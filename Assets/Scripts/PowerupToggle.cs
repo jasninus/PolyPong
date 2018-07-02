@@ -17,6 +17,5 @@ public class PowerupToggle : MonoBehaviour
     public void TogglePowerups(bool toggleVal)
     {
         PowerupVals.shouldSpawnPowerups = toggleVal;
-        Debug.Log(PowerupVals.shouldSpawnPowerups);
     }
 }

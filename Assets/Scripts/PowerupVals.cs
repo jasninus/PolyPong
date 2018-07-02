@@ -1,12 +1,26 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-public static class PowerupVals
+// Add all powerups here
+public enum Powerups
+{
+    speed,
+    sizeIncrease,
+    sizeDecrease
+}
+
+public class PowerupVals : MonoBehaviour
 {
     public static bool shouldSpawnPowerups;
 
-    // List all powerups
-    public static bool
-        speed,
-        sizeIncrease,
-        sizeDecrease;
+    public static Dictionary<Powerups, bool> enabledPowerups = new Dictionary<Powerups, bool>();
+
+    private void Awake()
+    {
+        foreach (Powerups item in Enum.GetValues(typeof(Powerups)))
+        {
+            enabledPowerups.Add(item, false);
+        }
+    }
 }
