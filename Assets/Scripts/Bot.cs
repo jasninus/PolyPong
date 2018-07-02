@@ -10,7 +10,7 @@ public class Bot : Player
 
     private int difficulty;
 
-    private float[] difficultySpeedModifiers = { 1, 1.25f, 1.4f};
+    private float[] difficultySpeedModifiers = { 1, 1.25f, 1.4f };
 
     private GameObject ball;
 
@@ -27,9 +27,9 @@ public class Bot : Player
     private void FixedUpdate()
     {
         // If ball is further away on players loacl axis than someValue
-            // If ball is to the left of player on players local axis
-                // Move left
-            // Else
-                // Move right
+        // If ball is to the left of player on players local axis
+        // Move left
+        // Else
+        // Move right
     }
 }
