@@ -5395,7 +5395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855339a20f3b66245a485a453ac64ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRounds: 5
+  maxRounds: 7
 --- !u!114 &1499696795
 MonoBehaviour:
   m_ObjectHideFlags: 0
