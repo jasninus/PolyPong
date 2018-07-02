@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     private LevelManager levelManager;
 
-    public static List<Player> players = new List<Player>();
+    public static List<Player> players = new List<Player>(), backupPlayers = new List<Player>();
 
     [SerializeField] private GameObject player;
 
@@ -42,7 +42,9 @@ public class PlayerManager : MonoBehaviour
 
         lP.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors.Last()].color;
 
-        // TODO Add new players only
+        Player[] playerArr = new Player[players.Count];
+        players.CopyTo(playerArr);
+        backupPlayers = playerArr.ToList();
     }
 
     public static void V2LookAt(Transform transform, Vector2 point)

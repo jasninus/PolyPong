@@ -25,6 +25,7 @@ public class LevelSpawner
     /// <summary>
     /// Spawns the circle immediately
     /// </summary>
+    /// <remarks>Actually spawns an extra player and lerps immediately to a circle</remarks>
     public void SpawnCircle()
     {
         PlayerColors extraPlayerColor = ChooseControls.activatedPlayers.First(i => !i.Value).Key;
@@ -37,6 +38,8 @@ public class LevelSpawner
         circleLerpManager.LerpToCircle();
 
         Object.Destroy(GameObject.FindWithTag("Ball")); // Destroy extra ball
+
+        ChooseControls.activatedPlayers[extraPlayerColor] = false;
     }
 
     /// <summary>

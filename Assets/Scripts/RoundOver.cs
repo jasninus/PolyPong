@@ -2,8 +2,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class VictoryScreen : MonoBehaviour
+public class RoundOver : MonoBehaviour
 {
+    private static int roundsPlayed;
+
     private Text winText;
 
     private GameObject panel;
@@ -24,7 +26,7 @@ public class VictoryScreen : MonoBehaviour
         gameEnded = true;
     }
 
-    private void ClearStaticVariables()
+    private void ClearAllStaticVariables()
     {
         ChooseControls.activatedPlayers.Clear();
         ChooseControls.controls.Clear();
@@ -34,12 +36,33 @@ public class VictoryScreen : MonoBehaviour
         LevelManager.shouldLerpToCircle = false;
     }
 
+    private void NewRoundFixStaticVariables()
+    {
+        MeshManager.materials.Clear();
+        PlayerManager.players.Clear();
+        LevelManager.isCircle = false;
+        LevelManager.shouldLerpToCircle = false;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && gameEnded == true)
         {
-            SceneManager.LoadScene(1);
-            ClearStaticVariables();
+            roundsPlayed++;
+
+            if (roundsPlayed < RoundSlider.selectedRoundAmount)
+            {
+                // TODO when spawning from circle, it will revert to triangle
+                // TODO seems like controls while not in circle is lost
+                NewRoundFixStaticVariables();
+                SceneManager.LoadScene(2);
+            }
+            else
+            {
+                ClearAllStaticVariables();
+                roundsPlayed = 0;
+                SceneManager.LoadScene(1);
+            }
         }
     }
 }

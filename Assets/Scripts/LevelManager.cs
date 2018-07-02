@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     public static List<Vector2> innerLerpFrom = new List<Vector2>(), innerLerpTo = new List<Vector2>(), outerLerpFrom = new List<Vector2>(), outerLerpTo = new List<Vector2>();
     public Vector2 levelCenter;
 
-    public static int playerToDestroy; // TODO make this obsolete
+    public static int playerToDestroy;
 
     public float lerpAmount;
     public float lerpedAmount, previousRotation;
@@ -40,6 +40,7 @@ public class LevelManager : MonoBehaviour
         arqdutManager = GetComponent<ArqdutManager>();
         ballManager = GetComponent<BallStart>();
 
+        // Different classes containing functionality made for better overview
         levelLerpManager = new LevelLerp(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, ballManager);
         circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, ballManager);
         levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, ballManager);

@@ -14,7 +14,7 @@ public class LevelLerp : MonoBehaviour
     private readonly BallStart ballManager;
 
     private int lerpPlayerNumber;
-    private readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 }, joiningPoints = new int[2];
+    private readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 } /* constants used in rotation calculations */, joiningPoints = new int[2];
 
     public LevelLerp(LevelManager levelManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, BallStart ballManager)
     {
@@ -80,7 +80,7 @@ public class LevelLerp : MonoBehaviour
         playerManager.UpdatePlayerPositions();
         arqdutManager.UpdateArqdutPositions(LevelManager.innerPoints, levelManager.levelCenter);
         levelManager.DrawMesh(ChooseControls.activatedPlayers.Count(i => i.Value) + Convert.ToByte(LevelManager.shouldLerpSmaller));
-        
+
         LevelManager.shouldSetIndices = false;
     }
 }

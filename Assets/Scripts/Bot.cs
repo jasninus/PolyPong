@@ -6,7 +6,7 @@ public class Bot : Player
 {
     public delegate void Spawn(GameObject ball);
 
-    public static event Spawn ballSpawn;
+    public static event Spawn BallSpawn;
 
     private int difficulty;
 
@@ -16,7 +16,7 @@ public class Bot : Player
 
     private void Awake()
     {
-        ballSpawn += GetNewBall;
+        BallSpawn += GetNewBall;
     }
 
     private void GetNewBall(GameObject newBall)
@@ -26,10 +26,12 @@ public class Bot : Player
 
     private void FixedUpdate()
     {
-        // If ball is further away on players loacl axis than someValue
-        // If ball is to the left of player on players local axis
-        // Move left
-        // Else
-        // Move right
+        // If ball is further away on bots local axis than someValue
+        {
+            // If ball is to the left of bot on bots local axis
+            // Move left
+            // Else
+            // Move right
+        }
     }
 }

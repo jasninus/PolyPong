@@ -29,6 +29,8 @@ public class BallStart : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         float direction = Random.Range(0, 2 * Mathf.PI);
-        spawnedBall.GetComponent<Rigidbody2D>().velocity = new Vector3(Mathf.Cos(direction), Mathf.Sin(direction)) * ballSpeed;
+
+        if (spawnedBall)
+            spawnedBall.GetComponent<Rigidbody2D>().velocity = new Vector3(Mathf.Cos(direction), Mathf.Sin(direction)) * ballSpeed;
     }
 }
