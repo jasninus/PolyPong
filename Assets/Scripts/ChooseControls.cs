@@ -35,7 +35,7 @@ public class ChooseControls : MonoBehaviour
 
     private PlayerColors selectedPlayer;
 
-    private readonly Dictionary<PlayerColors, Text[]> controlTexts = new Dictionary<PlayerColors, Text[]>();
+    private static readonly Dictionary<PlayerColors, Text[]> controlTexts = new Dictionary<PlayerColors, Text[]>();
     private readonly Dictionary<PlayerColors, float> selectionYVals = new Dictionary<PlayerColors, float>();
     public static readonly Dictionary<PlayerColors, bool> activatedPlayers = new Dictionary<PlayerColors, bool>();
     public static readonly Dictionary<PlayerColors, PlayerControls> controls = new Dictionary<PlayerColors, PlayerControls>();
@@ -130,6 +130,12 @@ public class ChooseControls : MonoBehaviour
 
         // Set ChoosingLeftControl to true if right control was just set
         choosingLeftControl = direction == Direction.right;
+    }
+
+    public static void UpdatePlayerControlText(PlayerColors player)
+    {
+        controlTexts[player][0].text = controls[player].leftKey;
+        controlTexts[player][1].text = controls[player].rightKey;
     }
 
     private void ClearControls()
