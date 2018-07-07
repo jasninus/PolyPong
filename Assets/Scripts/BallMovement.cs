@@ -19,7 +19,7 @@ public class BallMovement : MonoBehaviour
         transform.Rotate(0, 0, curvingAmount * curveRotationSpeed);
 
         Vector2 curveVector = Quaternion.Euler(0, 0, 90) * rb.velocity * curvingAmount * curveIntensity;
-        rb.velocity = (rb.velocity + curveVector).normalized * BallStart.ballSpeed;
+        rb.velocity = (rb.velocity + curveVector).normalized * GameStart.ballSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

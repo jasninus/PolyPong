@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class MeshManager : MonoBehaviour
 {
-    public MeshFilter filter;
-    public Mesh mesh;
-    public MeshRenderer rend;
+    [HideInInspector] public MeshFilter filter;
+    [HideInInspector] public Mesh mesh;
+    [HideInInspector] public MeshRenderer rend;
 
     private PolygonCollider2D collider;
 

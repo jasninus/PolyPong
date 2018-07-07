@@ -10,13 +10,13 @@ public class LevelLerpCircle : MonoBehaviour
     private readonly MeshManager meshManager;
     private readonly PlayerManager playerManager;
     private readonly ArqdutManager arqdutManager;
-    private readonly BallStart ballManager;
+    private readonly GameStart _gameManager;
 
     private int lerpPlayerNumber;
     private readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 }, joiningPoints = new int[2];
     private readonly int circleEdges = 20;
 
-    public LevelLerpCircle(LevelManager levelManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, BallStart ballManager)
+    public LevelLerpCircle(LevelManager levelManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, GameStart gameManager)
     {
         this.levelManager = levelManager;
         this.lerpManager = lerpManager;
@@ -24,7 +24,7 @@ public class LevelLerpCircle : MonoBehaviour
         this.meshManager = meshManager;
         this.playerManager = playerManager;
         this.arqdutManager = arqdutManager;
-        this.ballManager = ballManager;
+        this._gameManager = gameManager;
     }
 
     public void StartLerpToCircle(int playerOrder) // TODO this should probably take more parameters instead of referring directly to variables in levelManager
@@ -44,7 +44,7 @@ public class LevelLerpCircle : MonoBehaviour
         LevelManager.outerLerpTo = pointManager.SpawnOuterPoints(LevelManager.innerLerpTo);
 
         playerManager.CircleSetPlayerPoints(LevelManager.innerLerpTo, playerOrder);
-        ballManager.StartCountdown(levelManager.levelCenter);
+        _gameManager.StartCountdown(levelManager.levelCenter);
     }
 
     public void LerpToCircle()

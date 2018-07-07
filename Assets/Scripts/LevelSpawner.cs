@@ -9,9 +9,9 @@ public class LevelSpawner
     private readonly PlayerManager playerManager;
     private readonly MeshManager meshManager;
     private readonly ArqdutManager arqdutManager;
-    private readonly BallStart ballManager;
+    private readonly GameStart _gameManager;
 
-    public LevelSpawner(LevelManager levelManager, LevelLerpCircle circleLerpManager, LevelPoints pointManager, PlayerManager playerManager, MeshManager meshManager, ArqdutManager arqdutManager, BallStart ballManager)
+    public LevelSpawner(LevelManager levelManager, LevelLerpCircle circleLerpManager, LevelPoints pointManager, PlayerManager playerManager, MeshManager meshManager, ArqdutManager arqdutManager, GameStart gameManager)
     {
         this.levelManager = levelManager;
         this.circleLerpManager = circleLerpManager;
@@ -19,7 +19,7 @@ public class LevelSpawner
         this.playerManager = playerManager;
         this.meshManager = meshManager;
         this.arqdutManager = arqdutManager;
-        this.ballManager = ballManager;
+        this._gameManager = gameManager;
     }
 
     /// <summary>
@@ -57,6 +57,6 @@ public class LevelSpawner
 
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
         levelManager.DrawMesh(corners);
-        ballManager.StartCountdown(levelManager.levelCenter);
+        _gameManager.StartCountdown(levelManager.levelCenter);
     }
 }

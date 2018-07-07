@@ -15,14 +15,14 @@ public class LevelManager : MonoBehaviour
     public static int playerToDestroy;
 
     public float lerpAmount;
-    public float lerpedAmount, previousRotation;
+    [HideInInspector] public float lerpedAmount, previousRotation;
 
     private LevelPoints pointManager;
     private MeshManager meshManager;
     private PointLerp lerpManager;
     private PlayerManager playerManager;
     private ArqdutManager arqdutManager;
-    private BallStart ballManager;
+    private GameStart _gameManager;
 
     private LevelLerpCircle circleLerpManager;
     private LevelLerp levelLerpManager;
@@ -38,12 +38,12 @@ public class LevelManager : MonoBehaviour
         meshManager = GetComponent<MeshManager>();
         playerManager = GetComponent<PlayerManager>();
         arqdutManager = GetComponent<ArqdutManager>();
-        ballManager = GetComponent<BallStart>();
+        _gameManager = GetComponent<GameStart>();
 
         // Different classes containing functionality made for better overview
-        levelLerpManager = new LevelLerp(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, ballManager);
-        circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, ballManager);
-        levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, ballManager);
+        levelLerpManager = new LevelLerp(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager); // TODO warning about using new keyword. Seems like it thinks I'm trying to add classes as components
+        circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager);
+        levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, _gameManager);
     }
 
     private void Start()
