@@ -2,7 +2,7 @@
 
 public class BallMovement : MonoBehaviour
 {
-    private Player lastPlayerHit;
+    public Player lastPlayerHit;
 
     [SerializeField] private float maxCurving, curvingPerHit, curveIntensity, curveRotationSpeed, sideHitRotation;
     private float curvingAmount;

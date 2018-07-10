@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Add all powerups here
+// TODO Add all powerups here
 public enum Powerups
 {
-    speed,
-    sizeIncrease,
-    sizeDecrease
+    Speed,
+    SizeIncrease,
+    SizeDecrease,
+    Reverse
 }
 
 public class PowerupVals : MonoBehaviour
@@ -20,7 +21,8 @@ public class PowerupVals : MonoBehaviour
     {
         foreach (Powerups item in Enum.GetValues(typeof(Powerups)))
         {
-            enabledPowerups.Add(item, false);
+            // All powerups are enabled by default
+            enabledPowerups.Add(item, true);
         }
     }
 }
