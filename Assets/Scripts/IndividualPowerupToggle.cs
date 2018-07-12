@@ -21,7 +21,7 @@ public class IndividualPowerupToggle : MonoBehaviour
 
     public void ChangePowerupVal(bool toggleVal)
     {
-        PowerupVals.enabledPowerups[powerup] = toggleVal;
+        PowerupVals.powerupsActivatedState[powerup] = toggleVal;
         image.color = toggleVal ? Color.white : Color.gray;
     }
 }

@@ -10,27 +10,27 @@ public enum PowerupTarget
     Special
 }
 
+public enum SpawnConditions
+{
+    None,
+    NotInCircle
+}
+
 public abstract class PowerupBase : MonoBehaviour
 {
     [HideInInspector] public Powerups powerupType;
 
-    public PowerupTarget target;
+    [HideInInspector] public PowerupTarget target;
     
-    public SpawnConditions spawnConditions;
+    public SpawnConditions spawnConditions; // TODO implement
 
     public PowerupTarget[] validTargets;
     
     public int spawnLimit;
 
-    public float spawnRate, despawnTime, duration;
+    public float despawnTime, duration;
     
 
-
-    public enum SpawnConditions
-    {
-        None,
-        NotInCircle
-    }
 
     protected virtual void EnemyActivate(List<Player> enemies){}
 
@@ -81,6 +81,11 @@ public abstract class PowerupBase : MonoBehaviour
             }
 
             Invoke("Revert", duration);
+            Destroy(gameObject, duration + 0.1f);
+
+            // Powerup seems destroyed, but is still able to call Revert()
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

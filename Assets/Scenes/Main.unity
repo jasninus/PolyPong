@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 417679939}
   - component: {fileID: 417679940}
   - component: {fileID: 417679941}
+  - component: {fileID: 417679942}
   m_Layer: 0
   m_Name: LevelHandler
   m_TagString: LevelHandler
@@ -535,6 +536,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8b15d9ce8ce704f8e2423511ad1e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &417679942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 417679930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36531ff8cbda95840a57cb7ef60d4e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnablePowerups:
+  - {fileID: 1824805189220680, guid: eaa722c97813291408c2cc313928f877, type: 2}
+  spawnRadius: 3
+  minimumSpawnCooldown: 3
+  maximumSpawnCooldown: 10
 --- !u!1001 &600361290
 Prefab:
   m_ObjectHideFlags: 0

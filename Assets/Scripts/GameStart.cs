@@ -30,7 +30,11 @@ public class GameStart : MonoBehaviour
     /// <param name="levelCenter">Spawnpoint of the ball</param>
     public void StartCountdown(Vector2 levelCenter)
     {
-        StartCoroutine(CountDown(levelCenter));
+        // There cannot be two simultaneous countdowns
+        if (currentCountDown == 0)
+        {
+            StartCoroutine(CountDown(levelCenter));
+        }
     }
 
     private IEnumerator CountDown(Vector2 levelCenter)

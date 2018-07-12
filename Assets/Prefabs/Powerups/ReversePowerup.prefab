@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114077139636669414}
   m_Layer: 0
   m_Name: ReversePowerup
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -70,12 +70,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupType: 0
   target: 0
-  spawnConditions: 0
-  validTargets: 0000000002000000
-  spawnLimit: 0
-  spawnRate: 0
-  despawnTime: 0
-  duration: 0
+  spawnConditions: 1
+  validTargets: 00000000
+  spawnLimit: 2
+  despawnTime: 500
+  duration: 5
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1

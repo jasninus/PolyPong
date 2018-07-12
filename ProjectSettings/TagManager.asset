@@ -14,6 +14,8 @@ TagManager:
   - CircleCollider
   - Panel
   - WinText
+  - CountDownArrow
+  - Powerup
   layers:
   - Default
   - TransparentFX
