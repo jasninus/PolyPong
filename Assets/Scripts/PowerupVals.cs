@@ -5,7 +5,8 @@ using UnityEngine;
 // TODO Add all powerups here
 public enum Powerups
 {
-    Reverse
+    Reverse,
+    Shield
 }
 
 public class PowerupVals : MonoBehaviour

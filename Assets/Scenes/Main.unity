@@ -549,6 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnablePowerups:
   - {fileID: 1824805189220680, guid: eaa722c97813291408c2cc313928f877, type: 2}
+  - {fileID: 1824805189220680, guid: d6ca006b7f1cf714aab72333715b13a8, type: 2}
   spawnRadius: 3
   minimumSpawnCooldown: 3
   maximumSpawnCooldown: 10

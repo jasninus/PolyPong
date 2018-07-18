@@ -18,29 +18,37 @@ public enum SpawnConditions
 
 public abstract class PowerupBase : MonoBehaviour
 {
-    [HideInInspector] public Powerups powerupType;
-
     [HideInInspector] public PowerupTarget target;
-    
+
+    public Powerups powerupType;
+
     public SpawnConditions spawnConditions; // TODO implement
 
     public PowerupTarget[] validTargets;
-    
+
     public int spawnLimit;
 
     public float despawnTime, duration;
-    
 
+    protected virtual void EnemyActivate(List<Player> enemies)
+    {
+    }
 
-    protected virtual void EnemyActivate(List<Player> enemies){}
+    protected virtual void PlayerActivate(Player lastPlayerHit)
+    {
+    }
 
-    protected virtual void PlayerActivate(Player lastPlayerHit){}
+    protected virtual void BallActivate(GameObject ball)
+    {
+    }
 
-    protected virtual void BallActivate(GameObject ball){}
+    protected virtual void SpecialActivate()
+    {
+    }
 
-    protected virtual void SpecialActivate(){}
-
-    protected virtual void Revert(){}
+    protected virtual void Revert()
+    {
+    }
 
     private List<Player> GetAllEnemies(Player lastPlayerHit)
     {
@@ -50,7 +58,7 @@ public abstract class PowerupBase : MonoBehaviour
         {
             if (player != lastPlayerHit)
             {
-                enemies.Add(player);    
+                enemies.Add(player);
             }
         }
 

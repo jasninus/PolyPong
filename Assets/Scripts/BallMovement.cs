@@ -42,8 +42,11 @@ public class BallMovement : MonoBehaviour
 
     private void GoalCollision(Collision2D other)
     {
-        lastPlayerHit = null;
-        Destroy(gameObject);
+        if (!other.gameObject.GetComponent<Player>().hasShield)
+        {
+            lastPlayerHit = null;
+            Destroy(gameObject);
+        }
 
         LevelManager.playerToDestroy = other.gameObject.GetComponent<Player>().playerOrder;
 

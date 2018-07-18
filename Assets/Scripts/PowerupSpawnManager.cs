@@ -37,7 +37,7 @@ public class PowerupSpawnManager : MonoBehaviour
      * TEST LIST:
      *
      * Increase despawn time to check if limit works
-     * 
+     *
      */
 
     private void SpawnPowerup()
@@ -92,7 +92,12 @@ public class PowerupSpawnManager : MonoBehaviour
         yield return new WaitForSeconds(despawnTime);
 
         // If the powerup has not been picked up it gets destroyed
-        if (powerupToDestroy.GetComponent<Collider2D>().enabled)
+        //if ((bool)powerupToDestroy?.GetComponent<Collider2D>().enabled)
+        //{
+        //    Destroy(powerupToDestroy);
+        //}
+
+        if (powerupToDestroy)
         {
             Destroy(powerupToDestroy);
         }
@@ -106,6 +111,7 @@ public class PowerupSpawnManager : MonoBehaviour
 
     private GameObject ChooseRandomPowerupType(List<Powerups> excludedPowerups)
     {
+        // TODO this doesn't seem done
         List<Powerups> test = new List<Powerups>();
         test.AddRange(enabledPowerups.Where(i => !excludedPowerups.Contains(i)));
 

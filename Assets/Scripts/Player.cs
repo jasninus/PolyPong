@@ -4,6 +4,8 @@ public class Player : MonoBehaviour
 {
     public float playerSpeed, circleSpeed, minDis, minRot;
 
+    public bool hasShield;
+
     public struct LeftRightPoints
     {
         public Vector2 left, right;
@@ -54,6 +56,12 @@ public class Player : MonoBehaviour
 
     public void DestroyPlayer()
     {
+        if (hasShield)
+        {
+            hasShield = false;
+            return;
+        }
+
         ChooseControls.activatedPlayers[color] = false;
         levelManager.StartLerpLevelSmaller(playerOrder);
         LevelManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
@@ -62,6 +70,12 @@ public class Player : MonoBehaviour
 
     public void CircleDestroyPlayer()
     {
+        if (hasShield)
+        {
+            hasShield = false;
+            return;
+        }
+
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
         levelManager.StartLerpCircleSmaller(playerOrder);
         DeactivePlayer();
