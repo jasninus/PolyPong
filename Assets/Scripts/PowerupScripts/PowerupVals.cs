@@ -6,7 +6,8 @@ using UnityEngine;
 public enum Powerups
 {
     Reverse,
-    Shield
+    Shield,
+    Psychadelic
 }
 
 public class PowerupVals : MonoBehaviour

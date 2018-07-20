@@ -15,7 +15,7 @@ public class PowerupSpawnManager : MonoBehaviour
     [SerializeField] private float spawnRadius, minimumSpawnCooldown, maximumSpawnCooldown;
 
     private Powerups[] enabledPowerups;
-    private List<Powerups> unavailablePowerups = new List<Powerups>();
+    private readonly List<Powerups> unavailablePowerups = new List<Powerups>();
 
     private void Start()
     {
@@ -33,14 +33,7 @@ public class PowerupSpawnManager : MonoBehaviour
         StartCoroutine(SpawnTimer());
     }
 
-    /*
-     * TEST LIST:
-     *
-     * Increase despawn time to check if limit works
-     *
-     */
-
-    private void SpawnPowerup()
+    private void SpawnPowerup() // TODO this should be broken up into more methods
     {
         while (true)
         {
@@ -91,13 +84,7 @@ public class PowerupSpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(despawnTime);
 
-        // If the powerup has not been picked up it gets destroyed
-        //if ((bool)powerupToDestroy?.GetComponent<Collider2D>().enabled)
-        //{
-        //    Destroy(powerupToDestroy);
-        //}
-
-        if (powerupToDestroy)
+        if (powerupToDestroy && powerupToDestroy.GetComponent<SpriteRenderer>().enabled)
         {
             Destroy(powerupToDestroy);
         }

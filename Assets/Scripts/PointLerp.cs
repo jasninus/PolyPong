@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PointLerp : MonoBehaviour
@@ -27,15 +28,10 @@ public class PointLerp : MonoBehaviour
         return lerpedPoints;
     }
 
-    public Vector2[] LerpLevelBigger()
-    {
-        return null;
-    }
-
     public List<Vector2> LerpToCircle(List<Vector2> from, List<Vector2> to, float lerpAmount)
     {
-        //Debug.Log(from.Count + " " + to.Count);
         List<Vector2> lerpedPoints = new List<Vector2>();
+
         for (int i = 0; i < from.Count; i++)
         {
             if (i == from.Count - 2 || i == from.Count - 1) // Joining points
@@ -53,5 +49,11 @@ public class PointLerp : MonoBehaviour
         }
 
         return lerpedPoints;
+    }
+
+    public List<Vector2> LerpToNormal(List<Vector2> from, List<Vector2> to, float lerpAmount)
+    {
+        // LINQ is so cool. Felt like this had to be more than one line to be real
+        return from.Select((t, i) => Vector2.Lerp(t, to[i], lerpAmount)).ToList();
     }
 }

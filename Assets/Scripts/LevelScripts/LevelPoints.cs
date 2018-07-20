@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class LevelPoints : MonoBehaviour
 {
-    [SerializeField] private float borderThickness;
+    public float borderThickness;
     public float radius;
-
-    [SerializeField] private GameObject corner;
 
     /// <summary>
     /// Spawns all inner points in a level
@@ -29,6 +27,107 @@ public class LevelPoints : MonoBehaviour
         MovePoints(spawnedPoints, center);
 
         return spawnedPoints;
+    }
+
+    /// <summary>
+    /// Spawns all inner points in a level
+    /// </summary>
+    /// <param name="cornerAmount">How many points that should be spawned</param>
+    /// <param name="center">The center of the spawned points</param>
+    /// <param name="weightedCornerLengths">How long each of the sides should be. Has to have length equal to number of corners</param>
+    /// <returns>The spawned points</returns>
+    public List<Vector2> SpawnInnerPoints(int cornerAmount, Vector2 center, float[] weights)
+    {
+        List<Vector2> spawnedPoints = new List<Vector2>();
+
+        const float radians = 2 * Mathf.PI;
+
+        //float[] weights = GetWeightedRadians(cornerAmount);
+
+        float prevWeights = 0;
+
+        for (int i = 0; i < cornerAmount; i++)
+        {
+            //spawnedPoints.Add(new Vector2(Mathf.Cos((radians / cornerAmount) * i * weightedCornerLengths[i]),
+            //                              Mathf.Sin((radians / cornerAmount) * i * weightedCornerLengths[i])
+            //                             ) * radius);
+
+            spawnedPoints.Add(new Vector2(Mathf.Cos((radians / cornerAmount) * i + weights[i] + prevWeights), Mathf.Sin((radians / cornerAmount) * i + weights[i] + prevWeights)) * radius);
+
+            prevWeights += weights[i]; // You need all the previous weights
+
+            // Der skal laves et system, hvor de forskellige resultater fra sammenlignings-algoritmen bliver plusset ordentligt på
+            // Sammenlignings-algoritmen skal tage udgangspunkt i den ikke-vægtede polygon, hvor at radian-værdierne for siderne svarer til gennemsnittet af den forrige sides radianer plus den sides radianer
+        }
+
+        //MovePoints(spawnedPoints, center);
+
+        return spawnedPoints;
+    }
+
+    //public float[] GetWeightedRadians(int cornerAmount, out float outMagnitude, out float outAngle)
+    //{
+    //    outMagnitude = magnitude;
+    //    outAngle = angle;
+
+    //    const float radians = 2 * Mathf.PI;
+
+    //    float[] weights = new float[cornerAmount];
+
+    //    for (int i = 0; i < 6; i++)
+    //    {
+    //        float compareVal = (radians / cornerAmount) * i;
+
+    //        float diff = Mathf.Abs(angle - compareVal) <= Mathf.PI ?
+    //            Mathf.Abs(angle - compareVal) :
+    //            radians - Mathf.Abs(angle - compareVal);
+
+    //        float normalizedDiff = ((-2 * diff + Mathf.PI) / Mathf.PI) * magnitude;
+
+    //        weights[i] = normalizedDiff;
+
+    //        Debug.Log(i + " " + normalizedDiff);
+    //    }
+
+    //    return weights;
+    //}
+
+    //private GameObject[] spawnedCorners;
+
+    //[SerializeField] private float angle, magnitude, angleSpeed;
+    //private void Update()
+    //{
+    //    if (spawnedCorners?.Length > 0)
+    //    {
+    //        foreach (GameObject gameObject in spawnedCorners)
+    //        {
+    //            Destroy(gameObject);
+    //        }
+    //    }
+
+    //    Vector2[] v = new Vector2[1];
+    //    v[0] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+
+    //    spawnedCorners = VisualizePoints(v);
+    //}
+
+    [SerializeField] private GameObject corner;
+
+    /// <summary>
+    /// Spawns GameObjects at specified points
+    /// </summary>
+    /// <param name="points">The places in which to spawn GameObjects</param>
+    /// <returns>The spawned points</returns>
+    public GameObject[] VisualizePoints(IEnumerable<Vector2> points)
+    {
+        GameObject[] objs = new GameObject[points.Count()];
+
+        for (int i = 0; i < points.Count(); i++)
+        {
+            objs[i] = Instantiate(corner, points.ElementAt(i), Quaternion.identity);
+        }
+
+        return objs;
     }
 
     /// <summary>
@@ -83,23 +182,6 @@ public class LevelPoints : MonoBehaviour
         {
             points[i] = Quaternion.Euler(0, 0, degrees) * points[i];
         }
-    }
-
-    /// <summary>
-    /// Spawns GameObjects at specified points
-    /// </summary>
-    /// <param name="points">The places in which to spawn GameObjects</param>
-    /// <returns>The spawned points</returns>
-    public GameObject[] VisualizePoints(IEnumerable<Vector2> points)
-    {
-        GameObject[] objs = new GameObject[points.Count()];
-
-        for (int i = 0; i < points.Count(); i++)
-        {
-            objs[i] = Instantiate(corner, points.ElementAt(i), Quaternion.identity);
-        }
-
-        return objs;
     }
 
     /// <summary>

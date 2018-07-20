@@ -388,6 +388,9 @@ MonoBehaviour:
   borderThickness: 0.35
   radius: 5
   corner: {fileID: 1022042290596042, guid: 1fe3945bd87297b4d9d27b3b35605dba, type: 2}
+  angle: 0
+  magnitude: 0.3
+  angleSpeed: 0.03
 --- !u!23 &417679933
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -550,9 +553,10 @@ MonoBehaviour:
   spawnablePowerups:
   - {fileID: 1824805189220680, guid: eaa722c97813291408c2cc313928f877, type: 2}
   - {fileID: 1824805189220680, guid: d6ca006b7f1cf714aab72333715b13a8, type: 2}
+  - {fileID: 1824805189220680, guid: 97da1ebd5bab42d46b3dd4d9a347f30f, type: 2}
   spawnRadius: 3
   minimumSpawnCooldown: 3
-  maximumSpawnCooldown: 10
+  maximumSpawnCooldown: 3
 --- !u!1001 &600361290
 Prefab:
   m_ObjectHideFlags: 0

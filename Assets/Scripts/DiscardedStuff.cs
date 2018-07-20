@@ -103,4 +103,22 @@
     {
         pointManager.VisualizePoints(points);
     }
+
+    //[SerializeField] private GameObject corner;
+    /// <summary>
+    /// Spawns GameObjects at specified points
+    /// </summary>
+    /// <param name="points">The places in which to spawn GameObjects</param>
+    /// <returns>The spawned points</returns>
+    //public GameObject[] VisualizePoints(IEnumerable<Vector2> points)
+    //{
+    //    GameObject[] objs = new GameObject[points.Count()];
+
+    //    for (int i = 0; i < points.Count(); i++)
+    //    {
+    //        objs[i] = Instantiate(corner, points.ElementAt(i), Quaternion.identity);
+    //    }
+
+    //    return objs;
+    //}
  */

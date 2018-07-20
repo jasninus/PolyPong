@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ShieldPowerup : PowerupBase
 {
+    private Player affectedPlayer;
+
     private void Awake()
     {
         powerupType = Powerups.Shield;
@@ -12,6 +14,14 @@ public class ShieldPowerup : PowerupBase
 
     protected override void PlayerActivate(Player lastPlayerHit)
     {
-        lastPlayerHit.hasShield = true;
+        affectedPlayer = lastPlayerHit;
+
+        if (lastPlayerHit)
+            lastPlayerHit.hasShield = true;
+    }
+
+    protected override void Revert()
+    {
+        affectedPlayer.hasShield = false;
     }
 }

@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
     private LevelLerp levelLerpManager;
     private LevelSpawner levelSpawner;
 
-    private bool shouldLerpBigger;
+    private bool shouldLerpBigger, shouldLerpToNormal;
     public static bool shouldLerpToCircle, isCircle, shouldLerpSmaller, shouldSetIndices;
 
     private void Awake()
@@ -73,6 +73,43 @@ public class LevelManager : MonoBehaviour
         shouldSetIndices = true;
     }
 
+    public void UpdatePsychadelicLevel(float sinRotMagnitude, float[] weightedRadians, float magnitude, float angle)
+    {
+        innerPoints = pointManager.SpawnInnerPoints(innerPoints.Count, levelCenter, weightedRadians);
+        pointManager.RotatePoints(innerPoints, -Mathf.Sin(angle) * magnitude * sinRotMagnitude + previousRotation); // TODO this should take the current rotation of the level into account
+        outerPoints = pointManager.SpawnOuterPoints(innerPoints);
+
+        playerManager.UpdatePlayerPositions();
+        playerManager.PlayersLookAtPoint(levelCenter);
+        arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
+
+        DrawMesh(innerPoints.Count);
+
+        Debug.Log("Updating psychadelic");
+    }
+
+    public void ReturnToNormalLevel()
+    {
+        innerLerpFrom = innerPoints;
+        outerLerpFrom = outerPoints;
+
+        shouldLerpToNormal = true;
+    }
+
+    private void LerpToNormalLevel()
+    {
+        innerPoints = lerpManager.LerpToNormal(innerLerpFrom, innerLerpTo, lerpedAmount);
+        outerPoints = lerpManager.LerpToNormal(outerLerpFrom, outerLerpTo, lerpedAmount);
+
+        DrawMesh(innerPoints.Count);
+
+        playerManager.UpdatePlayerPositions();
+        playerManager.PlayersLookAtPoint(levelCenter);
+        arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
+
+        Debug.Log("Updating normal");
+    }
+
     public void DrawMesh(int playerAmount)
     {
         if (meshManager.mesh.vertexCount > 0)
@@ -85,6 +122,14 @@ public class LevelManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (shouldLerpToNormal)
+        {
+            LerpToNormalLevel();
+
+            lerpedAmount += lerpAmount;
+            shouldLerpToNormal = lerpedAmount < 1;
+        }
+
         if (shouldLerpSmaller && !shouldLerpToCircle)
         {
             levelLerpManager.LerpLevel();
