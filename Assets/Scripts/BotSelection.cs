@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class BotSelection : MonoBehaviour
 {
@@ -11,8 +10,12 @@ public class BotSelection : MonoBehaviour
 
     [SerializeField] private PlayerColors botColor;
 
+    private ChooseControls chooseControls;
+
     private void Awake()
     {
+        chooseControls = GameObject.FindWithTag("ControlManager").GetComponent<ChooseControls>();
+
         if (botDifficulties.Count > 0) // This method gets called on multiple instances, but it should only add values once
             return;
 
@@ -21,9 +24,10 @@ public class BotSelection : MonoBehaviour
             botDifficulties.Add(color, 0); 
         }
     }
-    
+
     public void SetBotDifficulty(int difficulty)
     {
+        chooseControls.ClearControls(botColor);
         ChooseControls.activatedPlayers[botColor] = true;
         botDifficulties[botColor] = difficulty;
         Debug.Log(botColor + " was set to difficulty: " + difficulty);

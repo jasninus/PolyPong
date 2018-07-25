@@ -388,9 +388,6 @@ MonoBehaviour:
   borderThickness: 0.35
   radius: 5
   corner: {fileID: 1022042290596042, guid: 1fe3945bd87297b4d9d27b3b35605dba, type: 2}
-  angle: 0
-  magnitude: 0.3
-  angleSpeed: 0.03
 --- !u!23 &417679933
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -524,7 +521,7 @@ MonoBehaviour:
   directionArrow: {fileID: 1714692680871626, guid: 78f2e760d9af5d949ad9607bb2e27e5c,
     type: 2}
   countdownText: {fileID: 322486956}
-  countDownTime: 1
+  countDownTime: 0.5
   BallSpeed: 2.3
   dirArrowDisFromCenter: 1
   countDownAmount: 3

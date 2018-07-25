@@ -48,15 +48,24 @@ public class ChooseControls : MonoBehaviour
 
     private void Awake()
     {
-        AddDictionaryValues();
+        TryAddDictionaryValues();
     }
 
-    private void AddDictionaryValues()
+    private void TryAddDictionaryValues()
     {
-        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors))) // TODO check if key is present in dictionary before adding
         {
-            // Add all text vars to controlTexts
-            controlTexts.Add(item, new Text[] { controlFields[(int)item * 2], controlFields[(int)item * 2 + 1] });
+            if (controlTexts.ContainsKey(item) && controlTexts[item][0] == null)
+            {
+                controlTexts.Remove(item);
+            }
+
+            if (!controlTexts.ContainsKey(item))
+            {
+                // Add all text vars to controlTexts
+                controlTexts.Add(item, new Text[] { controlFields[(int)item * 2], controlFields[(int)item * 2 + 1] });
+            }
+
 
             // Add all heights for the selectionBall
             selectionYVals.Add(item, squares[(int)item * 2].position.y);
@@ -83,7 +92,7 @@ public class ChooseControls : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ClearControls();
+            ClearPlayer(selectedPlayer);
         }
         else if (Input.GetKeyDown(KeyCode.Space) && choosingLeftControl && activatedPlayers.Count(p => p.Value) > 1) // Space should not be allowed as left key
         {
@@ -101,13 +110,13 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            SetButton(Direction.left, Input.inputString);
+            SetButton(selectedPlayer, Direction.left, Input.inputString);
             activatedPlayers[selectedPlayer] = true;
             BotSelection.botDifficulties[selectedPlayer] = 0;
         }
         else // Set rightKey control
         {
-            SetButton(Direction.right, Input.inputString);
+            SetButton(selectedPlayer, Direction.right, Input.inputString);
             selectingControls = false;
 
             GoToNextPlayer();
@@ -119,15 +128,15 @@ public class ChooseControls : MonoBehaviour
     /// </summary>
     /// <param name="direction"></param>
     /// <param name="input"></param>
-    private void SetButton(Direction direction, string input)
+    private void SetButton(PlayerColors playerToSet, Direction direction, string input)
     {
-        controlTexts[selectedPlayer][0 + (int)direction].text = input;
-        squares[(int)selectedPlayer * 2 + (int)direction].GetChild(0).gameObject.SetActive(false);
+        controlTexts[playerToSet][0 + (int)direction].text = input;
+        squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.SetActive(false);
 
         if (direction == Direction.left)
-            controls[selectedPlayer].leftKey = input;
+            controls[playerToSet].leftKey = input;
         else
-            controls[selectedPlayer].rightKey = input;
+            controls[playerToSet].rightKey = input;
 
         // Set ChoosingLeftControl to true if right control was just set
         choosingLeftControl = direction == Direction.right;
@@ -139,16 +148,21 @@ public class ChooseControls : MonoBehaviour
         controlTexts[player][1].text = controls[player].rightKey;
     }
 
-    private void ClearControls()
+    public void ClearControls(PlayerColors playerToWipe)
     {
-        SetButton(Direction.left, "");
-        SetButton(Direction.right, "");
+        SetButton(playerToWipe, Direction.left, "");
+        SetButton(playerToWipe, Direction.right, "");
 
-        squares[(int)selectedPlayer * 2].GetChild(0).gameObject.SetActive(true);
-        squares[(int)selectedPlayer * 2 + 1].GetChild(0).gameObject.SetActive(true);
+        squares[(int)playerToWipe * 2].GetChild(0).gameObject.SetActive(true);
+        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.SetActive(true);
+    }
 
-        activatedPlayers[selectedPlayer] = false;
-        BotSelection.botDifficulties[selectedPlayer] = 0;
+    private void ClearPlayer(PlayerColors playerToWipe)
+    {
+        ClearControls(playerToWipe);
+
+        activatedPlayers[playerToWipe] = false;
+        BotSelection.botDifficulties[playerToWipe] = 0;
         selectingControls = false;
     }
 

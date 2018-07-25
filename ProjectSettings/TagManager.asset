@@ -16,6 +16,7 @@ TagManager:
   - WinText
   - CountDownArrow
   - Powerup
+  - ControlManager
   layers:
   - Default
   - TransparentFX

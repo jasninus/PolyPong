@@ -83,6 +83,7 @@ public class GameStart : MonoBehaviour
     {
         _ball = Instantiate(ball, levelCenter, Quaternion.identity);
         _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ballSpeed;
-        BallSpawn(_ball);
+
+        BallSpawn?.Invoke(_ball);
     }
 }

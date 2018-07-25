@@ -18,6 +18,9 @@ public class PowerupVals : MonoBehaviour
 
     private void Awake()
     {
+        if (powerupsActivatedState.Count > 0)
+            return;
+
         foreach (Powerups item in Enum.GetValues(typeof(Powerups)))
         {
             // All powerups are enabled by default

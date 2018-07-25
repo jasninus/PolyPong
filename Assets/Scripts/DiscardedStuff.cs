@@ -147,3 +147,28 @@
 //bots[color].activated = true;
 //bots[color].difficulty = difficulty;
 //}
+
+//if (!controlTexts.ContainsKey(item))
+//{
+//// Add all text vars to controlTexts
+//controlTexts.Add(item, new Text[] { controlFields[(int)item * 2], controlFields[(int)item * 2 + 1] });
+//}
+
+//if (!selectionYVals.ContainsKey(item))
+//{
+//// Add all heights for the selectionBall
+//selectionYVals.Add(item, squares[(int)item * 2].position.y);
+//}
+
+
+//if (!activatedPlayers.ContainsKey(item))
+//{
+//// Add all player colors
+//activatedPlayers.Add(item, false);
+//}
+
+//if (!controls.ContainsKey(item))
+//{
+//// Add new PlayerControls for all colors
+//controls.Add(item, new PlayerControls());
+//}
