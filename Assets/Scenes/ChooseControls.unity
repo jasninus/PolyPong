@@ -581,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &97602976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -680,7 +680,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 112040081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2066412491}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &112040081
@@ -858,7 +869,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 143483594}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1217479802}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &143483594
@@ -1382,7 +1404,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 287927757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 365362903}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &287927757
@@ -1688,7 +1721,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 333708037}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 854265870}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &333708037
@@ -1800,6 +1844,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 365362902}
+  - component: {fileID: 365362903}
   m_Layer: 5
   m_Name: BlueButtons
   m_TagString: Untagged
@@ -1828,6 +1873,18 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: -292}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &365362903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365362901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botColor: 4
 --- !u!1 &382681408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,7 +2107,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 442218666}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2066412491}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &442218666
@@ -2160,7 +2228,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 451985563}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1992737607}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &451985563
@@ -3578,6 +3657,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 854265869}
+  - component: {fileID: 854265870}
   m_Layer: 5
   m_Name: OrangeButtons
   m_TagString: Untagged
@@ -3606,6 +3686,18 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: 92}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &854265870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 854265868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botColor: 1
 --- !u!1 &856878017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3890,7 +3982,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 970913439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 365362903}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &970913439
@@ -4075,7 +4178,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1009413078}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2073362847}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1009413078
@@ -5070,6 +5184,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1217479801}
+  - component: {fileID: 1217479802}
   m_Layer: 5
   m_Name: RedButtons
   m_TagString: Untagged
@@ -5098,6 +5213,18 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: -36}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1217479802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1217479800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botColor: 2
 --- !u!1 &1226554906
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,7 +5714,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1331402397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1992737607}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1331402397
@@ -6166,7 +6304,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1414836047}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1992737607}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1414836047
@@ -6276,7 +6425,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1420258505}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2066412491}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1420258505
@@ -6654,7 +6814,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1450205643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 365362903}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1450205643
@@ -7886,7 +8057,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1617781263}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2073362847}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1617781263
@@ -8096,8 +8278,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1687661319}
   m_LocalRotation: {x: 0, y: 0, z: 0.5, w: 0.8660254}
-  m_LocalPosition: {x: 8.99, y: -0.872, z: 0}
-  m_LocalScale: {x: 0.83748865, y: 0.83748865, z: 0.83748865}
+  m_LocalPosition: {x: 10.35, y: -0.77, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -8238,7 +8420,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1706718276}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1217479802}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1706718276
@@ -8361,7 +8554,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1788421410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.88, y: 2.0795, z: 0}
+  m_LocalPosition: {x: 7.85, y: 2.0795, z: 0}
   m_LocalScale: {x: 0.013, y: 0.013, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8554,7 +8747,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1889220838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 854265870}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1889220838
@@ -8741,6 +8945,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1992737606}
+  - component: {fileID: 1992737607}
   m_Layer: 5
   m_Name: PurpleButtons
   m_TagString: Untagged
@@ -8769,6 +8974,18 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: -164}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1992737607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1992737605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botColor: 3
 --- !u!1 &2035453038
 GameObject:
   m_ObjectHideFlags: 0
@@ -8843,7 +9060,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2035453041}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1217479802}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2035453041
@@ -9074,7 +9302,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2055789674}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2073362847}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2055789674
@@ -9186,6 +9425,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2066412490}
+  - component: {fileID: 2066412491}
   m_Layer: 5
   m_Name: GreenButton
   m_TagString: Untagged
@@ -9214,6 +9454,18 @@ RectTransform:
   m_AnchoredPosition: {x: 114.000015, y: -420}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2066412491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2066412489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botColor: 5
 --- !u!1 &2073362845
 GameObject:
   m_ObjectHideFlags: 0
@@ -9222,6 +9474,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2073362846}
+  - component: {fileID: 2073362847}
   m_Layer: 5
   m_Name: YellowButtons
   m_TagString: Untagged
@@ -9250,6 +9503,18 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: 220}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2073362847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2073362845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botColor: 0
 --- !u!1 &2088542778
 GameObject:
   m_ObjectHideFlags: 0
@@ -9398,7 +9663,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2118068570}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 854265870}
+        m_MethodName: SetBotDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2118068570

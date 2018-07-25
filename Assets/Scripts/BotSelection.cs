@@ -2,32 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
-// TODO this class should be placed on the object that contains the three bot difficulty buttons for each player
 public class BotSelection : MonoBehaviour
 {
-    public static Dictionary<PlayerColors, Bot> bots;
+    public static Dictionary<PlayerColors, int> botDifficulties = new Dictionary<PlayerColors, int>();
 
-    public class Bot
+    [SerializeField] private PlayerColors botColor;
+
+    private void Awake()
     {
-        public bool activated;
-        public int difficulty;
-    }
+        if (botDifficulties.Count > 0) // This method gets called on multiple instances, but it should only add values once
+            return;
 
-    [SerializeField] private PlayerColors color;
-
-    private void AddDictionaryValues()
-    {
-        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
         {
-            // Add all text vars to controlTexts
-            bots.Add(item, new Bot());
+            botDifficulties.Add(color, 0); 
         }
     }
-
-    public void SelectBotDifficulty(int difficulty) // Run this when button is clicked
+    
+    public void SetBotDifficulty(int difficulty)
     {
-        bots[color].activated = true;
-        bots[color].difficulty = difficulty;
+        ChooseControls.activatedPlayers[botColor] = true;
+        botDifficulties[botColor] = difficulty;
+        Debug.Log(botColor + " was set to difficulty: " + difficulty);
     }
 }

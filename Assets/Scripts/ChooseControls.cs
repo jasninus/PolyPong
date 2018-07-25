@@ -103,6 +103,7 @@ public class ChooseControls : MonoBehaviour
         {
             SetButton(Direction.left, Input.inputString);
             activatedPlayers[selectedPlayer] = true;
+            BotSelection.botDifficulties[selectedPlayer] = 0;
         }
         else // Set rightKey control
         {
@@ -147,6 +148,7 @@ public class ChooseControls : MonoBehaviour
         squares[(int)selectedPlayer * 2 + 1].GetChild(0).gameObject.SetActive(true);
 
         activatedPlayers[selectedPlayer] = false;
+        BotSelection.botDifficulties[selectedPlayer] = 0;
         selectingControls = false;
     }
 

@@ -65,11 +65,11 @@ public class BallMovement : MonoBehaviour
     /// <param name="hitPlayer">The hit player</param>
     private void CheckCurvingIncrease(Player hitPlayer)
     {
-        if (Input.GetKey(ChooseControls.controls[hitPlayer.color].leftKey))
+        if (hitPlayer.movingLeft)
         {
             curvingAmount -= curvingPerHit;
         }
-        else if (Input.GetKey(ChooseControls.controls[hitPlayer.color].rightKey))
+        else if (hitPlayer.movingRight)
         {
             curvingAmount += curvingPerHit;
         }

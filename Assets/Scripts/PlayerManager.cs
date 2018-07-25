@@ -29,18 +29,30 @@ public class PlayerManager : MonoBehaviour
 
         for (int i = 0; i < activatedColors.Length - 1; i++)
         {
-            Player p = Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>();
+            var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? 
+                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>() : 
+                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
+
+
             p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
             players.Add(p);
 
             p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
+            
+            //Debug.Log("Spawned " + activatedColors[i] + " " + p.GetType());
         }
 
-        Player lP = Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>();
+        Player lP = BotSelection.botDifficulties[activatedColors.Last()] == 0 ? 
+            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>() : 
+            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
+            
         lP.Initialize(activatedColors.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(), activatedColors.Length - 1, levelManager, playerSpeed, circleSpeed, radius);
         players.Add(lP);
 
         lP.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors.Last()].color;
+
+
+        Debug.Log("Spawned " + activatedColors.Last() + " " + lP.GetType());
 
         Player[] playerArr = new Player[players.Count];
         players.CopyTo(playerArr);

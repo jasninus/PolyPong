@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour
 {
+    public delegate void Spawn(GameObject ball);
+
+    public static event Spawn BallSpawn;
+
     [SerializeField] public GameObject ball, directionArrow;
     private GameObject _ball, spawnedDirArrow;
 
@@ -79,5 +83,6 @@ public class GameStart : MonoBehaviour
     {
         _ball = Instantiate(ball, levelCenter, Quaternion.identity);
         _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ballSpeed;
+        BallSpawn(_ball);
     }
 }

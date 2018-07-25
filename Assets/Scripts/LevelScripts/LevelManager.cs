@@ -76,7 +76,7 @@ public class LevelManager : MonoBehaviour
     public void UpdatePsychadelicLevel(float sinRotMagnitude, float[] weightedRadians, float magnitude, float angle)
     {
         innerPoints = pointManager.SpawnInnerPoints(innerPoints.Count, levelCenter, weightedRadians);
-        pointManager.RotatePoints(innerPoints, -Mathf.Sin(angle) * magnitude * sinRotMagnitude + previousRotation); // TODO this should take the current rotation of the level into account
+        pointManager.RotatePoints(innerPoints, -Mathf.Sin(angle) * magnitude * sinRotMagnitude + previousRotation);
         outerPoints = pointManager.SpawnOuterPoints(innerPoints);
 
         playerManager.UpdatePlayerPositions();
@@ -84,8 +84,6 @@ public class LevelManager : MonoBehaviour
         arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
 
         DrawMesh(innerPoints.Count);
-
-        Debug.Log("Updating psychadelic");
     }
 
     public void ReturnToNormalLevel()
@@ -106,8 +104,6 @@ public class LevelManager : MonoBehaviour
         playerManager.UpdatePlayerPositions();
         playerManager.PlayersLookAtPoint(levelCenter);
         arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
-
-        Debug.Log("Updating normal");
     }
 
     public void DrawMesh(int playerAmount)
@@ -128,6 +124,9 @@ public class LevelManager : MonoBehaviour
 
             lerpedAmount += lerpAmount;
             shouldLerpToNormal = lerpedAmount < 1;
+
+            if (!shouldLerpToNormal)
+                lerpedAmount = 0;
         }
 
         if (shouldLerpSmaller && !shouldLerpToCircle)

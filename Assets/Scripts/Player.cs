@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     public float playerSpeed, circleSpeed, minDis, minRot;
 
-    public bool hasShield;
+    public bool hasShield, movingLeft, movingRight;
 
     public struct LeftRightPoints
     {
@@ -113,29 +113,53 @@ public class Player : MonoBehaviour
 
     private void LevelMovement()
     {
-        minDis = 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad); // TODO this should only be calculated on start and whilst lerping level
+        minDis = GetMinDis();
         // Left key control
-        if (Input.GetKey(ChooseControls.controls[color].leftKey) && Vector3.Project(transform.GetChild(0).position - (Vector3)points.left, (transform.position - (Vector3)points.left).normalized).magnitude - transform.GetChild(0).localScale.x * transform.localScale.x / 2 > minDis)
+        if (Input.GetKey(ChooseControls.controls[color].leftKey) && CanMoveLeft(minDis))
         {
             MoveLeft();
         }
         // Right key control
-        if (Input.GetKey(ChooseControls.controls[color].rightKey) && Vector3.Project(transform.GetChild(0).position - (Vector3)points.right, (transform.position - (Vector3)points.right).normalized).magnitude - transform.GetChild(0).localScale.x * transform.localScale.x / 2 > minDis)
+        else if (Input.GetKey(ChooseControls.controls[color].rightKey) && CanMoveRight(minDis))
         {
             MoveRight();
+        }
+        else
+        {
+            movingLeft = false;
+            movingRight = false;
         }
 
         transform.GetChild(0).transform.localPosition = new Vector3(transform.GetChild(0).transform.localPosition.x, 10, transform.GetChild(0).transform.localPosition.z);
     } // TODO clamp player movement every frame
 
-    private void MoveLeft()
+    protected float GetMinDis()
     {
-        transform.GetChild(0).position += ((Vector3)points.left - transform.position).normalized * playerSpeed;
+        return 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad); // TODO this should only be calculated on start and whilst lerping level
     }
 
-    private void MoveRight()
+    protected bool CanMoveLeft(float minDis)
+    {
+        return Vector3.Project(transform.GetChild(0).position - (Vector3)points.left, (transform.position - (Vector3)points.left).normalized).magnitude - transform.GetChild(0).localScale.x * transform.localScale.x / 2 > minDis;
+    }
+
+    protected bool CanMoveRight(float minDis)
+    {
+        return Vector3.Project(transform.GetChild(0).position - (Vector3)points.right, (transform.position - (Vector3)points.right).normalized).magnitude - transform.GetChild(0).localScale.x * transform.localScale.x / 2 > minDis;
+    }
+
+    protected void MoveLeft()
+    {
+        transform.GetChild(0).position += ((Vector3)points.left - transform.position).normalized * playerSpeed;
+        movingLeft = true;
+        movingRight = false;
+    }
+
+    protected void MoveRight()
     {
         transform.GetChild(0).position += ((Vector3)points.right - transform.position).normalized * playerSpeed;
+        movingRight = true;
+        movingLeft = false;
     }
 
     private void CircleMovement()
