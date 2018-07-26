@@ -41,7 +41,7 @@ public class PowerupSpawnManager : MonoBehaviour
             if (unavailablePowerups.Count == enabledPowerups.Length)
             {
                 unavailablePowerups.Clear();
-                return;
+                break;
             }
 
             // Determine powerup type and spawn location
@@ -53,7 +53,7 @@ public class PowerupSpawnManager : MonoBehaviour
             switch (powerupToSpawn.spawnConditions)
             {
                 case SpawnConditions.NotInCircle:
-                    if (LevelManager.isCircle)
+                    if (LevelManager.isCircle || LevelManager.shouldLerpToCircle)
                     {
                         unavailablePowerups.Add(powerupToSpawn.powerupType);
                         continue;
@@ -65,7 +65,7 @@ public class PowerupSpawnManager : MonoBehaviour
             powerupToSpawn.target = ChooseRandomPowerupTarget(powerupToSpawn);
 
             // Check for spawnlimit on selected powerup type
-            if (GameObject.FindGameObjectsWithTag("Powerup").Count(o => o.GetComponent<PowerupBase>().powerupType == powerupToSpawn.powerupType) < powerupToSpawn.spawnLimit)
+            if (GameObject.FindGameObjectsWithTag("Powerup").Count(o => o.GetComponent<PowerupBase>()?.powerupType == powerupToSpawn.powerupType) < powerupToSpawn.spawnLimit)
             {
                 unavailablePowerups.Clear();
                 StartCoroutine(TryDestroyPowerup(powerupToSpawn.despawnTime, Instantiate(gameObjToSpawn, spawnLocation, Quaternion.identity)));

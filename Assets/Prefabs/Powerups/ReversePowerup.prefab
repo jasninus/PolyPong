@@ -68,11 +68,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621e99e5436e99b42ad604b7433520cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupType: 0
   target: 0
+  powerupType: 0
   spawnConditions: 0
   validTargets: 00000000
-  spawnLimit: 2
+  spawnLimit: 0
   despawnTime: 12
   duration: 5
 --- !u!212 &212052450499704378

@@ -65,8 +65,20 @@ public class LevelManager : MonoBehaviour
         shouldSetIndices = true;
     }
 
+    private void DestroyNonCirclePowerups()
+    {
+        PowerupBase[] powerups = GameObject.FindGameObjectsWithTag("Powerup").Select(o => o.GetComponent<PowerupBase>()).ToArray();
+
+        foreach (PowerupBase powerup in powerups.Where(p => p.spawnConditions == SpawnConditions.NotInCircle))
+        {
+            Destroy(powerup.gameObject);
+        }
+    }
+
     public void StartLerpCircleSmaller(int playerOrder)
     {
+        DestroyNonCirclePowerups();
+
         circleLerpManager.StartLerpToCircle(playerOrder);
 
         shouldLerpToCircle = true;

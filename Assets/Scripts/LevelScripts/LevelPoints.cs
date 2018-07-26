@@ -65,52 +65,6 @@ public class LevelPoints : MonoBehaviour
         return spawnedPoints;
     }
 
-    //public float[] GetWeightedRadians(int cornerAmount, out float outMagnitude, out float outAngle)
-    //{
-    //    outMagnitude = magnitude;
-    //    outAngle = angle;
-
-    //    const float radians = 2 * Mathf.PI;
-
-    //    float[] weights = new float[cornerAmount];
-
-    //    for (int i = 0; i < 6; i++)
-    //    {
-    //        float compareVal = (radians / cornerAmount) * i;
-
-    //        float diff = Mathf.Abs(angle - compareVal) <= Mathf.PI ?
-    //            Mathf.Abs(angle - compareVal) :
-    //            radians - Mathf.Abs(angle - compareVal);
-
-    //        float normalizedDiff = ((-2 * diff + Mathf.PI) / Mathf.PI) * magnitude;
-
-    //        weights[i] = normalizedDiff;
-
-    //        Debug.Log(i + " " + normalizedDiff);
-    //    }
-
-    //    return weights;
-    //}
-
-    //private GameObject[] spawnedCorners;
-
-    //[SerializeField] private float angle, magnitude, angleSpeed;
-    //private void Update()
-    //{
-    //    if (spawnedCorners?.Length > 0)
-    //    {
-    //        foreach (GameObject gameObject in spawnedCorners)
-    //        {
-    //            Destroy(gameObject);
-    //        }
-    //    }
-
-    //    Vector2[] v = new Vector2[1];
-    //    v[0] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-
-    //    spawnedCorners = VisualizePoints(v);
-    //}
-
     [SerializeField] private GameObject corner;
 
     /// <summary>

@@ -22,7 +22,7 @@ public abstract class PowerupBase : MonoBehaviour
 
     public Powerups powerupType;
 
-    public SpawnConditions spawnConditions; // TODO implement
+    public SpawnConditions spawnConditions;
 
     public PowerupTarget[] validTargets;
 

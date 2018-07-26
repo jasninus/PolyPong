@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public LeftRightPoints points;
 
-    private Vector3 childStart, childLerpFrom;
+    private Vector3 childStartPos, childLerpFrom;
 
     private LevelManager levelManager;
 
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         this.playerSpeed = playerSpeed;
         this.circleSpeed = circleSpeed;
 
-        childStart = transform.GetChild(0).localPosition;
+        childStartPos = transform.GetChild(0).localPosition;
         CalculateMinRot(radius);
     }
 
@@ -108,12 +108,13 @@ public class Player : MonoBehaviour
 
     public void LerpPlayerPosition(float lerpAmount)
     {
-        transform.GetChild(0).localPosition = Vector3.Lerp(childLerpFrom, childStart, lerpAmount * 2);
+        transform.GetChild(0).localPosition = Vector3.Lerp(childLerpFrom, childStartPos, lerpAmount * 2);
     }
 
     private void LevelMovement()
     {
-        minDis = GetMinDis();
+        minDis = CalculateMinDis();
+
         // Left key control
         if (Input.GetKey(ChooseControls.controls[color].leftKey) && CanMoveLeft(minDis))
         {
@@ -133,7 +134,7 @@ public class Player : MonoBehaviour
         transform.GetChild(0).transform.localPosition = new Vector3(transform.GetChild(0).transform.localPosition.x, 10, transform.GetChild(0).transform.localPosition.z);
     } // TODO clamp player movement every frame
 
-    protected float GetMinDis()
+    protected float CalculateMinDis()
     {
         return 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad); // TODO this should only be calculated on start and whilst lerping level
     }
@@ -164,14 +165,35 @@ public class Player : MonoBehaviour
 
     private void CircleMovement()
     {
+        // TODO convert to protected functions, so they can be called from Bot. Hey, good-lookin' ;)
+
         if (Input.GetKey(ChooseControls.controls[color].leftKey) && transform.parent.rotation.eulerAngles.z > 90 + minRot)
         {
-            transform.parent.Rotate(0, 0, -circleSpeed);
+            CircleMoveLeft();
         }
 
         if (Input.GetKey(ChooseControls.controls[color].rightKey) && transform.parent.rotation.eulerAngles.z < 270 - minRot)
         {
-            transform.parent.Rotate(0, 0, circleSpeed);
+            CircleMoveRight();
         }
+        else
+        {
+            movingLeft = false;
+            movingRight = false;
+        }
+    }
+
+    protected void CircleMoveRight()
+    {
+        transform.parent.Rotate(0, 0, circleSpeed);
+        movingRight = true;
+        movingLeft = false;
+    }
+
+    protected void CircleMoveLeft()
+    {
+        transform.parent.Rotate(0, 0, -circleSpeed);
+        movingLeft = true;
+        movingRight = false;
     }
 }
