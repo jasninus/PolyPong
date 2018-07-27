@@ -48,12 +48,13 @@ public class Bot : Player
     private void LevelMovement()
     {
         float minDis = CalculateMinDis();
+        float xDiff = transform.InverseTransformVector(ball.transform.position - transform.GetChild(0).position).x;
 
-        if (transform.InverseTransformVector(ball.transform.position - transform.GetChild(0).position).x < 0 && CanMoveLeft(minDis))
+        if (xDiff < -0.05f && CanMoveLeft(minDis))
         {
             MoveLeft();
         }
-        else if (CanMoveRight(minDis)) // TODO there should probably be added a dead point in the middle, so there isn't constant jittering. One could also make some overcompensation when moving from one direction to another, which would probably help in the circle especially
+        else if (xDiff > 0.05f && CanMoveRight(minDis))
         {
             MoveRight();
         }
@@ -62,6 +63,8 @@ public class Bot : Player
             movingLeft = false;
             movingRight = false;
         }
+
+        ClampMovement(minDis);
     }
 
     private void OnDrawGizmos()
@@ -72,6 +75,7 @@ public class Bot : Player
 
     private void CircleMovement()
     {
+        // TODO consider changing logic to be based on if left or right movement will bring bot closer to ball. This will probably make bots more difficult
         if (CalculateCircleXDiff() > 0 && transform.parent.rotation.eulerAngles.z < 270 - minRot)
         {
             CircleMoveRight();

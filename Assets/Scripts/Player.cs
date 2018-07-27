@@ -132,7 +132,23 @@ public class Player : MonoBehaviour
         }
 
         transform.GetChild(0).transform.localPosition = new Vector3(transform.GetChild(0).transform.localPosition.x, 10, transform.GetChild(0).transform.localPosition.z);
-    } // TODO clamp player movement every frame
+
+        // TODO clamp player movement every frame
+        
+    }
+
+    protected void ClampMovement(float minDis)
+    {
+        if (!CanMoveLeft(minDis))
+        {
+            MoveRight();
+        }
+
+        if (!CanMoveRight(minDis))
+        {
+            MoveLeft();
+        }
+    }
 
     protected float CalculateMinDis()
     {
