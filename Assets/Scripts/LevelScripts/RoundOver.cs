@@ -36,7 +36,7 @@ public class RoundOver : MonoBehaviour
         LevelManager.shouldLerpToCircle = false;
     }
 
-    private void NewRoundFixStaticVariables()
+    private void ResetStaticVariables()
     {
         MeshManager.materials.Clear();
         PlayerManager.players.Clear();
@@ -50,15 +50,17 @@ public class RoundOver : MonoBehaviour
         {
             roundsPlayed++;
 
+            Points.previousPlayerDeaths = 0;
+
             if (roundsPlayed < RoundSlider.selectedRoundAmount)
             {
-                // TODO when spawning from circle, it will revert to triangle
-                // TODO seems like controls while not in circle is lost
-                NewRoundFixStaticVariables();
+                ResetStaticVariables();
                 SceneManager.LoadScene(2);
             }
             else
             {
+                Debug.Log(Points.GetWinner() + " has actually won");
+                Points.ResetPoints();
                 ClearAllStaticVariables();
                 roundsPlayed = 0;
                 SceneManager.LoadScene(1);

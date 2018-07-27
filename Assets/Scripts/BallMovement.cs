@@ -42,21 +42,25 @@ public class BallMovement : MonoBehaviour
 
     private void GoalCollision(Collision2D other)
     {
-        if (!other.gameObject.GetComponent<Player>().hasShield)
+        Player hitPlayer = other.gameObject.GetComponent<Player>();
+
+        if (!hitPlayer.hasShield)
         {
             lastPlayerHit = null;
             Destroy(gameObject);
         }
 
-        LevelManager.playerToDestroy = other.gameObject.GetComponent<Player>().playerOrder;
+        LevelManager.playerToDestroy = hitPlayer.playerOrder;
+
+        Points.AddPoints(hitPlayer.color);
 
         if (LevelManager.innerPoints.Count < 4)
         {
-            other.gameObject.GetComponent<Player>().CircleDestroyPlayer();
+            hitPlayer.CircleDestroyPlayer();
             return;
         }
 
-        other.gameObject.GetComponent<Player>().DestroyPlayer();
+        hitPlayer.DestroyPlayer();
     }
 
     /// <summary>

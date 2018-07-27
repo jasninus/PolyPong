@@ -48,6 +48,8 @@ public class ChooseControls : MonoBehaviour
 
     private void Awake()
     {
+        Points.Setup();
+
         TryAddDictionaryValues();
     }
 

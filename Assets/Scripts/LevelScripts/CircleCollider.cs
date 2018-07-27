@@ -64,7 +64,9 @@ public class CircleCollider : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Points.AddPoints(owner.color);
         PlayerManager.players.Remove(owner);
+        Points.AddPoints(PlayerManager.players.First().color);
         RoundWin(PlayerManager.players.First());
     }
 }

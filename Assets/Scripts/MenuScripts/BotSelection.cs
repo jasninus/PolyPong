@@ -16,7 +16,7 @@ public class BotSelection : MonoBehaviour
     {
         chooseControls = GameObject.FindWithTag("ControlManager").GetComponent<ChooseControls>();
 
-        if (botDifficulties.Count > 0) // This method gets called on multiple instances, but it should only add values once
+        if (botDifficulties.Count > 0) // REASON this method gets called on multiple instances, but it should only add values once
             return;
 
         foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
@@ -30,6 +30,5 @@ public class BotSelection : MonoBehaviour
         chooseControls.ClearControls(botColor);
         ChooseControls.activatedPlayers[botColor] = true;
         botDifficulties[botColor] = difficulty;
-        Debug.Log(botColor + " was set to difficulty: " + difficulty);
     }
 }

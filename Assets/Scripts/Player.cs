@@ -111,6 +111,8 @@ public class Player : MonoBehaviour
         transform.GetChild(0).localPosition = Vector3.Lerp(childLerpFrom, childStartPos, lerpAmount * 2);
     }
 
+#region movement
+
     private void LevelMovement()
     {
         minDis = CalculateMinDis();
@@ -212,4 +214,6 @@ public class Player : MonoBehaviour
         movingLeft = true;
         movingRight = false;
     }
+
+#endregion movement
 }

@@ -44,7 +44,6 @@ public class LevelLerpCircle : MonoBehaviour
         LevelManager.outerLerpTo = pointManager.SpawnOuterPoints(LevelManager.innerLerpTo);
 
         playerManager.CircleSetPlayerPoints(LevelManager.innerLerpTo, playerOrder);
-        pointManager.VisualizePoints(LevelManager.innerLerpTo);
         _gameManager.StartCountdown(levelManager.levelCenter);
     }
 
