@@ -72,7 +72,7 @@ MonoBehaviour:
   powerupType: 2
   spawnConditions: 1
   validTargets: 03000000
-  spawnLimit: 1
+  spawnLimit: 0
   despawnTime: 10
   duration: 12
   targetMagnitude: 0.3

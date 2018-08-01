@@ -33,14 +33,10 @@ public class BallMovement : MonoBehaviour
             case "Goal":
                 GoalCollision(other);
                 break;
-
-            case "CircleCollider":
-                Destroy(gameObject);
-                break;
         }
     }
 
-    private void GoalCollision(Collision2D other)
+    private void GoalCollision(Collision2D other) // TODO this shouldn't be called when a player has a shield
     {
         Player hitPlayer = other.gameObject.GetComponent<Player>();
 
@@ -51,8 +47,6 @@ public class BallMovement : MonoBehaviour
         }
 
         LevelManager.playerToDestroy = hitPlayer.playerOrder;
-
-        Points.AddPoints(hitPlayer.color);
 
         if (LevelManager.innerPoints.Count < 4)
         {

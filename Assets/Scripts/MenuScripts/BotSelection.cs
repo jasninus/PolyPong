@@ -21,7 +21,7 @@ public class BotSelection : MonoBehaviour
 
         foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
         {
-            botDifficulties.Add(color, 0); 
+            botDifficulties.Add(color, 0);
         }
     }
 
@@ -30,5 +30,6 @@ public class BotSelection : MonoBehaviour
         chooseControls.ClearControls(botColor);
         ChooseControls.activatedPlayers[botColor] = true;
         botDifficulties[botColor] = difficulty;
+        chooseControls.GoToNextPlayer();
     }
 }

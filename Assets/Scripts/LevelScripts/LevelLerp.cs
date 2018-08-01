@@ -33,6 +33,7 @@ public class LevelLerp : MonoBehaviour
         LevelManager.innerLerpFrom = LevelManager.innerPoints;
         LevelManager.outerLerpFrom = LevelManager.outerPoints;
 
+        // TODO there was error about index being out of bounds of array after ending game in circle. This method shouldn't even be called after player dies in circle
         float rotateAmount = 360 / (LevelManager.innerPoints.Count * 2) - rotationConstants[LevelManager.innerPoints.Count - 1] * playerOrder + levelManager.previousRotation; // Calculate rotation
         levelManager.previousRotation = rotateAmount;
 

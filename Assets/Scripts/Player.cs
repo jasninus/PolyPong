@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
             return;
         }
 
+        Points.AddPoints(color);
         ChooseControls.activatedPlayers[color] = false;
         levelManager.StartLerpLevelSmaller(playerOrder);
         LevelManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour
         transform.GetChild(0).localPosition = Vector3.Lerp(childLerpFrom, childStartPos, lerpAmount * 2);
     }
 
-#region movement
+    #region movement
 
     private void LevelMovement()
     {
@@ -136,7 +137,6 @@ public class Player : MonoBehaviour
         transform.GetChild(0).transform.localPosition = new Vector3(transform.GetChild(0).transform.localPosition.x, 10, transform.GetChild(0).transform.localPosition.z);
 
         // TODO clamp player movement every frame
-        
     }
 
     protected void ClampMovement(float minDis)
@@ -215,5 +215,5 @@ public class Player : MonoBehaviour
         movingRight = false;
     }
 
-#endregion movement
+    #endregion movement
 }

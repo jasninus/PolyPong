@@ -55,7 +55,7 @@ public class ChooseControls : MonoBehaviour
 
     private void TryAddDictionaryValues()
     {
-        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors))) // TODO check if key is present in dictionary before adding
+        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
         {
             if (controlTexts.ContainsKey(item) && controlTexts[item][0] == null)
             {
@@ -67,7 +67,6 @@ public class ChooseControls : MonoBehaviour
                 // Add all text vars to controlTexts
                 controlTexts.Add(item, new Text[] { controlFields[(int)item * 2], controlFields[(int)item * 2 + 1] });
             }
-
 
             // Add all heights for the selectionBall
             selectionYVals.Add(item, squares[(int)item * 2].position.y);
@@ -96,7 +95,7 @@ public class ChooseControls : MonoBehaviour
         {
             ClearPlayer(selectedPlayer);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && choosingLeftControl && activatedPlayers.Count(p => p.Value) > 1) // Space should not be allowed as left key
+        else if (Input.GetKeyDown(KeyCode.Space) && choosingLeftControl && activatedPlayers.Count(p => p.Value) > 1) // Left key can't be space and there must be two or more players
         {
             StartGame();
         }
@@ -176,7 +175,7 @@ public class ChooseControls : MonoBehaviour
         return Input.inputString.Length == 1;
     }
 
-    private void GoToNextPlayer()
+    public void GoToNextPlayer()
     {
         try
         {
