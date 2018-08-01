@@ -7,6 +7,8 @@ public class RoundSlider : MonoBehaviour
     public static int selectedRoundAmount;
     [SerializeField] private int maxRounds;
 
+    [SerializeField] private Text displayText;
+
     private Slider slider;
 
     private void Awake()
@@ -19,5 +21,7 @@ public class RoundSlider : MonoBehaviour
     public void OnSliderValueChange(float roundAmount)
     {
         selectedRoundAmount = (int)roundAmount;
+
+        displayText.text = roundAmount + " round" + (roundAmount > 1 ? "s" : "");
     }
 }

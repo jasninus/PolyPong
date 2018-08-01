@@ -30,9 +30,8 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < activatedColors.Length - 1; i++)
         {
             var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
-                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>() : 
+                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>() :
                 Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
-
 
             p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
             players.Add(p);
@@ -41,9 +40,9 @@ public class PlayerManager : MonoBehaviour
         }
 
         Player lP = BotSelection.botDifficulties[activatedColors.Last()] == 0 ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>() : 
+            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>() :
             Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
-            
+
         lP.Initialize(activatedColors.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(), activatedColors.Length - 1, levelManager, playerSpeed, circleSpeed, radius);
         players.Add(lP);
 
@@ -94,7 +93,7 @@ public class PlayerManager : MonoBehaviour
     {
         leftIndex = destroyedPlayer + 1 > 2 ? 0 : destroyedPlayer + 1; // Left player
         players[leftIndex].points.left = toPoints[toPoints.Count / 4];
-        players[leftIndex].points.right = new Vector2(0,0);
+        players[leftIndex].points.right = new Vector2(0, 0);
         circleStartLeft = players[leftIndex].transform.position;
         players[leftIndex].SetChildLerpFrom();
 
