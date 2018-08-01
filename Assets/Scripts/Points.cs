@@ -7,10 +7,10 @@ using UnityEngineInternal.Input;
 
 public static class Points
 {
-    private static Dictionary<PlayerColors, int> points = new Dictionary<PlayerColors, int>();
+    private static readonly Dictionary<PlayerColors, int> points = new Dictionary<PlayerColors, int>();
 
     public static int previousPlayerDeaths;
-    
+
     public static void Setup()
     {
         if (points.Count > 0)
@@ -37,7 +37,7 @@ public static class Points
         }
     }
 
-    public static PlayerColors GetWinner()
+    public static PlayerColors GetWinner() // TODO tie functionality must be implemented
     {
         PlayerColors winner = PlayerColors.Yellow;
 

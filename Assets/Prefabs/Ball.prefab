@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d81c20b591b7e46924ca47926f8493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastPlayerHit: {fileID: 0}
+  ballSpeed: 2.3
   maxCurving: 0.9
   curvingPerHit: 0.3
   curveIntensity: 0.008

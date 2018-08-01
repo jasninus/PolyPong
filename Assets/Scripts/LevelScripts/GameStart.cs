@@ -16,17 +16,11 @@ public class GameStart : MonoBehaviour
 
     [SerializeField] private Text countdownText;
 
-    [SerializeField] private float countDownTime, BallSpeed, dirArrowDisFromCenter;
-    public static float ballSpeed; // TODO ballSpeed should probably be moved to BallMovement
+    [SerializeField] private float countDownTime, dirArrowDisFromCenter;
     private float ballDirection;
 
     [SerializeField] private int countDownAmount;
     private int currentCountDown;
-
-    private void Awake()
-    {
-        ballSpeed = BallSpeed;
-    }
 
     /// <summary>
     /// Start the countdown to launch the ball
@@ -49,7 +43,7 @@ public class GameStart : MonoBehaviour
             normalizedBallDirection = new Vector2(Mathf.Cos(ballDirection), Mathf.Sin(ballDirection));
             spawnedDirArrow = SpawnDirectionArrow(normalizedBallDirection, ballDirection * Mathf.Rad2Deg);
         }
-        
+
         countdownText.text = (countDownAmount - currentCountDown).ToString();
         currentCountDown++;
 
@@ -82,7 +76,7 @@ public class GameStart : MonoBehaviour
     private void SpawnBall(Vector2 levelCenter)
     {
         _ball = Instantiate(ball, levelCenter, Quaternion.identity);
-        _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ballSpeed;
+        _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ball.GetComponent<BallMovement>().ballSpeed;
 
         BallSpawn?.Invoke(_ball);
     }

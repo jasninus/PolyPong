@@ -2,8 +2,10 @@
 
 public class BallMovement : MonoBehaviour
 {
-    public Player lastPlayerHit;
+    [HideInInspector] public Player lastPlayerHit;
 
+    public static float ballSpeedModifier;
+    public float ballSpeed;
     [SerializeField] private float maxCurving, curvingPerHit, curveIntensity, curveRotationSpeed, sideHitRotation;
     private float curvingAmount;
 
@@ -11,15 +13,16 @@ public class BallMovement : MonoBehaviour
 
     private void Awake()
     {
+        ballSpeed += ballSpeedModifier;
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() // TODO stop rotation if curvingAmount is 0 and test if is problem in circle
     {
         transform.Rotate(0, 0, curvingAmount * curveRotationSpeed);
 
         Vector2 curveVector = Quaternion.Euler(0, 0, 90) * rb.velocity * curvingAmount * curveIntensity;
-        rb.velocity = (rb.velocity + curveVector).normalized * GameStart.ballSpeed;
+        rb.velocity = (rb.velocity + curveVector).normalized * ballSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -36,7 +39,7 @@ public class BallMovement : MonoBehaviour
         }
     }
 
-    private void GoalCollision(Collision2D other) // TODO this shouldn't be called when a player has a shield
+    private void GoalCollision(Collision2D other)
     {
         Player hitPlayer = other.gameObject.GetComponent<Player>();
 

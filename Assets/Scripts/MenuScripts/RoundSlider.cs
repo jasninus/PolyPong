@@ -18,7 +18,7 @@ public class RoundSlider : MonoBehaviour
         slider.onValueChanged.AddListener(OnSliderValueChange);
     }
 
-    public void OnSliderValueChange(float roundAmount)
+    private void OnSliderValueChange(float roundAmount)
     {
         selectedRoundAmount = (int)roundAmount;
 
