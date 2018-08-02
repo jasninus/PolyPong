@@ -7,7 +7,7 @@ internal sealed class KeyConfigWidget : MonoBehaviour
 
     private Text buttonText;
 
-    private bool isListening = false;
+    private bool isListening;
 
     [SerializeField]
     private KeyManager.Key key;
@@ -19,73 +19,70 @@ internal sealed class KeyConfigWidget : MonoBehaviour
     {
         get
         {
-            return this.isListening;
+            return isListening;
         }
 
         set
         {
-            this.isListening = value;
-            this.UpdateButtonText();
+            isListening = value;
+            UpdateButtonText();
         }
     }
 
-    public string Name
-    {
-        get { return this.name; }
-    }
+    public string Name => name;
 
     private void Awake()
     {
-        this.key.Load(this.Name);
+        key.Load(Name);
 
-        this.button = this.GetComponentInChildren<Button>();
-        this.buttonText = this.button.GetComponentInChildren<Text>();
-        this.button.onClick.AddListener(this.ToggleListening);
-        this.UpdateButtonText();
+        button = GetComponentInChildren<Button>();
+        buttonText = button.GetComponentInChildren<Text>();
+        button.onClick.AddListener(ToggleListening);
+        UpdateButtonText();
     }
 
     private void OnDestroy()
     {
-        this.key.Save(this.Name);
+        key.Save(Name);
     }
 
     private void OnStoppedListening()
     {
-        this.keyManager.StoppedListening -= this.OnStoppedListening;
-        this.IsListening = false;
+        keyManager.StoppedListening -= OnStoppedListening;
+        IsListening = false;
     }
 
     private void ToggleListening()
     {
-        if (this.IsListening)
+        if (IsListening)
         {
-            this.keyManager.StopListening();
+            keyManager.StopListening();
         }
         else
         {
-            this.IsListening = true;
+            IsListening = true;
         }
     }
 
     private void Update()
     {
-        if (this.key.GetKeyDown())
+        if (key.GetKeyDown())
         {
-            Debug.Log(this.Name + " pressed!");
+            Debug.Log(Name + " pressed!");
         }
     }
 
     private void UpdateButtonText()
     {
-        if (this.IsListening)
+        if (IsListening)
         {
-            this.buttonText.text = "Press any key...";
-            this.keyManager.StartListening(this.key);
-            this.keyManager.StoppedListening += this.OnStoppedListening;
+            buttonText.text = "Press any key...";
+            keyManager.StartListening(key);
+            keyManager.StoppedListening += OnStoppedListening;
         }
         else
         {
-            this.buttonText.text = this.key.Code.ToString();
+            buttonText.text = key.Code.ToString();
         }
     }
 }

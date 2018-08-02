@@ -22,6 +22,7 @@ public enum Direction
     middle
 }
 
+[RequireComponent(typeof(ButtonIcons))]
 public class ChooseControls : MonoBehaviour
 {
     [SerializeField] private Text[] controlFields;
@@ -29,11 +30,17 @@ public class ChooseControls : MonoBehaviour
     [SerializeField] private SelectionBall selectionBall;
     [SerializeField] private Transform[] squares;
 
+    [SerializeField] private Sprite arrow;
+
+    private ButtonIcons buttonIcons;
+
     private bool choosingLeftControl = true, selectingControls;
 
     private int numberInput;
 
     private PlayerColors selectedPlayer;
+
+    private KeyCode pressedKey;
 
     private static readonly Dictionary<PlayerColors, Text[]> controlTexts = new Dictionary<PlayerColors, Text[]>();
     private readonly Dictionary<PlayerColors, float> selectionYVals = new Dictionary<PlayerColors, float>();
@@ -42,13 +49,15 @@ public class ChooseControls : MonoBehaviour
 
     public class PlayerControls
     {
-        public string leftKey;
-        public string rightKey;
+        public KeyCode leftKey;
+        public KeyCode rightKey;
     }
 
     private void Awake()
     {
         Points.Setup();
+
+        buttonIcons = GetComponent<ButtonIcons>();
 
         TryAddDictionaryValues();
     }
@@ -99,25 +108,25 @@ public class ChooseControls : MonoBehaviour
         {
             StartGame();
         }
-        else if (LookForAcceptableInput())
+        else if (KeyManagerTest.GetValidInput(ref pressedKey))
         {
-            SetControls();
+            SetControls(pressedKey);
         }
     }
 
-    private void SetControls()
+    private void SetControls(KeyCode key)
     {
         selectingControls = true;
 
         if (choosingLeftControl) // Set leftKey control
         {
-            SetButton(selectedPlayer, Direction.left, Input.inputString);
+            SetButton(selectedPlayer, Direction.left, key);
             activatedPlayers[selectedPlayer] = true;
             BotSelection.botDifficulties[selectedPlayer] = 0;
         }
         else // Set rightKey control
         {
-            SetButton(selectedPlayer, Direction.right, Input.inputString);
+            SetButton(selectedPlayer, Direction.right, key);
             selectingControls = false;
 
             GoToNextPlayer();
@@ -127,12 +136,10 @@ public class ChooseControls : MonoBehaviour
     /// <summary>
     /// Set text and control for selectedPlayer and direction to input
     /// </summary>
-    /// <param name="direction"></param>
-    /// <param name="input"></param>
-    private void SetButton(PlayerColors playerToSet, Direction direction, string input)
+    private void SetButton(PlayerColors playerToSet, Direction direction, KeyCode input)
     {
-        controlTexts[playerToSet][0 + (int)direction].text = input;
-        squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.SetActive(false);
+        buttonIcons.SetButtonIcon(input, controlTexts[playerToSet][(int)direction],
+            squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.GetComponent<SpriteRenderer>());
 
         if (direction == Direction.left)
             controls[playerToSet].leftKey = input;
@@ -145,17 +152,23 @@ public class ChooseControls : MonoBehaviour
 
     public static void UpdatePlayerControlText(PlayerColors player)
     {
-        controlTexts[player][0].text = controls[player].leftKey;
-        controlTexts[player][1].text = controls[player].rightKey;
+        controlTexts[player][0].text = controls[player].leftKey.ToString();
+        controlTexts[player][1].text = controls[player].rightKey.ToString();
     }
 
     public void ClearControls(PlayerColors playerToWipe)
     {
-        SetButton(playerToWipe, Direction.left, "");
-        SetButton(playerToWipe, Direction.right, "");
+        SetButton(playerToWipe, Direction.left, KeyCode.Clear);
+        SetButton(playerToWipe, Direction.right, KeyCode.Clear);
+
+        controlTexts[playerToWipe][0].text = "";
+        controlTexts[playerToWipe][1].text = "";
 
         squares[(int)playerToWipe * 2].GetChild(0).gameObject.SetActive(true);
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.SetActive(true);
+
+        squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
+        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
     }
 
     private void ClearPlayer(PlayerColors playerToWipe)

@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Bot : Player
 {
-
     [SerializeField] private int difficulty;
 
-    private readonly float[] difficultySpeedModifiers = { 0.5f, 0.7f, 0.9f }, circleDifficultyModifiers= { 1f, 1.4f, 1.7f };
+    private readonly float[] difficultySpeedModifiers = { 0.5f, 0.7f, 0.9f }, circleDifficultyModifiers = { 1f, 1.4f, 1.7f };
+    [SerializeField] private float deadpointRange = 0.05f;
 
     private GameObject ball;
 
     private void Awake()
     {
         GameStart.BallSpawn += GetNewBall;
-        
     }
 
     private void Start()
@@ -50,11 +49,11 @@ public class Bot : Player
         float minDis = CalculateMinDis();
         float xDiff = transform.InverseTransformVector(ball.transform.position - transform.GetChild(0).position).x;
 
-        if (xDiff < -0.05f && CanMoveLeft(minDis))
+        if (xDiff < -deadpointRange && CanMoveLeft(minDis))
         {
             MoveLeft();
         }
-        else if (xDiff > 0.05f && CanMoveRight(minDis))
+        else if (xDiff > deadpointRange && CanMoveRight(minDis))
         {
             MoveRight();
         }
@@ -98,7 +97,7 @@ public class Bot : Player
 
         Vector2 fromVector = ball.transform.position - transform.position;
         Vector2 rotatedVector = Quaternion.Euler(0, 0, axisRotation / 2 + (playerOrder == 1 ? 90 : 270)) * fromVector;
-        
+
         return rotatedVector.x;
     }
 }

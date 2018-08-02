@@ -22,7 +22,7 @@ public class FlipControls : MonoBehaviour
     public void FlipPlayerControls()
     {
         ChooseControls.PlayerControls controls = ChooseControls.controls[player];
-        string leftKey = controls.leftKey;
+        KeyCode leftKey = controls.leftKey;
         controls.leftKey = controls.rightKey;
         controls.rightKey = leftKey;
 

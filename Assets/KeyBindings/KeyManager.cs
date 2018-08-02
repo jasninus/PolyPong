@@ -7,37 +7,31 @@ internal sealed class KeyManager : MonoBehaviour
 
     public event Action StoppedListening;
 
-    private bool DoListen
-    {
-        get { return this.listeningKey != null; }
-    }
+    private bool DoListen => listeningKey != null;
 
     public void StartListening(Key key)
     {
-        if (this.DoListen)
+        if (DoListen)
         {
-            this.StopListening();
+            StopListening();
         }
 
-        this.listeningKey = key;
+        listeningKey = key;
     }
 
     public void StopListening()
     {
-        this.listeningKey = null;
-        if (this.StoppedListening != null)
-        {
-            this.StoppedListening();
-        }
+        listeningKey = null;
+        StoppedListening?.Invoke();
     }
 
     private void Update()
     {
-        if (this.DoListen)
+        if (DoListen)
         {
-            if (this.listeningKey.Listen())
+            if (listeningKey.Listen())
             {
-                this.StopListening();
+                StopListening();
             }
         }
     }
@@ -64,17 +58,17 @@ internal sealed class KeyManager : MonoBehaviour
 
         public bool GetKey()
         {
-            return Input.GetKey(this.Code);
+            return Input.GetKey(Code);
         }
 
         public bool GetKeyDown()
         {
-            return Input.GetKeyDown(this.Code);
+            return Input.GetKeyDown(Code);
         }
 
         public bool GetKeyUp()
         {
-            return Input.GetKeyUp(this.Code);
+            return Input.GetKeyUp(Code);
         }
 
         public bool Listen()
@@ -85,7 +79,7 @@ internal sealed class KeyManager : MonoBehaviour
                 {
                     if (Input.GetKeyDown(IrregularKeys[i]))
                     {
-                        this.Code = IrregularKeys[i];
+                        Code = IrregularKeys[i];
                         return true;
                     }
                 }
@@ -97,14 +91,14 @@ internal sealed class KeyManager : MonoBehaviour
 
                     if (Enum.IsDefined(typeof(KeyCode), keyCodeName))
                     {
-                        this.Code = this.Parse(keyCodeName);
+                        Code = Parse(keyCodeName);
                         return true;
                     }
 
                     // Assume length of 1
                     if (char.IsDigit(keyCodeName[0]))
                     {
-                        this.Code = this.Parse("Alpha" + keyCodeName);
+                        Code = Parse("Alpha" + keyCodeName);
                         return true;
                     }
                 }
@@ -115,19 +109,12 @@ internal sealed class KeyManager : MonoBehaviour
 
         public void Load(string name)
         {
-            if (PlayerPrefs.HasKey(name))
-            {
-                this.Code = this.Parse(PlayerPrefs.GetString(name));
-            }
-            else
-            {
-                this.Code = this.defaultCode;
-            }
+            Code = PlayerPrefs.HasKey(name) ? Parse(PlayerPrefs.GetString(name)) : defaultCode;
         }
 
         public void Save(string name)
         {
-            PlayerPrefs.SetString(name, this.Code.ToString());
+            PlayerPrefs.SetString(name, Code.ToString());
         }
 
         private KeyCode Parse(string keyCodeName)
