@@ -7,7 +7,9 @@ public enum Powerups
 {
     Reverse,
     Shield,
-    Psychadelic
+    Psychadelic,
+    Speed,
+    SizeIncrease
 }
 
 public class PowerupVals : MonoBehaviour

@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4661154386399414}
   - component: {fileID: 212052450499704378}
   - component: {fileID: 58992244768257606}
-  - component: {fileID: 114758660660879128}
+  - component: {fileID: 114177203480385536}
   m_Layer: 0
-  m_Name: ShieldPowerup
+  m_Name: SizeIncrease
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.985
---- !u!114 &114758660660879128
+--- !u!114 &114177203480385536
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,16 +65,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824805189220680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 848ab36c754706b47aa0105b19a02e5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 29a2749e51af65949b40930d2898fc6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: 0
-  powerupType: 1
+  powerupType: 4
   spawnConditions: 0
-  validTargets: 01000000
-  spawnLimit: 0
-  despawnTime: 12
-  duration: 3600
+  validTargets: 0100000002000000
+  spawnLimit: 1
+  despawnTime: 10
+  duration: 4
+  playerSizeIncrease: 0.1
+  ballSizeIncrease: 0.0017
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4661154386399414}
   - component: {fileID: 212052450499704378}
   - component: {fileID: 58992244768257606}
-  - component: {fileID: 114758660660879128}
+  - component: {fileID: 114225726517198520}
   m_Layer: 0
-  m_Name: ShieldPowerup
+  m_Name: SpeedPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.985
---- !u!114 &114758660660879128
+--- !u!114 &114225726517198520
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,16 +65,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824805189220680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 848ab36c754706b47aa0105b19a02e5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 76819a1e141a912429c3afac28f129be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: 0
-  powerupType: 1
+  powerupType: 3
   spawnConditions: 0
-  validTargets: 01000000
+  validTargets: 000000000100000002000000
   spawnLimit: 0
-  despawnTime: 12
-  duration: 3600
+  despawnTime: 10
+  duration: 3
+  ballSpeedIncrease: 1
+  playerSpeedIncrease: 0.035
+  enemySpeedDecrease: 0.025
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -110,7 +113,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9d9adb3debb76fa46b034e6f296324fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b057b710fea250f46a630da8b33741c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
