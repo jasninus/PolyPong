@@ -76,7 +76,8 @@ public abstract class PowerupBase : MonoBehaviour
                     break;
 
                 case PowerupTarget.Player:
-                    PlayerActivate(other.GetComponent<BallMovement>().lastPlayerHit);
+                    if (other.GetComponent<BallMovement>().lastPlayerHit)
+                        PlayerActivate(other.GetComponent<BallMovement>().lastPlayerHit);
                     break;
 
                 case PowerupTarget.Ball:

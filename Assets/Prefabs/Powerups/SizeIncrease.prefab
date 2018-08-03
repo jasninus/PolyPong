@@ -75,8 +75,9 @@ MonoBehaviour:
   spawnLimit: 1
   despawnTime: 10
   duration: 4
-  playerSizeIncrease: 0.1
-  ballSizeIncrease: 0.0017
+  playerSizeIncrease: 0.25
+  ballSizeIncrease: 0.003
+  sizeChangeDuration: 2
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1

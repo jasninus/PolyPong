@@ -80,7 +80,7 @@ public class PowerupSpawnManager : MonoBehaviour
         }
     }
 
-    private IEnumerator TryDestroyPowerup(float despawnTime, GameObject powerupToDestroy)
+    private IEnumerator TryDestroyPowerup(float despawnTime, GameObject powerupToDestroy) // TODO when destroying player, all powerups affecting that player should be destroyed
     {
         yield return new WaitForSeconds(despawnTime);
 
@@ -113,6 +113,7 @@ public class PowerupSpawnManager : MonoBehaviour
     /// <returns>The chosen target</returns>
     private PowerupTarget ChooseRandomPowerupTarget(PowerupBase chosenPowerup)
     {
+        // TODO there should be added a reference to ball, so that when lastPlayerHit is null, the player target cannot be used
         PowerupTarget[] validTargets = chosenPowerup.validTargets;
         return validTargets[Random.Range(0, validTargets.Length)];
     }
