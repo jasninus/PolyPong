@@ -77,7 +77,7 @@ MonoBehaviour:
   duration: 4
   playerSizeIncrease: 0.25
   ballSizeIncrease: 0.003
-  sizeChangeDuration: 2
+  sizeChangeDuration: 0.5
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -14,31 +14,37 @@ public class SizeIncreasePowerup : PowerupBase
     protected override void PlayerActivate(Player lastPlayerHit)
     {
         enlargedPlayer = lastPlayerHit.transform.GetChild(0);
-        //enlargedPlayer.localScale = new Vector3(enlargedPlayer.localScale.x + playerSizeIncrease, enlargedPlayer.localScale.y, enlargedPlayer.localScale.z);
         originalSize = enlargedPlayer.localScale.x;
         lerpBigger = true;
         lerpStartTime = Time.time;
+
+        Invoke("RevertToNormalSize", duration - sizeChangeDuration);
     }
 
     protected override void BallActivate(GameObject ball)
     {
         enlargedBall = ball.transform;
-        //enlargedBall.localScale = new Vector3(enlargedBall.localScale.x + ballSizeIncrease, enlargedBall.localScale.y + ballSizeIncrease, enlargedBall.localScale.z);
         originalSize = enlargedBall.localScale.x;
         lerpBigger = true;
         lerpStartTime = Time.time;
+
+        Invoke("RevertToNormalSize", duration - sizeChangeDuration);
     }
 
-    protected override void Revert()
+    private void RevertToNormalSize()
     {
         switch (target)
         {
             case PowerupTarget.Ball:
-                enlargedBall.localScale = new Vector3(enlargedBall.localScale.x - ballSizeIncrease, enlargedBall.localScale.y - ballSizeIncrease, enlargedBall.localScale.z);  // TODO add lerping
+                originalSize = enlargedBall.localScale.x;
+                lerpSmaller = true;
+                lerpStartTime = Time.time;
                 break;
 
             case PowerupTarget.Player:
-                enlargedPlayer.localScale = new Vector3(enlargedPlayer.localScale.x - playerSizeIncrease, enlargedPlayer.localScale.y, enlargedPlayer.localScale.z);  // TODO add lerping
+                originalSize = enlargedPlayer.localScale.x;
+                lerpSmaller = true;
+                lerpStartTime = Time.time;
                 break;
         }
     }
@@ -54,6 +60,22 @@ public class SizeIncreasePowerup : PowerupBase
             else // Ball
             {
                 enlargedBall.localScale = new Vector3(originalSize + Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), originalSize + Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedBall.localScale.z);
+            }
+
+            if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)
+            {
+                lerpBigger = false;
+            }
+        }
+        else if (lerpSmaller)
+        {
+            if (target == PowerupTarget.Player)
+            {
+                enlargedPlayer.localScale = new Vector3(originalSize - Mathf.Lerp(0, playerSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedPlayer.localScale.y, enlargedPlayer.localScale.z);
+            }
+            else // Ball
+            {
+                enlargedBall.localScale = new Vector3(originalSize - Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), originalSize - Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedBall.localScale.z);
             }
 
             if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)
