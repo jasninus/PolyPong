@@ -48,16 +48,9 @@ public class LevelPoints : MonoBehaviour
 
         for (int i = 0; i < cornerAmount; i++)
         {
-            //spawnedPoints.Add(new Vector2(Mathf.Cos((radians / cornerAmount) * i * weightedCornerLengths[i]),
-            //                              Mathf.Sin((radians / cornerAmount) * i * weightedCornerLengths[i])
-            //                             ) * radius);
-
             spawnedPoints.Add(new Vector2(Mathf.Cos((radians / cornerAmount) * i + weights[i] + prevWeights), Mathf.Sin((radians / cornerAmount) * i + weights[i] + prevWeights)) * radius);
 
-            prevWeights += weights[i]; // You need all the previous weights
-
-            // Der skal laves et system, hvor de forskellige resultater fra sammenlignings-algoritmen bliver plusset ordentligt på
-            // Sammenlignings-algoritmen skal tage udgangspunkt i den ikke-vægtede polygon, hvor at radian-værdierne for siderne svarer til gennemsnittet af den forrige sides radianer plus den sides radianer
+            prevWeights += weights[i];
         }
 
         //MovePoints(spawnedPoints, center);
@@ -120,7 +113,7 @@ public class LevelPoints : MonoBehaviour
         }
     }
 
-    private Vector2 GetCenter(IEnumerable<Vector2> points)
+    public static Vector2 GetCenter(IEnumerable<Vector2> points)
     {
         return points.Aggregate(Vector2.zero, (acc, next) => acc + next / points.Count());
     }

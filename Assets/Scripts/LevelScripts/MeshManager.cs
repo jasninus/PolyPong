@@ -52,9 +52,10 @@ public class MeshManager : MonoBehaviour
         return v3List;
     }
 
-    public void SetMaterials()
+    public Material[] SetMaterials()
     {
         rend.materials = ChooseControls.activatedPlayers.Where(i => i.Value).Select(item => materials[item.Key]).ToArray();
+        return rend.materials;
     }
 
     public void SetVertices(List<Vector3> points)
@@ -78,7 +79,7 @@ public class MeshManager : MonoBehaviour
         mesh.SetTriangles(indices, cornerAmount - 1); // Draw odd mesh
     }
 
-    private void DrawNormalSquares(List<int> list, int edges) // TODO maybe this should not draw but only add. Then circle start could use this
+    private void DrawNormalSquares(List<int> list, int edges)
     {
         for (int i = 0; i < edges - 1; i++)
         {
