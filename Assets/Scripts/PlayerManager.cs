@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
     public static void V2LookAt(Transform transform, Vector2 point)
     {
         Vector2 v2Position = new Vector2(transform.position.x, transform.position.y);
-        Vector2 normPoint = (point + v2Position).normalized;
+        Vector2 normPoint = (point + v2Position);
 
         float zRotation = Mathf.Atan2(normPoint.y, normPoint.x) * Mathf.Rad2Deg + 90f;
         transform.rotation = Quaternion.Euler(0f, 0f, zRotation);

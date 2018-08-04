@@ -33,9 +33,19 @@ public class BallMesh : MonoBehaviour
 
     private void Start()
     {
-        rend.materials = meshManager.rend.materials;
+        //Material[] mats = new Material[2];
 
-        currentPlayers = rend.materials.Length - Convert.ToInt32(LevelManager.isCircle);
+        //if (LevelManager.isCircle)
+        //{
+        //    for (int i = 0; i < 2; i++)
+        //    {
+        //        mats[i] = MeshManager.materials[PlayerManager.players[i].color];
+        //    }
+        //}
+
+        rend.materials = LevelManager.isCircle ? PlayerManager.players.Select(p => MeshManager.materials[p.color]).ToArray() : meshManager.rend.materials;
+
+        currentPlayers = rend.materials.Length;
     }
 
     private void FixedUpdate()
