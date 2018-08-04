@@ -9,14 +9,17 @@ public class SizeIncreasePowerup : PowerupBase
 
     private bool lerpBigger, lerpSmaller;
 
-    private Transform enlargedPlayer, enlargedBall;
+    private Transform enlargedPlayerTransform, enlargedBall;
+
+    private Player enlargedPlayer;
 
     protected override void PlayerActivate(Player lastPlayerHit)
     {
-        enlargedPlayer = lastPlayerHit.transform.GetChild(0);
-        originalSize = enlargedPlayer.localScale.x;
+        enlargedPlayerTransform = lastPlayerHit.transform.GetChild(0);
+        originalSize = enlargedPlayerTransform.localScale.x;
         lerpBigger = true;
         lerpStartTime = Time.time;
+        enlargedPlayer = lastPlayerHit;
 
         Invoke("RevertToNormalSize", duration - sizeChangeDuration);
     }
@@ -36,13 +39,19 @@ public class SizeIncreasePowerup : PowerupBase
         switch (target)
         {
             case PowerupTarget.Ball:
+                if (!enlargedBall)
+                    return;
+
                 originalSize = enlargedBall.localScale.x;
                 lerpSmaller = true;
                 lerpStartTime = Time.time;
                 break;
 
             case PowerupTarget.Player:
-                originalSize = enlargedPlayer.localScale.x;
+                if (!enlargedPlayerTransform)
+                    return;
+
+                originalSize = enlargedPlayerTransform.localScale.x;
                 lerpSmaller = true;
                 lerpStartTime = Time.time;
                 break;
@@ -53,11 +62,12 @@ public class SizeIncreasePowerup : PowerupBase
     {
         if (lerpBigger)
         {
-            if (target == PowerupTarget.Player)
+            if (target == PowerupTarget.Player && enlargedPlayerTransform)
             {
-                enlargedPlayer.localScale = new Vector3(originalSize + Mathf.Lerp(0, playerSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedPlayer.localScale.y, enlargedPlayer.localScale.z);
+                enlargedPlayerTransform.localScale = new Vector3(originalSize + Mathf.Lerp(0, playerSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedPlayerTransform.localScale.y, enlargedPlayerTransform.localScale.z);
+                enlargedPlayer.ClampMovement(enlargedPlayer.CalculateMinDis());
             }
-            else // Ball
+            else if (enlargedBall) // Ball
             {
                 enlargedBall.localScale = new Vector3(originalSize + Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), originalSize + Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedBall.localScale.z);
             }
@@ -69,11 +79,11 @@ public class SizeIncreasePowerup : PowerupBase
         }
         else if (lerpSmaller)
         {
-            if (target == PowerupTarget.Player)
+            if (target == PowerupTarget.Player && enlargedPlayerTransform)
             {
-                enlargedPlayer.localScale = new Vector3(originalSize - Mathf.Lerp(0, playerSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedPlayer.localScale.y, enlargedPlayer.localScale.z);
+                enlargedPlayerTransform.localScale = new Vector3(originalSize - Mathf.Lerp(0, playerSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedPlayerTransform.localScale.y, enlargedPlayerTransform.localScale.z);
             }
-            else // Ball
+            else if (enlargedBall) // Ball
             {
                 enlargedBall.localScale = new Vector3(originalSize - Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), originalSize - Mathf.Lerp(0, ballSizeIncrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), enlargedBall.localScale.z);
             }

@@ -10,7 +10,7 @@ public class BallMesh : MonoBehaviour
     [SerializeField] private float radius;
 
     /// <summary>
-    /// Must be divisible by 6, 5, 4
+    /// Must be divisible by 6, 5 and 4
     /// </summary>
     [SerializeField] private int ballEdges = 60;
 
@@ -33,23 +33,10 @@ public class BallMesh : MonoBehaviour
 
     private void Start()
     {
-        //Material[] mats = new Material[2];
-
-        //if (LevelManager.isCircle)
-        //{
-        //    for (int i = 0; i < 2; i++)
-        //    {
-        //        mats[i] = MeshManager.materials[PlayerManager.players[i].color];
-        //    }
-        //}
-
         rend.materials = LevelManager.isCircle ? PlayerManager.players.Select(p => MeshManager.materials[p.color]).ToArray() : meshManager.rend.materials;
 
         currentPlayers = rend.materials.Length;
-    }
 
-    private void FixedUpdate()
-    {
         AddVertices();
         AddIndices();
     }
@@ -73,7 +60,7 @@ public class BallMesh : MonoBehaviour
         mesh.vertices = GeneratePoints();
     }
 
-    private void AddIndices() // TODO this list does not have to be generated each frame
+    private void AddIndices()
     {
         List<int> indices = new List<int>(); // TODO could be fun to test whether it is most efficient to have this here or in the first for-loop
 

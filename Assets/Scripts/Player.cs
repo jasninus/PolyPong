@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
         // TODO clamp player movement every frame
     }
 
-    protected void ClampMovement(float minDis)
+    public void ClampMovement(float minDis)
     {
         if (!CanMoveLeft(minDis))
         {
@@ -152,9 +152,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected float CalculateMinDis()
+    public float CalculateMinDis()
     {
-        return 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad); // TODO this should only be calculated on start and whilst lerping level
+        return 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad);
     }
 
     protected bool CanMoveLeft(float minDis)

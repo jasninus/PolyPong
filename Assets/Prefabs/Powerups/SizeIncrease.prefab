@@ -72,7 +72,7 @@ MonoBehaviour:
   powerupType: 4
   spawnConditions: 0
   validTargets: 0100000002000000
-  spawnLimit: 0
+  spawnLimit: 4
   despawnTime: 10
   duration: 4
   playerSizeIncrease: 0.25
