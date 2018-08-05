@@ -1,9 +1,14 @@
-﻿using UnityEngine.UI;
+﻿using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RoundOver : MonoBehaviour
 {
+    public delegate void Round();
+
+    public static event Round RoundEnd;
+
     private static int roundsPlayed;
 
     private Text winText;
@@ -14,16 +19,38 @@ public class RoundOver : MonoBehaviour
 
     private void Awake()
     {
-        CircleCollider.RoundWin += CreateVictoryScreen;
+        CircleCollider.RoundWin += EndRound;
     }
 
-    public void CreateVictoryScreen(Player winner)
+    public void EndRound()
+    {
+        if (roundsPlayed >= RoundSlider.selectedRoundAmount - 1)
+        {
+            CreateVictoryScreen();
+        }
+        else
+        {
+            CreateNextRoundScreen();
+        }
+
+        gameEnded = true;
+        //RoundEnd?.Invoke();
+    }
+
+    private void CreateNextRoundScreen()
     {
         GameObject panel = GameObject.FindWithTag("Panel");
         panel.GetComponent<Image>().enabled = true;
-        panel.GetComponent<Image>().color = MeshManager.materials[winner.color].color;
-        GameObject.FindWithTag("WinText").GetComponent<Text>().text = winner.color + " player has won!";
-        gameEnded = true;
+        panel.GetComponent<Image>().color = Color.gray;
+        GameObject.FindWithTag("WinText").GetComponent<Text>().text = "Press space to continue";
+    }
+
+    private void CreateVictoryScreen()
+    {
+        GameObject panel = GameObject.FindWithTag("Panel");
+        panel.GetComponent<Image>().enabled = true;
+        panel.GetComponent<Image>().color = MeshManager.materials[Points.GetWinner()].color;
+        GameObject.FindWithTag("WinText").GetComponent<Text>().text = Points.GetWinner() + " player has won!";
     }
 
     private void ClearAllStaticVariables()
@@ -34,6 +61,7 @@ public class RoundOver : MonoBehaviour
         MeshManager.materials.Clear();
         LevelManager.isCircle = false;
         LevelManager.shouldLerpToCircle = false;
+        PlayerManager.backupPlayers.Clear();
     }
 
     private void ResetStaticVariables()
@@ -42,29 +70,40 @@ public class RoundOver : MonoBehaviour
         PlayerManager.players.Clear();
         LevelManager.isCircle = false;
         LevelManager.shouldLerpToCircle = false;
+
+        foreach (Player backupPlayer in PlayerManager.backupPlayers)
+        {
+            ChooseControls.activatedPlayers[backupPlayer.color] = true;
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && gameEnded == true)
+        if (Input.GetKeyDown(KeyCode.Space) && gameEnded)
         {
+            Points.previousPlayerDeaths = 0;
             roundsPlayed++;
 
-            Points.previousPlayerDeaths = 0;
-
-            if (roundsPlayed < RoundSlider.selectedRoundAmount)
+            if (roundsPlayed < RoundSlider.selectedRoundAmount) // More rounds remaining
             {
                 ResetStaticVariables();
                 SceneManager.LoadScene(2);
+                //DelayScoreboardUpdate();  // Display updated scores
             }
-            else
+            else // Last round done
             {
                 Debug.Log(Points.GetWinner() + " has actually won");
                 Points.ResetPoints();
                 ClearAllStaticVariables();
                 roundsPlayed = 0;
                 SceneManager.LoadScene(1);
+                RoundSlider.selectedRoundAmount = 1;
             }
         }
+    }
+
+    private IEnumerator DelayScoreboardUpdate()
+    {
+        yield return new WaitForSeconds(0.05f);
     }
 }

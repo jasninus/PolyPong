@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PolygonCollider2D))]
 public class CircleCollider : MonoBehaviour
 {
-    public delegate void RoundEnd(Player winner);
+    public delegate void RoundEnd();
 
     public static event RoundEnd RoundWin;
 
@@ -74,6 +74,6 @@ public class CircleCollider : MonoBehaviour
         Points.AddPoints(owner.color);
         PlayerManager.players.Remove(owner);
         Points.AddPoints(PlayerManager.players.First().color);
-        RoundWin(PlayerManager.players.First());
+        RoundWin?.Invoke();
     }
 }

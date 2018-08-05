@@ -72,11 +72,11 @@ MonoBehaviour:
   powerupType: 4
   spawnConditions: 0
   validTargets: 0100000002000000
-  spawnLimit: 4
+  spawnLimit: 0
   despawnTime: 10
-  duration: 4
-  playerSizeIncrease: 0.25
-  ballSizeIncrease: 0.003
+  duration: 5.5
+  playerSizeIncrease: 0.27
+  ballSizeIncrease: 0.004
   sizeChangeDuration: 0.5
 --- !u!212 &212052450499704378
 SpriteRenderer:

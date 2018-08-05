@@ -7,7 +7,7 @@ using UnityEngineInternal.Input;
 
 public static class Points
 {
-    private static readonly Dictionary<PlayerColors, int> points = new Dictionary<PlayerColors, int>();
+    public static readonly Dictionary<PlayerColors, int> points = new Dictionary<PlayerColors, int>();
 
     public static int previousPlayerDeaths;
 
@@ -50,5 +50,10 @@ public static class Points
         }
 
         return winner;
+    }
+
+    public static List<PlayerColors> GetSortedPlayers()
+    {
+        return points.OrderByDescending(i => i.Value).Select(i => i.Key).ToList();
     }
 }

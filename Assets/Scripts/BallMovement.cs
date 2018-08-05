@@ -57,6 +57,11 @@ public class BallMovement : MonoBehaviour
 
         if (LevelManager.innerPoints.Count < 4)
         {
+            if (LevelManager.innerPoints.Count == 3)
+            {   // This sucks
+                Points.AddPoints(hitPlayer.color);
+            }
+
             hitPlayer.CircleDestroyPlayer();
             return;
         }

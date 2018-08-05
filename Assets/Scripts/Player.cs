@@ -2,6 +2,10 @@
 
 public class Player : MonoBehaviour
 {
+    public delegate void PlayerDeath();
+
+    public static event PlayerDeath UpdateScoreboard;
+
     public float playerSpeed, circleSpeed, minDis, minRot;
 
     public bool hasShield, movingLeft, movingRight;
@@ -67,6 +71,8 @@ public class Player : MonoBehaviour
         levelManager.StartLerpLevelSmaller(playerOrder);
         LevelManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
         DeactivePlayer();
+
+        UpdateScoreboard?.Invoke();
     }
 
     public void CircleDestroyPlayer()
@@ -80,6 +86,8 @@ public class Player : MonoBehaviour
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
         levelManager.StartLerpCircleSmaller(playerOrder);
         DeactivePlayer();
+
+        UpdateScoreboard?.Invoke();
     }
 
     private void CheckPlayerOrderDecrease(int destroyedPlayerOrder)
