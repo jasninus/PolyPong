@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(AudioSource))]
 public class BallMovement : MonoBehaviour
 {
     [HideInInspector] public Player lastPlayerHit;
@@ -9,12 +10,15 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float maxCurving, curvingPerHit, curveIntensity, curveRotationSpeed, sideHitRotation;
     private float curvingAmount;
 
+    private AudioSource audio;
+
     private Rigidbody2D rb;
 
     private void Awake()
     {
         ballSpeed += ballSpeedModifier;
         rb = GetComponent<Rigidbody2D>();
+        audio = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate() // TODO stop rotation if curvingAmount is 0 and test if is problem in circle
@@ -97,6 +101,8 @@ public class BallMovement : MonoBehaviour
 
     private void PlayerCollision(Collision2D other)
     {
+        audio.Play();
+
         lastPlayerHit = other.gameObject.transform.parent.GetComponent<Player>();
         CheckCurvingIncrease(lastPlayerHit);
         ClampCurving();
