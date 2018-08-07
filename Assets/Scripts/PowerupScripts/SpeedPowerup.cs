@@ -7,14 +7,14 @@ public class SpeedPowerup : PowerupBase
 {
     [SerializeField] private float ballSpeedIncrease, playerSpeedIncrease, enemySpeedDecrease;
 
-    private BallMovement ball;
+    private Ball ball;
 
     private List<Player> enemies;
     private Player spedPlayer;
 
     protected override void BallActivate(GameObject ball)
     {
-        this.ball = ball.GetComponent<BallMovement>();
+        this.ball = ball.GetComponent<Ball>();
         this.ball.ballSpeed += ballSpeedIncrease;
     }
 

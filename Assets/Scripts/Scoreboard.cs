@@ -26,7 +26,6 @@ public class Scoreboard : MonoBehaviour
         }
 
         RoundOver.RoundEnd += UpdateScoreboard;
-        //Player.UpdateScoreboard -= UpdateText;
         Player.UpdateScoreboard += UpdateText;
         UpdateScoreboard();
     }
@@ -35,11 +34,6 @@ public class Scoreboard : MonoBehaviour
     {
         UpdatePositions();
         UpdateText();
-    }
-
-    private void Update()
-    {
-        Debug.Log(pointTexts[PlayerColors.Yellow]);
     }
 
     private void UpdatePositions()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(AudioSource))]
-public class BallMovement : MonoBehaviour
+public class Ball : MonoBehaviour
 {
     [HideInInspector] public Player lastPlayerHit;
 

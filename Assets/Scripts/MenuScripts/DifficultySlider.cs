@@ -21,6 +21,6 @@ public class DifficultySlider : MonoBehaviour
 
     private void OnSliderValueChanged(float value)
     {
-        BallMovement.ballSpeedModifier = value - slider.maxValue / 2;
+        Ball.ballSpeedModifier = value - slider.maxValue / 2;
     }
 }

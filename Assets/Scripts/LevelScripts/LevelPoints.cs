@@ -125,9 +125,13 @@ public class LevelPoints : MonoBehaviour
     /// <param name="degrees">How many degrees around the z-axis the points should be rotated</param>
     public void RotatePoints(IList<Vector2> points, float degrees)
     {
+        Vector2 center = GetCenter(points);
+
         for (int i = 0; i < points.Count; i++)
         {
-            points[i] = Quaternion.Euler(0, 0, degrees) * points[i];
+            Vector2 fromCenter = points[i] - center;
+
+            points[i] = (Vector2)(Quaternion.Euler(0, 0, degrees) * fromCenter) + center;
         }
     }
 

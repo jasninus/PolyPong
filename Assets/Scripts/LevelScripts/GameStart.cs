@@ -28,6 +28,9 @@ public class GameStart : MonoBehaviour
     /// <param name="levelCenter">Spawnpoint of the ball</param>
     public void StartCountdown(Vector2 levelCenter)
     {
+        if (!ChooseControls.gameStarted)
+            return;
+
         // There cannot be two simultaneous countdowns
         if (currentCountDown == 0)
         {
@@ -76,7 +79,7 @@ public class GameStart : MonoBehaviour
     private void SpawnBall(Vector2 levelCenter)
     {
         _ball = Instantiate(ball, levelCenter, Quaternion.identity);
-        _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ball.GetComponent<BallMovement>().ballSpeed;
+        _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ball.GetComponent<Ball>().ballSpeed;
 
         BallSpawn?.Invoke(_ball);
     }

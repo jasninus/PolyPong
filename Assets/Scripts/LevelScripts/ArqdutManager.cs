@@ -16,6 +16,16 @@ public class ArqdutManager : MonoBehaviour
         }
     }
 
+    public void DestroyAllArqduts()
+    {
+        foreach (GameObject arqdut in arqduts)
+        {
+            Destroy(arqdut);
+        }
+
+        arqduts.Clear();
+    }
+
     public void DestroyArqdut(int playerOrder)
     {
         Destroy(arqduts[playerOrder]);

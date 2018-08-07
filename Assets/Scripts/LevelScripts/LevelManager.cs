@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.CodeDom;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(LevelPoints), typeof(MeshManager), typeof(PlayerManager))]
+[RequireComponent(typeof(PointLerp), typeof(ArqdutManager))]
 public class LevelManager : MonoBehaviour
 {
     public delegate void PlayerDestroy(int destroyedPlayerOrder);
@@ -17,21 +20,21 @@ public class LevelManager : MonoBehaviour
     public float lerpAmount;
     [HideInInspector] public float lerpedAmount, previousRotation;
 
-    private LevelPoints pointManager;
-    private MeshManager meshManager;
-    private PointLerp lerpManager;
-    private PlayerManager playerManager;
-    private ArqdutManager arqdutManager;
-    private GameStart _gameManager;
+    protected LevelPoints pointManager;
+    protected MeshManager meshManager;
+    protected PointLerp lerpManager;
+    protected PlayerManager playerManager;
+    protected ArqdutManager arqdutManager;
+    protected GameStart _gameManager;
 
-    private LevelLerpCircle circleLerpManager;
-    private LevelLerp levelLerpManager;
-    private LevelSpawner levelSpawner;
+    protected LevelLerpCircle circleLerpManager;
+    protected LevelLerp levelLerpManager;
+    protected LevelSpawner levelSpawner;
 
-    private bool shouldLerpBigger, shouldLerpToNormal;
+    private bool shouldLerpToNormal;
     public static bool shouldLerpToCircle, isCircle, shouldLerpSmaller, shouldSetIndices;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         lerpManager = GetComponent<PointLerp>();
         pointManager = GetComponent<LevelPoints>();
@@ -46,7 +49,7 @@ public class LevelManager : MonoBehaviour
         levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, _gameManager);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (ChooseControls.activatedPlayers.Count(i => i.Value) < 3) // Start as circle
         {
@@ -128,17 +131,12 @@ public class LevelManager : MonoBehaviour
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(innerPoints, outerPoints));
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (shouldLerpToNormal)
         {
             LerpToNormalLevel();
-
-            lerpedAmount += lerpAmount;
-            shouldLerpToNormal = lerpedAmount < 1;
-
-            if (!shouldLerpToNormal)
-                lerpedAmount = 0;
+            UpdateLerpedAmount();
         }
 
         if (shouldLerpSmaller && !shouldLerpToCircle)
@@ -150,6 +148,15 @@ public class LevelManager : MonoBehaviour
         {
             circleLerpManager.LerpCircle();
         }
+    }
+
+    private void UpdateLerpedAmount()
+    {
+        lerpedAmount += lerpAmount;
+        shouldLerpToNormal = lerpedAmount < 1 + lerpAmount;
+
+        if (!shouldLerpToNormal)
+            lerpedAmount = 0;
     }
 
     public void DestroyPlayer(int playerToDestroy)

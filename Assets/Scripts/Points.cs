@@ -24,7 +24,6 @@ public static class Points
 
     public static void AddPoints(PlayerColors color)
     {
-        Debug.Log("Added " + (previousPlayerDeaths) + " points to " + color);
         points[color] += previousPlayerDeaths;
         previousPlayerDeaths++;
     }

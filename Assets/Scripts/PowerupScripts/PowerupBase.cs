@@ -72,12 +72,12 @@ public abstract class PowerupBase : MonoBehaviour
             switch (target)
             {
                 case PowerupTarget.Enemies:
-                    EnemyActivate(GetAllEnemies(other.GetComponent<BallMovement>().lastPlayerHit));
+                    EnemyActivate(GetAllEnemies(other.GetComponent<Ball>().lastPlayerHit));
                     break;
 
                 case PowerupTarget.Player:
-                    if (other.GetComponent<BallMovement>().lastPlayerHit)
-                        PlayerActivate(other.GetComponent<BallMovement>().lastPlayerHit);
+                    if (other.GetComponent<Ball>().lastPlayerHit)
+                        PlayerActivate(other.GetComponent<Ball>().lastPlayerHit);
                     break;
 
                 case PowerupTarget.Ball:

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -51,9 +52,14 @@ public class PointLerp : MonoBehaviour
         return lerpedPoints;
     }
 
-    public List<Vector2> LerpToNormal(List<Vector2> from, List<Vector2> to, float lerpAmount)
+    public List<Vector2> LerpToNormal(List<Vector2> from, List<Vector2> to, float lerpAmount) // I think this can also be used to lerp bigger. If LevelManager handles spawning of the new points, then this can be used no problem
     {
-        // LINQ is so cool. Felt like this had to be more than one line to be real
-        return from.Select((t, i) => Vector2.Lerp(t, to[i], lerpAmount)).ToList();
+        try
+        {
+            return from.Select((t, i) => Vector2.Lerp(t, to[i], lerpAmount)).ToList();
+        }
+        catch { }
+
+        return null;
     }
 }

@@ -27,39 +27,62 @@ public class PlayerManager : MonoBehaviour
     {
         var activatedColors = ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray();
 
+        if (players.Count > 0)
+            players.Clear();
+
         for (int i = 0; i < activatedColors.Length - 1; i++)
         {
-            var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
-                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>() :
-                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
-
-            p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
-            players.Add(p);
-
-            p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
+            SpawnPlayer(radius, activatedColors, i);
         }
 
-        Player lP = BotSelection.botDifficulties[activatedColors.Last()] == 0 ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>() :
-            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
-
-        lP.Initialize(activatedColors.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(), activatedColors.Length - 1, levelManager, playerSpeed, circleSpeed, radius);
-        players.Add(lP);
-
-        lP.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors.Last()].color;
+        SpawnLastPlayer(radius, activatedColors);
 
         Player[] playerArr = new Player[players.Count];
         players.CopyTo(playerArr);
         backupPlayers = playerArr.ToList();
     }
 
-    public static void V2LookAt(Transform transform, Vector2 point)
+    private void SpawnPlayer(float radius, PlayerColors[] activatedColors, int i)
     {
-        Vector2 v2Position = new Vector2(transform.position.x, transform.position.y);
-        Vector2 normPoint = (point + v2Position);
+        var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
+            Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
+            : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
+
+        p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
+        players.Add(p);
+
+        p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
+    }
+
+    private void SpawnLastPlayer(float radius, PlayerColors[] activatedColors)
+    {
+        var lP = BotSelection.botDifficulties[activatedColors.Last()] == 0 ? // Should added var be a bot or player
+            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>()
+            : Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
+
+        lP.Initialize(activatedColors.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(), activatedColors.Length - 1, levelManager, playerSpeed, circleSpeed, radius);
+        players.Add(lP);
+
+        lP.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors.Last()].color;
+    }
+
+    public void DestroyAllPlayers()
+    {
+        foreach (Player player in players)
+        {
+            Destroy(player.gameObject);
+        }
+
+        players.Clear();
+    }
+
+    public static void V2LookAt(Transform oTransform, Vector2 point)
+    {
+        Vector2 v2Position = new Vector2(oTransform.position.x, oTransform.position.y);
+        Vector2 normPoint = v2Position - point;
 
         float zRotation = Mathf.Atan2(normPoint.y, normPoint.x) * Mathf.Rad2Deg + 90f;
-        transform.rotation = Quaternion.Euler(0f, 0f, zRotation);
+        oTransform.rotation = Quaternion.Euler(0f, 0f, zRotation);
     }
 
     public void PlayersLookAtPoint(Vector2 point)

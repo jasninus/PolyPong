@@ -57,6 +57,8 @@ public class LevelSpawner
 
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
         levelManager.DrawMesh(corners);
-        _gameManager.StartCountdown(levelManager.levelCenter);
+
+        if (ChooseControls.gameStarted)
+            _gameManager.StartCountdown(levelManager.levelCenter);
     }
 }

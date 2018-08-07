@@ -34,16 +34,4 @@ public class KeyManagerTest : MonoBehaviour
 
         return false;
     }
-
-    private void Update()
-    {
-        //Debug.Log(Environment.TickCount);
-
-        //GetValidInput(ref key);
-
-        //if (Input.GetKeyDown(KeyCode.Clear))
-        //{
-        //    Debug.Log("Pressed");
-        //}
-    }
 }

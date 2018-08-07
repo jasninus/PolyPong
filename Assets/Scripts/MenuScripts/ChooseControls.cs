@@ -32,6 +32,10 @@ public class ChooseControls : MonoBehaviour
 
     [SerializeField] private Sprite arrow;
 
+    public delegate void PlayerChange(PlayerColors selectedPlayer);
+
+    public static event PlayerChange PlayerAmountIncreased, PlayerAmountDecreased;
+
     private ButtonIcons buttonIcons;
 
     private bool choosingLeftControl = true, selectingControls;
@@ -41,6 +45,8 @@ public class ChooseControls : MonoBehaviour
     private PlayerColors selectedPlayer;
 
     private KeyCode pressedKey;
+
+    public static bool gameStarted;
 
     private static readonly Dictionary<PlayerColors, Text[]> controlTexts = new Dictionary<PlayerColors, Text[]>();
     private readonly Dictionary<PlayerColors, float> selectionYVals = new Dictionary<PlayerColors, float>();
@@ -158,8 +164,8 @@ public class ChooseControls : MonoBehaviour
 
     public void ClearControls(PlayerColors playerToWipe)
     {
-        SetButton(playerToWipe, Direction.left, KeyCode.Clear);
-        SetButton(playerToWipe, Direction.right, KeyCode.Clear);
+        SetButton(playerToWipe, Direction.left, KeyCode.None);
+        SetButton(playerToWipe, Direction.right, KeyCode.None);
 
         controlTexts[playerToWipe][0].text = "";
         controlTexts[playerToWipe][1].text = "";
@@ -169,6 +175,8 @@ public class ChooseControls : MonoBehaviour
 
         squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
+
+        PlayerAmountDecreased?.Invoke(playerToWipe);
     }
 
     private void ClearPlayer(PlayerColors playerToWipe)
@@ -220,6 +228,8 @@ public class ChooseControls : MonoBehaviour
     {
         selectionBall.StartPosLerpToPoint(new Vector3(selectionBall.transform.position.x, selectionYVals[selectingPlayer], selectionBall.transform.position.z));
         selectedPlayer = selectingPlayer;
+
+        PlayerAmountIncreased?.Invoke(selectingPlayer);
     }
 
     /// <summary>
@@ -234,6 +244,10 @@ public class ChooseControls : MonoBehaviour
 
     private void StartGame()
     {
+        LevelManager.isCircle = false; // Reset specific static variables from the menu level TODO these might have to be reset in other places if menu level is to change from circle to polygon
+        LevelManager.shouldLerpToCircle = false;
+
+        gameStarted = true;
         SceneManager.LoadScene("Main");
     }
 }

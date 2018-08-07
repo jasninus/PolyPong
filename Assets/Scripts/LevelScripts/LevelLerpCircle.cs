@@ -71,9 +71,13 @@ public class LevelLerpCircle : MonoBehaviour
             levelManager.lerpedAmount = 0;
 
             levelManager.DestroyPlayer(LevelManager.playerToDestroy);
-            playerManager.SpawnCircleMovementObjs(levelManager.levelCenter);
-            playerManager.SpawnCircleColliders(LevelManager.playerToDestroy);
-            LevelManager.isCircle = true;
+
+            if (ChooseControls.gameStarted)
+            {
+                playerManager.SpawnCircleMovementObjs(levelManager.levelCenter);
+                playerManager.SpawnCircleColliders(LevelManager.playerToDestroy);
+                LevelManager.isCircle = true;
+            }
         }
 
         if (LevelManager.shouldSetIndices)

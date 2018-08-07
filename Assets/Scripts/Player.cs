@@ -100,6 +100,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!ChooseControls.gameStarted)
+            return;
+
         if (!LevelManager.isCircle && !LevelManager.shouldLerpToCircle)
         {
             LevelMovement();

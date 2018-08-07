@@ -9,25 +9,24 @@ public class MeshManager : MonoBehaviour
     [HideInInspector] public Mesh mesh;
     [HideInInspector] public MeshRenderer rend;
 
-    private PolygonCollider2D collider;
+    private PolygonCollider2D coll;
 
     [SerializeField] private Material[] matArray;
 
     public static readonly Dictionary<PlayerColors, Material> materials = new Dictionary<PlayerColors, Material>();
-    private readonly CircleMesh circleMesh;
 
     public MeshManager()
     {
-        circleMesh = new CircleMesh(this);
+        Circle = new CircleMesh(this);
     }
 
-    public CircleMesh Circle
-    {
-        get { return circleMesh; }
-    }
+    public CircleMesh Circle { get; }
 
     private void Awake()
     {
+        if (materials.Count > 0)
+            materials.Clear();
+
         foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
         {
             // Add materials
@@ -37,7 +36,7 @@ public class MeshManager : MonoBehaviour
         filter = GetComponent<MeshFilter>();
         rend = GetComponent<MeshRenderer>();
         mesh = filter.mesh;
-        collider = GetComponent<PolygonCollider2D>();
+        coll = GetComponent<PolygonCollider2D>();
     }
 
     /// <summary>

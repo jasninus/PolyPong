@@ -34,7 +34,6 @@ public class RoundOver : MonoBehaviour
         }
 
         gameEnded = true;
-        //RoundEnd?.Invoke();
     }
 
     private void CreateNextRoundScreen()
@@ -59,12 +58,13 @@ public class RoundOver : MonoBehaviour
         ChooseControls.controls.Clear();
         PlayerManager.players.Clear();
         MeshManager.materials.Clear();
+        PlayerManager.backupPlayers.Clear();
         LevelManager.isCircle = false;
         LevelManager.shouldLerpToCircle = false;
-        PlayerManager.backupPlayers.Clear();
+        ChooseControls.gameStarted = false;
     }
 
-    private void ResetStaticVariables()
+    public static void ResetStaticVariables()
     {
         MeshManager.materials.Clear();
         PlayerManager.players.Clear();
@@ -73,7 +73,7 @@ public class RoundOver : MonoBehaviour
 
         foreach (Player backupPlayer in PlayerManager.backupPlayers)
         {
-            ChooseControls.activatedPlayers[backupPlayer.color] = true;
+            //ChooseControls.activatedPlayers[backupPlayer.color] = true;
         }
     }
 
@@ -88,11 +88,9 @@ public class RoundOver : MonoBehaviour
             {
                 ResetStaticVariables();
                 SceneManager.LoadScene(2);
-                //DelayScoreboardUpdate();  // Display updated scores
             }
             else // Last round done
             {
-                Debug.Log(Points.GetWinner() + " has actually won");
                 Points.ResetPoints();
                 ClearAllStaticVariables();
                 roundsPlayed = 0;
@@ -100,10 +98,5 @@ public class RoundOver : MonoBehaviour
                 RoundSlider.selectedRoundAmount = 1;
             }
         }
-    }
-
-    private IEnumerator DelayScoreboardUpdate()
-    {
-        yield return new WaitForSeconds(0.05f);
     }
 }

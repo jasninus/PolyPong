@@ -2,8 +2,8 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class playerCount : MonoBehaviour {
-
+public class PlayerCount : MonoBehaviour
+{
     [SerializeField]
     private Text text;
 
@@ -14,15 +14,15 @@ public class playerCount : MonoBehaviour {
     private int sceneToLoad;
 
     private int numberOfPlayers;
-    
-	void Start ()
+
+    private void Start()
     {
         text.text = "How many players are you?";
 
         text1.text = "Press 2,3,4,5 or 6";
-	}
-	
-	void Update ()
+    }
+
+    private void Update()
     {
         if (Input.GetKey("2"))
         {
@@ -56,8 +56,7 @@ public class playerCount : MonoBehaviour {
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        
     }
 }
