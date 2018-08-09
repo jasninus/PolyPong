@@ -6603,7 +6603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCenter: {x: 10.5, y: 0}
-  lerpAmount: 0.2
+  lerpAmount: 0.02
   lerpedAmount: 0
   previousRotation: 0
 --- !u!114 &1212984659

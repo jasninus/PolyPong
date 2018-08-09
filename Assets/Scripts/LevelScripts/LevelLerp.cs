@@ -13,7 +13,7 @@ public class LevelLerp : MonoBehaviour
     private readonly GameStart _gameManager;
 
     private int lerpPlayerNumber;
-    private readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 } /* constants used in rotation calculations */, joiningPoints = new int[2];
+    public readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 } /* constants used in rotation calculations */, joiningPoints = new int[2];
 
     public LevelLerp(LevelManager levelManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, GameStart gameManager)
     {
@@ -58,10 +58,12 @@ public class LevelLerp : MonoBehaviour
     private void FinishLerping()
     {
         levelManager.DestroyPlayer(LevelManager.playerToDestroy);
-        LevelManager.shouldLerpSmaller = false;
 
         LevelManager.innerPoints = LevelManager.innerLerpTo;
         LevelManager.outerPoints = LevelManager.outerLerpTo;
+
+        LevelManager.shouldLerpSmaller = false;
+
         meshManager.SetMaterials();
         levelManager.lerpedAmount = 0;
         playerManager.UpdatePlayerPositions();

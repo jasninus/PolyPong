@@ -119,7 +119,7 @@ public class LevelPoints : MonoBehaviour
     }
 
     /// <summary>
-    /// Rotates the given point(s) around a centerpoint be specified degrees
+    /// Rotates the given point(s) around a centerpoint by specified degrees
     /// </summary>
     /// <param name="points">The points to be rotated</param>
     /// <param name="degrees">How many degrees around the z-axis the points should be rotated</param>

@@ -73,6 +73,11 @@ public class PlayerManager : MonoBehaviour
             Destroy(player.gameObject);
         }
 
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Goal"))
+        {
+            Destroy(player); // Destroy all remaining players
+        }
+
         players.Clear();
     }
 

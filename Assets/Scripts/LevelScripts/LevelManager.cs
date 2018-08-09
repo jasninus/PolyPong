@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     public static int playerToDestroy;
 
-    public float lerpAmount;
+    public float lerpAmount; // TODO there should be made two different speeds: One for lerping smaller and one for lerping larger
     [HideInInspector] public float lerpedAmount, previousRotation;
 
     protected LevelPoints pointManager;
@@ -31,7 +32,7 @@ public class LevelManager : MonoBehaviour
     protected LevelLerp levelLerpManager;
     protected LevelSpawner levelSpawner;
 
-    private bool shouldLerpToNormal;
+    protected bool shouldLerpToNormal;
     public static bool shouldLerpToCircle, isCircle, shouldLerpSmaller, shouldSetIndices;
 
     protected virtual void Awake()

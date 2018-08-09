@@ -65,20 +65,21 @@ public class MeshManager : MonoBehaviour
     #region Level
 
     /// <summary>
-    /// Needs to have vertices added. Adds all indices and draw submeshes
+    /// Adds all indices and draw submeshes
     /// </summary>
+    /// <remarks>Needs to have vertices added before being called</remarks>
     public void AddIndicesAndDrawMesh(int cornerAmount) // TODO sorting of indices can be done on start. Doesn't have to be done every frame
     {
         mesh.subMeshCount = cornerAmount;
         List<int> indices = new List<int>();
 
-        DrawNormalSquares(indices, cornerAmount);
+        DrawNormalSquares(ref indices, cornerAmount);
 
         AddOddSquare(indices, cornerAmount);
         mesh.SetTriangles(indices, cornerAmount - 1); // Draw odd mesh
     }
 
-    private void DrawNormalSquares(List<int> list, int edges)
+    private void DrawNormalSquares(ref List<int> list, int edges)
     {
         for (int i = 0; i < edges - 1; i++)
         {
