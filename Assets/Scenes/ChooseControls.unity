@@ -6606,6 +6606,7 @@ MonoBehaviour:
   lerpAmount: 0.02
   lerpedAmount: 0
   previousRotation: 0
+  disBeforePlayerSpawn: 0.2
 --- !u!114 &1212984659
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ public class MenuLevelManager : LevelManager
 
     private readonly int[][] addPlayerRotationConstants = { new[] { 0 }, new[] { 0 }, new[] { 0 }, new[] { -45, -15, 15, 45 }, new[] { -36, -18, 0, 18, 36 }, new[] { -30, -18, -6, 6, 18, 30 } };
 
+    [SerializeField] private float disBeforePlayerSpawn;
+
     private List<QueueItem> queue = new List<QueueItem>();
 
     private struct QueueItem
@@ -46,12 +48,12 @@ public class MenuLevelManager : LevelManager
 
     private void Update()
     {
-        if (ChooseControls.activatedPlayers.Count(p => p.Value) == 3 && !levelIsSpawned)
+        if (ChooseControls.activatedPlayers.Count(p => p.Value) == 3 && !levelIsSpawned) // The first
         {
             SpawnLevel();
         }
 
-        if (queue.Count > 0 && !queueIsRunning)
+        if (queue.Count > 0 && !queueIsRunning) // Start queue if queue is not running and there are queued items
         {
             StartCoroutine(Queue());
         }
@@ -67,10 +69,8 @@ public class MenuLevelManager : LevelManager
         queue.Add(new QueueItem { lerpType = false, color = color });
     }
 
-    private void StartAddPlayer(PlayerColors color) // The player that is currently selected, should be displayed on the example level
+    private void StartAddPlayer(PlayerColors color)
     {
-        // BUG when a player is cleared, and then added before switching to any other player, everything breaks
-
         UpdateActivatedPlayers(color);
 
         if (!ChooseControls.activatedPlayers[color] && ChooseControls.activatedPlayers.Count(p => p.Value) > 2)
@@ -101,7 +101,7 @@ public class MenuLevelManager : LevelManager
         ChooseControls.activatedPlayers[color] = true;
 
         UpdateLerpLists(index, activatedColors);
-        UpdateManagers(index);
+        UpdateManagers(index, color);
 
         ReturnToNormalLevel();
 
@@ -155,7 +155,7 @@ public class MenuLevelManager : LevelManager
         outerLerpTo = pointManager.SpawnOuterPoints(innerLerpTo);
     }
 
-    private void UpdateManagers(int index)
+    private void UpdateManagers(int index, PlayerColors color)
     {
         arqdutManager.DestroyAllArqduts();
         arqdutManager.SpawnArqduts(innerPoints, levelCenter);
@@ -163,6 +163,13 @@ public class MenuLevelManager : LevelManager
         meshManager.SetMaterials();
         playerManager.DestroyAllPlayers();
         playerManager.SpawnPlayers(pointManager.radius);
+        HidePlayer(color);
+        StartCoroutine(RevealPlayer(PlayerManager.players.First(p => p.color == color)));
+    }
+
+    private void HidePlayer(PlayerColors color)
+    {
+        PlayerManager.players.First(p => p.color == color).transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void RemovePlayer(PlayerColors color)
@@ -174,8 +181,12 @@ public class MenuLevelManager : LevelManager
         }
     }
 
-    private void SpawnPlayer()
+    private IEnumerator RevealPlayer(Player player)
     {
+        yield return new WaitUntil(() => Vector2.Distance(player.points.left, player.points.right) > disBeforePlayerSpawn);
+
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
         // A player should be spawned as soon as there is space for it to be spawned on it's part of the level. The arrow indicating the currently selected control direction should be spawned as soon as there is space to spawn it
     }
 }
