@@ -14,7 +14,7 @@ public class BotSelection : MonoBehaviour
 
     private void Awake()
     {
-        chooseControls = GameObject.FindWithTag("ControlManager").GetComponent<ChooseControls>();
+        chooseControls = GameObject.FindWithTag("LevelHandler").GetComponent<ChooseControls>();
 
         if (botDifficulties.Count > 0) // REASON this method gets called on multiple instances, but it should only add values once
             return;

@@ -8,7 +8,8 @@ using UnityEngine;
 // TODO This whole system should probably be hooked up to the psychadelic size system instead. When a player is added, it's weight should start lerping from 0 to 1. When a player is removed, it's weight should lerp from 1 to 0. All players should be able to lerp at the same time. All players' weight will be normalized to calculate their actual weight
 public class MenuLevelManager : LevelManager
 {
-    private bool levelIsSpawned, queueIsRunning, executeLevelLerpRunning;
+    public static bool levelIsSpawned;
+    private bool queueIsRunning, executeLevelLerpRunning;
 
     private PlayerColors previouslySelectedPlayer;
 
@@ -17,6 +18,8 @@ public class MenuLevelManager : LevelManager
     [SerializeField] private float disBeforePlayerSpawn;
 
     private List<QueueItem> queue = new List<QueueItem>();
+
+    private DirectionArrows arrowManager;
 
     private struct QueueItem
     {
@@ -29,6 +32,8 @@ public class MenuLevelManager : LevelManager
     protected override void Awake()
     {
         base.Awake();
+
+        arrowManager = GetComponent<DirectionArrows>();
 
         ChooseControls.PlayerAmountIncreased += QueueAddPlayer;
         ChooseControls.PlayerAmountDecreased += QueueRemovePlayer;
@@ -43,6 +48,8 @@ public class MenuLevelManager : LevelManager
     private void SpawnLevel()
     {
         levelSpawner.SpawnLevel(3);
+        arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == ChooseControls.controls.First(c => c.Value.rightKey == KeyCode.None).Key));
+        arrowManager.SwitchArrowDirection();
         levelIsSpawned = true;
     }
 
@@ -163,13 +170,16 @@ public class MenuLevelManager : LevelManager
         meshManager.SetMaterials();
         playerManager.DestroyAllPlayers();
         playerManager.SpawnPlayers(pointManager.radius);
+        arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == color));
         HidePlayer(color);
         StartCoroutine(RevealPlayer(PlayerManager.players.First(p => p.color == color)));
     }
 
     private void HidePlayer(PlayerColors color)
     {
-        PlayerManager.players.First(p => p.color == color).transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        Player player = PlayerManager.players.First(p => p.color == color);
+        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void RemovePlayer(PlayerColors color)
@@ -186,6 +196,7 @@ public class MenuLevelManager : LevelManager
         yield return new WaitUntil(() => Vector2.Distance(player.points.left, player.points.right) > disBeforePlayerSpawn);
 
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
 
         // A player should be spawned as soon as there is space for it to be spawned on it's part of the level. The arrow indicating the currently selected control direction should be spawned as soon as there is space to spawn it
     }

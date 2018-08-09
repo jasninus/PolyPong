@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -53,6 +54,8 @@ public class ChooseControls : MonoBehaviour
     public static readonly Dictionary<PlayerColors, bool> activatedPlayers = new Dictionary<PlayerColors, bool>();
     public static readonly Dictionary<PlayerColors, PlayerControls> controls = new Dictionary<PlayerColors, PlayerControls>();
 
+    private DirectionArrows arrowManager;
+
     public class PlayerControls
     {
         public KeyCode leftKey;
@@ -64,6 +67,8 @@ public class ChooseControls : MonoBehaviour
         Points.Setup();
 
         buttonIcons = GetComponent<ButtonIcons>();
+
+        arrowManager = GetComponent<DirectionArrows>();
 
         TryAddDictionaryValues();
     }
@@ -137,7 +142,7 @@ public class ChooseControls : MonoBehaviour
                 firstPlayerSelected = true;
             }
 
-            activatedPlayers[selectedPlayer] = true; // TODO here players get set to active
+            activatedPlayers[selectedPlayer] = true;
             BotSelection.botDifficulties[selectedPlayer] = 0;
         }
         else // Set rightKey control
@@ -158,9 +163,16 @@ public class ChooseControls : MonoBehaviour
             squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.GetComponent<SpriteRenderer>());
 
         if (direction == Direction.left)
+        {
             controls[playerToSet].leftKey = input;
+
+            arrowManager.SwitchArrowDirection();
+        }
         else
+        {
             controls[playerToSet].rightKey = input;
+            arrowManager.RemoveArrow();
+        }
 
         // Set ChoosingLeftControl to true if right control was just set
         choosingLeftControl = direction == Direction.right;
@@ -258,6 +270,8 @@ public class ChooseControls : MonoBehaviour
     {
         LevelManager.isCircle = false; // Reset specific static variables from the menu level TODO these might have to be reset in other places if menu level is to change from circle to polygon
         LevelManager.shouldLerpToCircle = false;
+
+        // TODO check if all players has had their controls set and discard those who hasn't
 
         gameStarted = true;
         SceneManager.LoadScene("Main");
