@@ -34,19 +34,19 @@ public class ChooseControls : MonoBehaviour
 
     public delegate void PlayerChange(PlayerColors selectedPlayer);
 
-    public static event PlayerChange PlayerAmountIncreased, PlayerAmountDecreased;
+    public static event PlayerChange PlayerAmountIncreased, PlayerAmountDecreased, ForceAddPlayer;
 
     private ButtonIcons buttonIcons;
 
-    private bool choosingLeftControl = true, selectingControls;
+    private bool choosingLeftControl = true, selectingControls, firstPlayerSelected;
+    public static bool gameStarted;
 
     private int numberInput;
 
+    public static PlayerColors previouslyClearedPlayer;
     private PlayerColors selectedPlayer;
 
     private KeyCode pressedKey;
-
-    public static bool gameStarted;
 
     private static readonly Dictionary<PlayerColors, Text[]> controlTexts = new Dictionary<PlayerColors, Text[]>();
     private readonly Dictionary<PlayerColors, float> selectionYVals = new Dictionary<PlayerColors, float>();
@@ -127,7 +127,17 @@ public class ChooseControls : MonoBehaviour
         if (choosingLeftControl) // Set leftKey control
         {
             SetButton(selectedPlayer, Direction.left, key);
-            activatedPlayers[selectedPlayer] = true;
+
+            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected)
+            {
+                ForceAddPlayer?.Invoke(selectedPlayer);
+            }
+            else
+            {
+                firstPlayerSelected = true;
+            }
+
+            activatedPlayers[selectedPlayer] = true; // TODO here players get set to active
             BotSelection.botDifficulties[selectedPlayer] = 0;
         }
         else // Set rightKey control
@@ -177,6 +187,8 @@ public class ChooseControls : MonoBehaviour
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
 
         PlayerAmountDecreased?.Invoke(playerToWipe);
+
+        previouslyClearedPlayer = playerToWipe;
     }
 
     private void ClearPlayer(PlayerColors playerToWipe)

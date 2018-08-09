@@ -30,6 +30,7 @@ public class MenuLevelManager : LevelManager
 
         ChooseControls.PlayerAmountIncreased += QueueAddPlayer;
         ChooseControls.PlayerAmountDecreased += QueueRemovePlayer;
+        ChooseControls.ForceAddPlayer += AddPlayer;
     }
 
     protected override void Start()
@@ -66,26 +67,29 @@ public class MenuLevelManager : LevelManager
         queue.Add(new QueueItem { lerpType = false, color = color });
     }
 
-    private void AddPlayer(PlayerColors color) // The player that is currently selected, should be displayed on the example level
+    private void StartAddPlayer(PlayerColors color) // The player that is currently selected, should be displayed on the example level
     {
         // BUG when a player is cleared, and then added before switching to any other player, everything breaks
 
-        UpdateActivatedPlayers();
+        UpdateActivatedPlayers(color);
 
         if (!ChooseControls.activatedPlayers[color] && ChooseControls.activatedPlayers.Count(p => p.Value) > 2)
         {
-            // Find out what innerPoint should be duplicated to accomodate new player
-            List<PlayerColors> activatedColors = ChooseControls.activatedPlayers.Where(p => p.Value).Select(p => p.Key).ToList();
-            activatedColors.Add(color);
-            activatedColors = activatedColors.OrderBy(c => (int)c).ToList();
-
-            previouslySelectedPlayer = color;
-
-            int index = activatedColors.IndexOf(color);
-            StartCoroutine(ExecuteLevelLerp(index, activatedColors, color));
+            AddPlayer(color);
         }
+    }
 
-        // shouldLerpToNormal when getting bigger and shouldLerpSmaller when lerping smaller
+    private void AddPlayer(PlayerColors color)
+    {
+        // Find out what innerPoint should be duplicated to accomodate new player
+        List<PlayerColors> activatedColors = ChooseControls.activatedPlayers.Where(p => p.Value).Select(p => p.Key).ToList();
+        activatedColors.Add(color);
+        activatedColors = activatedColors.OrderBy(c => (int)c).ToList();
+
+        previouslySelectedPlayer = color;
+
+        int index = activatedColors.IndexOf(color);
+        StartCoroutine(ExecuteLevelLerp(index, activatedColors, color));
     }
 
     private IEnumerator ExecuteLevelLerp(int index, List<PlayerColors> activatedColors, PlayerColors color)
@@ -112,7 +116,7 @@ public class MenuLevelManager : LevelManager
 
         if (queue[0].lerpType) // Read next item in queue
         {
-            AddPlayer(queue[0].color);
+            StartAddPlayer(queue[0].color);
         }
         else
         {
@@ -130,11 +134,11 @@ public class MenuLevelManager : LevelManager
         queueIsRunning = false;
     }
 
-    private void UpdateActivatedPlayers()
+    private void UpdateActivatedPlayers(PlayerColors selectedColor)
     {
-        if (ChooseControls.controls[previouslySelectedPlayer].rightKey == KeyCode.None)
+        if (ChooseControls.controls[previouslySelectedPlayer].leftKey == KeyCode.None)
         {
-            ChooseControls.activatedPlayers[previouslySelectedPlayer] = false;
+            ChooseControls.activatedPlayers[previouslySelectedPlayer] = false; // TODO this gets run and sets yellow to inactive, when it shouldn't
             RemovePlayer(previouslySelectedPlayer);
         }
     }
@@ -144,7 +148,7 @@ public class MenuLevelManager : LevelManager
         innerPoints.Insert(index, index == innerPoints.Count ? innerPoints[0] : innerPoints[index]);
         outerPoints = pointManager.SpawnOuterPoints(innerPoints);
 
-        innerLerpTo = pointManager.SpawnInnerPoints(activatedColors.Count, levelCenter); // Seems like the current way to access the correct value in to rotation constants array is by [index][index]
+        innerLerpTo = pointManager.SpawnInnerPoints(activatedColors.Count, levelCenter);
         float rotateAmount = previousRotation + addPlayerRotationConstants[activatedColors.Count - 1][index];
         previousRotation = rotateAmount;
         pointManager.RotatePoints(innerLerpTo, rotateAmount);
