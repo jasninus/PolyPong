@@ -39,7 +39,7 @@ public class ChooseControls : MonoBehaviour
 
     private ButtonIcons buttonIcons;
 
-    private bool choosingLeftControl = true, selectingControls, firstPlayerSelected;
+    private bool choosingLeftControl = true, selectingControls, firstPlayerSelected, playerCleared;
     public static bool gameStarted;
 
     private int numberInput;
@@ -119,7 +119,7 @@ public class ChooseControls : MonoBehaviour
         {
             StartGame();
         }
-        else if (KeyManagerTest.GetValidInput(ref pressedKey))
+        else if (InputManager.GetValidInput(ref pressedKey))
         {
             SetControls(pressedKey);
         }
@@ -131,7 +131,7 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected)
+            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared)
             {
                 ForceAddPlayer?.Invoke(selectedPlayer);
             }
@@ -216,6 +216,7 @@ public class ChooseControls : MonoBehaviour
         activatedPlayers[playerToWipe] = false;
         BotSelection.botDifficulties[playerToWipe] = 0;
         selectingControls = false;
+        playerCleared = true;
     }
 
     /// <summary>

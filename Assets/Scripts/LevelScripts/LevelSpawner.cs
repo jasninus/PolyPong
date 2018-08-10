@@ -50,7 +50,7 @@ public class LevelSpawner
         LevelManager.innerPoints = pointManager.SpawnInnerPoints(corners, levelManager.levelCenter);
         LevelManager.outerPoints = pointManager.SpawnOuterPoints(LevelManager.innerPoints);
 
-        playerManager.SpawnPlayers(pointManager.radius);
+        playerManager.SpawnPlayers(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray());
         playerManager.PlayersLookAtPoint(levelManager.levelCenter);
         meshManager.SetMaterials();
         arqdutManager.SpawnArqduts(LevelManager.innerPoints, levelManager.levelCenter);

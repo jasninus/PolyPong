@@ -18,8 +18,11 @@ public class LevelManager : MonoBehaviour
 
     public static int playerToDestroy;
 
-    public float lerpAmount; // TODO there should be made two different speeds: One for lerping smaller and one for lerping larger
-    [HideInInspector] public float lerpedAmount, previousRotation;
+    // TODO there should be made two different speeds: One for lerping smaller and one for lerping larger
+    [HideInInspector] public float lerpedAmount, previousRotation, lerpAmount;
+
+    [SerializeField] protected float lerpSmallerModifier, lerpLargerModifier;
+    public float baseLerpAmount;
 
     protected LevelPoints pointManager;
     protected MeshManager meshManager;
@@ -27,12 +30,16 @@ public class LevelManager : MonoBehaviour
     protected PlayerManager playerManager;
     protected ArqdutManager arqdutManager;
     protected GameStart _gameManager;
+    protected DirectionArrows arrowManager;
 
     protected LevelLerpCircle circleLerpManager;
     protected LevelLerp levelLerpManager;
     protected LevelSpawner levelSpawner;
 
+    public Player circleSpawningPlayer;
+
     protected bool shouldLerpToNormal;
+    public bool shouldLerpFromCircle;
     public static bool shouldLerpToCircle, isCircle, shouldLerpSmaller, shouldSetIndices;
 
     protected virtual void Awake()
@@ -43,10 +50,11 @@ public class LevelManager : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         arqdutManager = GetComponent<ArqdutManager>();
         _gameManager = GetComponent<GameStart>();
+        arrowManager = GetComponent<DirectionArrows>();
 
         // Different classes containing functionality made for better overview
         levelLerpManager = new LevelLerp(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager); // TODO warning about using new keyword. Seems like it thinks I'm trying to add classes as components
-        circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager);
+        circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager, arrowManager);
         levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, _gameManager);
     }
 
@@ -148,6 +156,11 @@ public class LevelManager : MonoBehaviour
         if (shouldLerpToCircle)
         {
             circleLerpManager.LerpCircle();
+        }
+
+        if (shouldLerpFromCircle)
+        {
+            circleLerpManager.LerpFromCircle();
         }
     }
 

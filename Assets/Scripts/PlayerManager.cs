@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -23,10 +24,8 @@ public class PlayerManager : MonoBehaviour
         levelManager = GetComponent<LevelManager>();
     }
 
-    public void SpawnPlayers(float radius)
+    public void SpawnPlayers(float radius, PlayerColors[] activatedColors)
     {
-        var activatedColors = ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray();
-
         if (players.Count > 0)
             players.Clear();
 
@@ -42,16 +41,26 @@ public class PlayerManager : MonoBehaviour
         backupPlayers = playerArr.ToList();
     }
 
-    private void SpawnPlayer(float radius, PlayerColors[] activatedColors, int i)
+    public Player SpawnPlayer(float radius, PlayerColors[] activatedColors, int i)
     {
-        var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
-            : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
+        try
+        {
+            var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
+                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
+                : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
 
-        p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
-        players.Add(p);
+            p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
+            players.Add(p);
 
-        p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
+            p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
+
+            return p;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private void SpawnLastPlayer(float radius, PlayerColors[] activatedColors)
@@ -129,6 +138,12 @@ public class PlayerManager : MonoBehaviour
         players[rightIndex].points.left = toPoints[(toPoints.Count / 4) * 3];
         circleStartRight = players[rightIndex].transform.position;
         players[rightIndex].SetChildLerpFrom();
+    }
+
+    public void SetFromCircleIndexes(int index)
+    {
+        leftIndex = index == 1 ? 1 : 0;
+        rightIndex = index == 1 ? 0 : 1;
     }
 
     public void CircleUpdatePlayerPosition(float lerpAmount)

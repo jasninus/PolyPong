@@ -160,7 +160,6 @@
 //selectionYVals.Add(item, squares[(int)item * 2].position.y);
 //}
 
-
 //if (!activatedPlayers.ContainsKey(item))
 //{
 //// Add all player colors

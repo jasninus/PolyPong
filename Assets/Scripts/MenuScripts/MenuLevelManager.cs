@@ -17,9 +17,7 @@ public class MenuLevelManager : LevelManager
 
     [SerializeField] private float disBeforePlayerSpawn;
 
-    private List<QueueItem> queue = new List<QueueItem>();
-
-    private DirectionArrows arrowManager;
+    private readonly List<QueueItem> queue = new List<QueueItem>();
 
     private struct QueueItem
     {
@@ -33,8 +31,6 @@ public class MenuLevelManager : LevelManager
     {
         base.Awake();
 
-        arrowManager = GetComponent<DirectionArrows>();
-
         ChooseControls.PlayerAmountIncreased += QueueAddPlayer;
         ChooseControls.PlayerAmountDecreased += QueueRemovePlayer;
         ChooseControls.ForceAddPlayer += AddPlayer;
@@ -47,7 +43,7 @@ public class MenuLevelManager : LevelManager
 
     private void SpawnLevel()
     {
-        levelSpawner.SpawnLevel(3);
+        levelSpawner.SpawnCircle()/*SpawnLevel(3)*/;
         arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == ChooseControls.controls.First(c => c.Value.rightKey == KeyCode.None).Key));
         arrowManager.SwitchArrowDirection();
         arrowManager.FlipArrow();
@@ -56,7 +52,7 @@ public class MenuLevelManager : LevelManager
 
     private void Update()
     {
-        if (ChooseControls.activatedPlayers.Count(p => p.Value) == 3 && !levelIsSpawned) // The first
+        if (ChooseControls.activatedPlayers.Count(p => p.Value) == 2 && !levelIsSpawned) // The first
         {
             SpawnLevel();
         }
@@ -65,6 +61,29 @@ public class MenuLevelManager : LevelManager
         {
             StartCoroutine(Queue());
         }
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        if (shouldLerpFromCircle)
+        {
+            UpdateCircleSpawningPlayerPosition();
+        }
+    }
+
+    private void UpdateCircleSpawningPlayerPosition()
+    {
+        circleSpawningPlayer.points = new Player.LeftRightPoints
+        {
+            left = innerPoints[innerPoints.Count - 2],
+            right = innerPoints[innerPoints.Count - 1]
+        };
+
+        circleSpawningPlayer.transform.position = (circleSpawningPlayer.points.left + circleSpawningPlayer.points.right) * 0.5f;
+
+        // TODO there are errors when it is not the last player that is the third player. One player does also not get it's position updated
     }
 
     private void QueueAddPlayer(PlayerColors color)
@@ -77,11 +96,20 @@ public class MenuLevelManager : LevelManager
         queue.Add(new QueueItem { lerpType = false, color = color });
     }
 
+    private void UpdateActivatedPlayers(PlayerColors selectedColor)
+    {
+        if (ChooseControls.controls[previouslySelectedPlayer].leftKey == KeyCode.None)
+        {
+            ChooseControls.activatedPlayers[previouslySelectedPlayer] = false;
+            RemovePlayer(previouslySelectedPlayer);
+        }
+    }
+
     private void StartAddPlayer(PlayerColors color)
     {
         UpdateActivatedPlayers(color);
 
-        if (!ChooseControls.activatedPlayers[color] && ChooseControls.activatedPlayers.Count(p => p.Value) > 2)
+        if (!ChooseControls.activatedPlayers[color] && ChooseControls.activatedPlayers.Count(p => p.Value) > 1)
         {
             AddPlayer(color);
         }
@@ -104,51 +132,51 @@ public class MenuLevelManager : LevelManager
     {
         executeLevelLerpRunning = true;
 
-        yield return new WaitUntil(() => !shouldLerpSmaller);
+        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpFromCircle);
 
         ChooseControls.activatedPlayers[color] = true;
 
-        UpdateLerpLists(index, activatedColors);
-        UpdateManagers(index, color);
+        if (ChooseControls.activatedPlayers.Count(p => p.Value) > 3) // Normal level lerp
+        {
+            UpdateLerpLists(index, activatedColors);
+            UpdateManagers(index, color);
 
-        ReturnToNormalLevel();
+            ReturnToNormalLevel();
+        }
+        else // Circle level lerp
+        {
+            StartFromCircleLerp(index);
+        }
 
         executeLevelLerpRunning = false;
     }
 
-    private IEnumerator Queue()
+    private void StartFromCircleLerp(int index)
     {
-        queueIsRunning = true;
+        UpdateArqduts();
+        shouldLerpFromCircle = true;
+        lerpedAmount = 1;
 
-        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpToNormal && !executeLevelLerpRunning); // Wait until level is done lerping
-
-        if (queue[0].lerpType) // Read next item in queue
+        Player p = playerManager.SpawnPlayer(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray(), index);
+        p.points = new Player.LeftRightPoints
         {
-            StartAddPlayer(queue[0].color);
-        }
-        else
-        {
-            RemovePlayer(queue[0].color);
-        }
+            left = innerPoints[innerPoints.Count - 2],
+            right = innerPoints[innerPoints.Count - 1]
+        };
 
-        queue.RemoveAt(0);
+        circleSpawningPlayer = p;
+        arrowManager.AttachLeftArrow(p);
+        HidePlayer(p.color);
+        StartCoroutine(RevealPlayer(p));
 
-        if (queue.Count > 0) // Check if there are more items in queue
-        {
-            StartCoroutine(Queue());
-            yield break;
-        }
-
-        queueIsRunning = false;
+        playerManager.SetFromCircleIndexes(index);
     }
 
-    private void UpdateActivatedPlayers(PlayerColors selectedColor)
+    private void UpdateArqduts()
     {
-        if (ChooseControls.controls[previouslySelectedPlayer].leftKey == KeyCode.None)
-        {
-            ChooseControls.activatedPlayers[previouslySelectedPlayer] = false; // TODO this gets run and sets yellow to inactive, when it shouldn't
-            RemovePlayer(previouslySelectedPlayer);
-        }
+        arqdutManager.DestroyAllArqduts();
+        List<Vector2> arqdutSpawnPosition = new List<Vector2>(3) { innerPoints[0], innerPoints[innerPoints.Count - 2], innerPoints.Last() };
+        arqdutManager.SpawnArqduts(arqdutSpawnPosition, levelCenter);
     }
 
     private void UpdateLerpLists(int index, List<PlayerColors> activatedColors)
@@ -170,25 +198,70 @@ public class MenuLevelManager : LevelManager
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(innerPoints, outerPoints));
         meshManager.SetMaterials();
         playerManager.DestroyAllPlayers();
-        playerManager.SpawnPlayers(pointManager.radius);
+        playerManager.SpawnPlayers(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray());
         arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == color));
         HidePlayer(color);
         StartCoroutine(RevealPlayer(PlayerManager.players.First(p => p.color == color)));
+    }
+
+    private IEnumerator Queue()
+    {
+        queueIsRunning = true;
+        // TODO there are errors when switching when there are 3 players and it has to go through the circle. I believe it is because the conditions in the coroutines are not updated to reflect the bools used in the circle lerping
+
+        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpToNormal && !executeLevelLerpRunning && !shouldLerpFromCircle); // Wait until level is done lerping
+        // TODO if there are more than a certain number in the queue, it should lerp instantly
+        if (queue[0].lerpType) // Read next item in queue
+        {
+            StartAddPlayer(queue[0].color);
+            lerpAmount = baseLerpAmount + lerpLargerModifier * queue.Count;
+            Debug.Log("Larger: " + lerpAmount);
+        }
+        else
+        {
+            RemovePlayer(queue[0].color);
+            lerpAmount += baseLerpAmount + lerpSmallerModifier * queue.Count;
+            Debug.Log("Smaller: " + lerpAmount);
+        }
+
+        queue.RemoveAt(0);
+
+        if (queue.Count > 0) // Check if there are more items in queue
+        {
+            StartCoroutine(Queue());
+            yield break;
+        }
+
+        lerpAmount = baseLerpAmount;
+
+        queueIsRunning = false;
     }
 
     private void HidePlayer(PlayerColors color)
     {
         Player player = PlayerManager.players.First(p => p.color == color);
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-        player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+
+        if (player.transform.GetChild(0).childCount > 0)
+            player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void RemovePlayer(PlayerColors color)
     {
-        if (ChooseControls.activatedPlayers.Count(p => p.Value) > 2 && PlayerManager.players.Select(p => p.color).Contains(color))
+        if (ChooseControls.activatedPlayers.Count(p => p.Value) > 1 && PlayerManager.players.Select(p => p.color).Contains(color))
         {
-            PlayerManager.players.Where(p => p.color == color).ElementAt(0).DestroyPlayer();
-            playerToDestroy = PlayerManager.players.Where(p => p.color == color).ElementAt(0).playerOrder;
+            Player player = PlayerManager.players.First(p => p.color == color);
+
+            if (ChooseControls.activatedPlayers.Count(p => p.Value) > 2) // Normal level removal
+            {
+                player.DestroyPlayer();
+            }
+            else // Lerp to circle
+            {
+                player.CircleDestroyPlayer();
+            }
+
+            playerToDestroy = player.playerOrder;
         }
     }
 

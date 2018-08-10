@@ -6577,9 +6577,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCenter: {x: 10.5, y: 0}
-  lerpAmount: 0.02
   lerpedAmount: 0
   previousRotation: 0
+  lerpAmount: 0
+  lerpSmallerModifier: 0.1
+  lerpLargerModifier: 0.4
+  baseLerpAmount: 0.3
+  circleSpawningPlayer: {fileID: 0}
+  shouldLerpFromCircle: 0
   disBeforePlayerSpawn: 1
 --- !u!114 &1212984658
 MonoBehaviour:

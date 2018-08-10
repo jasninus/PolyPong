@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -46,7 +47,15 @@ public class ArqdutManager : MonoBehaviour
     {
         arqduts[0].transform.position = points[0];
         arqduts[1].transform.position = points[points.Count - 2];
-        arqduts[2].transform.position = points.Last();
+        try
+        {
+            arqduts[2].transform.position = points.Last();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         for (int i = 0; i < 3; i++)
         {
