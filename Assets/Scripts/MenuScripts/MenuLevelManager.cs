@@ -132,7 +132,7 @@ public class MenuLevelManager : LevelManager
     {
         executeLevelLerpRunning = true;
 
-        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpFromCircle);
+        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpFromCircle && !shouldLerpToCircle);
 
         ChooseControls.activatedPlayers[color] = true;
 
@@ -145,19 +145,24 @@ public class MenuLevelManager : LevelManager
         }
         else // Circle level lerp
         {
-            StartFromCircleLerp(index);
+            StartFromCircleLerp(index, activatedColors);
         }
 
         executeLevelLerpRunning = false;
     }
 
-    private void StartFromCircleLerp(int index)
+    private void StartFromCircleLerp(int index, List<PlayerColors> activatedColors)
     {
         UpdateArqduts();
         shouldLerpFromCircle = true;
         lerpedAmount = 1;
 
-        Player p = playerManager.SpawnPlayer(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray(), index);
+        Player p = playerManager.SpawnPlayer(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray(), 0);
+
+        p.playerOrder = index;
+        p.color = activatedColors[index];
+        p.transform.GetChild(0).GetComponent<SpriteRenderer>().color = MeshManager.materials[p.color].color;
+
         p.points = new Player.LeftRightPoints
         {
             left = innerPoints[innerPoints.Count - 2],
@@ -170,6 +175,8 @@ public class MenuLevelManager : LevelManager
         StartCoroutine(RevealPlayer(p));
 
         playerManager.SetFromCircleIndexes(index);
+
+        meshManager.SetMaterials();
     }
 
     private void UpdateArqduts()
@@ -210,18 +217,16 @@ public class MenuLevelManager : LevelManager
         // TODO there are errors when switching when there are 3 players and it has to go through the circle. I believe it is because the conditions in the coroutines are not updated to reflect the bools used in the circle lerping
 
         yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpToNormal && !executeLevelLerpRunning && !shouldLerpFromCircle); // Wait until level is done lerping
-        // TODO if there are more than a certain number in the queue, it should lerp instantly
+
         if (queue[0].lerpType) // Read next item in queue
         {
             StartAddPlayer(queue[0].color);
             lerpAmount = baseLerpAmount + lerpLargerModifier * queue.Count;
-            Debug.Log("Larger: " + lerpAmount);
         }
         else
         {
             RemovePlayer(queue[0].color);
             lerpAmount += baseLerpAmount + lerpSmallerModifier * queue.Count;
-            Debug.Log("Smaller: " + lerpAmount);
         }
 
         queue.RemoveAt(0);
@@ -271,7 +276,5 @@ public class MenuLevelManager : LevelManager
 
         player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-
-        // A player should be spawned as soon as there is space for it to be spawned on it's part of the level. The arrow indicating the currently selected control direction should be spawned as soon as there is space to spawn it
     }
 }
