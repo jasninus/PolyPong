@@ -1,12 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DirectionArrows : MonoBehaviour
 {
-    [SerializeField] private GameObject prefabArrow;
+    [SerializeField] private Transform arrow;
 
-    [HideInInspector] public Transform currentArrow;
+    private SpriteRenderer arrowRend;
+
+    private void Awake()
+    {
+        arrowRend = arrow.GetComponent<SpriteRenderer>();
+    }
 
     private const float disFromPlayerEdge = 0.6f;
     private float playerEdgeDisFromMiddle;
@@ -19,26 +25,27 @@ public class DirectionArrows : MonoBehaviour
         if (playerEdgeDisFromMiddle == 0)
             playerEdgeDisFromMiddle = player.transform.GetChild(0).localScale.x / 2;
 
-        Transform pTrans = player.transform.GetChild(0);
+        arrowRend.enabled = true;
+        arrow.parent = player.transform.GetChild(0);
+        arrow.localPosition = new Vector3(-(playerEdgeDisFromMiddle + disFromPlayerEdge), 0, 0);
 
-        currentArrow = Instantiate(prefabArrow, pTrans).transform;
-        currentArrow.localPosition = new Vector3(-(playerEdgeDisFromMiddle + disFromPlayerEdge), 0, 0);
-        currentArrow.localScale = new Vector3(0.4f, 4, 1);
-        currentArrow.Rotate(0, 0, 180);
+        arrow.localScale = new Vector3(0.5f, 5, 1);
+        arrow.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void SwitchArrowDirection()
     {
-        if (currentArrow)
-        {
-            currentArrow.localPosition = new Vector3(playerEdgeDisFromMiddle + disFromPlayerEdge, 0, 0);
-            currentArrow.Rotate(0, 0, 180);
-        }
+        arrow.localPosition = new Vector3(playerEdgeDisFromMiddle + disFromPlayerEdge, 0, 0);
+        arrow.Rotate(0, 0, 180);
     }
 
-    public void RemoveArrow()
+    public void FlipArrow()
     {
-        if (currentArrow)
-            Destroy(currentArrow.gameObject);
+        arrow.Rotate(0, 0, 180);
+    }
+
+    public void HideArrow()
+    {
+        arrowRend.enabled = false;
     }
 }

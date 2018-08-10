@@ -50,6 +50,7 @@ public class MenuLevelManager : LevelManager
         levelSpawner.SpawnLevel(3);
         arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == ChooseControls.controls.First(c => c.Value.rightKey == KeyCode.None).Key));
         arrowManager.SwitchArrowDirection();
+        arrowManager.FlipArrow();
         levelIsSpawned = true;
     }
 

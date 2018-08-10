@@ -131,8 +131,6 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            SetButton(selectedPlayer, Direction.left, key);
-
             if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected)
             {
                 ForceAddPlayer?.Invoke(selectedPlayer);
@@ -141,6 +139,8 @@ public class ChooseControls : MonoBehaviour
             {
                 firstPlayerSelected = true;
             }
+
+            SetButton(selectedPlayer, Direction.left, key);
 
             activatedPlayers[selectedPlayer] = true;
             BotSelection.botDifficulties[selectedPlayer] = 0;
@@ -166,16 +166,22 @@ public class ChooseControls : MonoBehaviour
         {
             controls[playerToSet].leftKey = input;
 
-            arrowManager.SwitchArrowDirection();
+            StartCoroutine(SwitchArrowDirection());
         }
         else
         {
             controls[playerToSet].rightKey = input;
-            arrowManager.RemoveArrow();
+            arrowManager.HideArrow();
         }
 
         // Set ChoosingLeftControl to true if right control was just set
         choosingLeftControl = direction == Direction.right;
+    }
+
+    private IEnumerator SwitchArrowDirection()
+    {
+        yield return new WaitForSeconds(0.01f);
+        arrowManager.SwitchArrowDirection();
     }
 
     public static void UpdatePlayerControlText(PlayerColors player)
