@@ -131,7 +131,7 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared)
+            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared && MenuLevelManager.levelIsSpawned)
             {
                 ForceAddPlayer?.Invoke(selectedPlayer);
             }

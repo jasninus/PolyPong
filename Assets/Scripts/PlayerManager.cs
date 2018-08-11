@@ -43,24 +43,16 @@ public class PlayerManager : MonoBehaviour
 
     public Player SpawnPlayer(float radius, PlayerColors[] activatedColors, int i)
     {
-        try
-        {
-            var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
-                Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
-                : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
+        var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
+            Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
+            : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
 
-            p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
-            players.Add(p);
+        p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
+        players.Add(p);
 
-            p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
+        p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
 
-            return p;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        return p;
     }
 
     private void SpawnLastPlayer(float radius, PlayerColors[] activatedColors)

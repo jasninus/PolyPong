@@ -43,10 +43,12 @@ public class MenuLevelManager : LevelManager
 
     private void SpawnLevel()
     {
-        levelSpawner.SpawnCircle()/*SpawnLevel(3)*/;
+        levelSpawner.SpawnCircle();
         arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == ChooseControls.controls.First(c => c.Value.rightKey == KeyCode.None).Key));
         arrowManager.SwitchArrowDirection();
         arrowManager.FlipArrow();
+        StopAllCoroutines();
+        shouldLerpFromCircle = false;
         levelIsSpawned = true;
     }
 
@@ -214,7 +216,6 @@ public class MenuLevelManager : LevelManager
     private IEnumerator Queue()
     {
         queueIsRunning = true;
-        // TODO there are errors when switching when there are 3 players and it has to go through the circle. I believe it is because the conditions in the coroutines are not updated to reflect the bools used in the circle lerping
 
         yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpToNormal && !executeLevelLerpRunning && !shouldLerpFromCircle); // Wait until level is done lerping
 
@@ -268,6 +269,18 @@ public class MenuLevelManager : LevelManager
 
             playerToDestroy = player.playerOrder;
         }
+        else if (PlayerManager.players.Select(p => p.color).Contains(color))
+        {
+            DestroyLevel();
+        }
+    }
+
+    private void DestroyLevel()
+    {
+        arqdutManager.DestroyAllArqduts();
+        playerManager.DestroyAllPlayers();
+        meshManager.mesh.Clear();
+        levelIsSpawned = false;
     }
 
     private IEnumerator RevealPlayer(Player player)

@@ -14,16 +14,13 @@ public class DirectionArrows : MonoBehaviour
         arrowRend = arrow.GetComponent<SpriteRenderer>();
     }
 
-    private const float disFromPlayerEdge = 0.6f;
+    private const float disFromPlayerEdge = 0.8f;
     private float playerEdgeDisFromMiddle;
 
     public void AttachLeftArrow(Player player)
     {
         if (!player)
             return;
-
-        if (playerEdgeDisFromMiddle == 0)
-            playerEdgeDisFromMiddle = player.transform.GetChild(0).localScale.x / 2;
 
         arrowRend.enabled = true;
         arrow.parent = player.transform.GetChild(0);
@@ -46,6 +43,7 @@ public class DirectionArrows : MonoBehaviour
 
     public void HideArrow()
     {
+        arrow.parent = null;
         arrowRend.enabled = false;
     }
 }
