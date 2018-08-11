@@ -38,7 +38,16 @@ public class GameStart : MonoBehaviour
         }
     }
 
-    private IEnumerator CountDown(Vector2 levelCenter)
+    public void ResetCountdown()
+    {
+        currentCountDown = 0;
+        StopAllCoroutines();
+        Destroy(spawnedDirArrow);
+        countdownText.text = "";
+        Time.timeScale = 1;
+    }
+
+    public IEnumerator CountDown(Vector2 levelCenter)
     {
         if (currentCountDown == 0)
         {
@@ -58,6 +67,32 @@ public class GameStart : MonoBehaviour
         }
         else
         {
+            StartRound(levelCenter);
+        }
+    }
+
+    public IEnumerator CountDown(Vector2 levelCenter, Vector2 direction)
+    {
+        if (currentCountDown == 0)
+        {
+            ballDirection = direction.y >= 0 ? Mathf.Acos(direction.normalized.x) : 2 * Mathf.PI - Mathf.Acos(direction.normalized.x);
+            normalizedBallDirection = direction.normalized;
+            spawnedDirArrow = SpawnDirectionArrow(normalizedBallDirection, ballDirection * Mathf.Rad2Deg);
+            spawnedDirArrow.transform.position = levelCenter;
+        }
+
+        countdownText.text = (countDownAmount - currentCountDown).ToString();
+        currentCountDown++;
+
+        yield return new WaitForSecondsRealtime(countDownTime);
+
+        if (countDownAmount > currentCountDown)
+        {
+            StartCoroutine(CountDown(levelCenter, direction));
+        }
+        else
+        {
+            Time.timeScale = 1;
             StartRound(levelCenter);
         }
     }

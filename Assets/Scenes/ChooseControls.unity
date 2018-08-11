@@ -6581,8 +6581,8 @@ MonoBehaviour:
   previousRotation: 0
   lerpAmount: 0
   lerpSmallerModifier: 0.1
-  lerpLargerModifier: 0.02
-  baseLerpAmount: 0.02
+  lerpLargerModifier: 0.1
+  baseLerpAmount: 0.3
   circleSpawningPlayer: {fileID: 0}
   shouldLerpFromCircle: 0
   disBeforePlayerSpawn: 1

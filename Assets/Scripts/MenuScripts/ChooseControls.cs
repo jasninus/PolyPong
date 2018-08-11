@@ -275,10 +275,18 @@ public class ChooseControls : MonoBehaviour
 
     private void StartGame()
     {
-        LevelManager.isCircle = false; // Reset specific static variables from the menu level TODO these might have to be reset in other places if menu level is to change from circle to polygon
+        LevelManager.isCircle = false;
         LevelManager.shouldLerpToCircle = false;
 
-        // TODO check if all players has had their controls set and discard those who hasn't
+        PlayerColors[] players = activatedPlayers.Where(p => p.Value).Select(p => p.Key).ToArray();
+
+        foreach (PlayerColors player in players)
+        {
+            if (controls[player].rightKey == KeyCode.None && BotSelection.botDifficulties[player] == 0)
+            {
+                activatedPlayers[player] = false;
+            }
+        }
 
         gameStarted = true;
         SceneManager.LoadScene("Main");

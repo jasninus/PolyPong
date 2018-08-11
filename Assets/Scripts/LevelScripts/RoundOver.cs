@@ -52,7 +52,7 @@ public class RoundOver : MonoBehaviour
         GameObject.FindWithTag("WinText").GetComponent<Text>().text = Points.GetWinner() + " player has won!";
     }
 
-    private void ClearAllStaticVariables()
+    public static void ClearAllStaticVariables()
     {
         ChooseControls.activatedPlayers.Clear();
         ChooseControls.controls.Clear();
@@ -62,6 +62,7 @@ public class RoundOver : MonoBehaviour
         LevelManager.isCircle = false;
         LevelManager.shouldLerpToCircle = false;
         ChooseControls.gameStarted = false;
+        MenuLevelManager.levelIsSpawned = false;
     }
 
     public static void ResetStaticVariables()
@@ -70,11 +71,6 @@ public class RoundOver : MonoBehaviour
         PlayerManager.players.Clear();
         LevelManager.isCircle = false;
         LevelManager.shouldLerpToCircle = false;
-
-        foreach (Player backupPlayer in PlayerManager.backupPlayers)
-        {
-            //ChooseControls.activatedPlayers[backupPlayer.color] = true;
-        }
     }
 
     private void Update()

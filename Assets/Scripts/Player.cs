@@ -66,7 +66,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        Points.AddPoints(color);
+        if (ChooseControls.gameStarted)
+            Points.AddPoints(color);
+
         ChooseControls.activatedPlayers[color] = false;
         levelManager.StartLerpLevelSmaller(playerOrder);
         LevelManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
