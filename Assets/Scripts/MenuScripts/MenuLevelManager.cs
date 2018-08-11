@@ -211,6 +211,9 @@ public class MenuLevelManager : LevelManager
         arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == color));
         HidePlayer(color);
         StartCoroutine(RevealPlayer(PlayerManager.players.First(p => p.color == color)));
+
+        playerManager.PlayersLookAtPoint(levelCenter);
+        meshManager.AddIndicesAndDrawMesh(innerPoints.Count);
     }
 
     private IEnumerator Queue()

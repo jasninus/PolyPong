@@ -18,7 +18,6 @@ public class LevelManager : MonoBehaviour
 
     public static int playerToDestroy;
 
-    // TODO there should be made two different speeds: One for lerping smaller and one for lerping larger
     [HideInInspector] public float lerpedAmount, previousRotation, lerpAmount;
 
     [SerializeField] protected float lerpSmallerModifier, lerpLargerModifier;
