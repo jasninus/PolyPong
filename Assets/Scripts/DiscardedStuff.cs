@@ -171,3 +171,27 @@
 //// Add new PlayerControls for all colors
 //controls.Add(item, new PlayerControls());
 //}
+
+//private void Update()
+//{
+//if (Input.GetKeyDown("h"))
+//{
+//SetResolutionLow();
+//}
+
+//if (Input.GetKeyDown("j"))
+//{
+//ResetResolution();
+//}
+//}
+
+//private void SetResolutionLow()
+//{
+//// Must be a build to work
+//Screen.SetResolution(100, 100, true);
+//}
+
+//private void ResetResolution()
+//{
+//Screen.SetResolution(2560, 1440, true);
+//}
