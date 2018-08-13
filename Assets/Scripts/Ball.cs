@@ -51,6 +51,11 @@ public class Ball : MonoBehaviour
         {
             lastPlayerHit = null;
             Destroy(gameObject);
+
+            foreach (GameObject ball in GameObject.FindGameObjectsWithTag("Ball")) // Destroy all other balls
+            {
+                Destroy(ball);
+            }
         }
 
         LevelManager.playerToDestroy = hitPlayer.playerOrder;
@@ -58,7 +63,7 @@ public class Ball : MonoBehaviour
         if (LevelManager.innerPoints.Count < 4)
         {
             if (LevelManager.innerPoints.Count == 3)
-            {   // This sucks
+            {
                 Points.AddPoints(hitPlayer.color);
             }
 

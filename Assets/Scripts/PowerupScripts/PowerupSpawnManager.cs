@@ -49,7 +49,7 @@ public class PowerupSpawnManager : MonoBehaviour
             GameObject gameObjToSpawn = unavailablePowerups.Count == 0 ? ChooseRandomPowerupType() : ChooseRandomPowerupType(unavailablePowerups);
             PowerupBase powerupToSpawn = gameObjToSpawn.GetComponent<PowerupBase>();
 
-            // Check if powerup can be spawned in current conditions
+            // Check if powerup can be spawned in current conditions. Continue if condition is not met and add to unavailable
             switch (powerupToSpawn.spawnConditions)
             {
                 case SpawnConditions.NotInCircle:
@@ -58,7 +58,14 @@ public class PowerupSpawnManager : MonoBehaviour
                         unavailablePowerups.Add(powerupToSpawn.powerupType);
                         continue;
                     }
+                    break;
 
+                case SpawnConditions.NeedsMultipleBalls:
+                    if (GameObject.FindGameObjectsWithTag("Ball").Length < 2)
+                    {
+                        unavailablePowerups.Add(powerupToSpawn.powerupType);
+                        continue;
+                    }
                     break;
             }
 

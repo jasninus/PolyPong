@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4661154386399414}
   - component: {fileID: 212052450499704378}
   - component: {fileID: 58992244768257606}
-  - component: {fileID: 114772373882359888}
+  - component: {fileID: 114402548417688632}
   m_Layer: 0
-  m_Name: SizeDecrease
+  m_Name: SplitPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.985
---- !u!114 &114772373882359888
+--- !u!114 &114402548417688632
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,19 +65,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824805189220680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3384f53de7428db4188f37a6f3b7c4dc, type: 3}
+  m_Script: {fileID: 11500000, guid: c795de8efe1057b459e323122f952ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: 0
-  powerupType: 5
+  powerupType: 6
   spawnConditions: 0
-  validTargets: 0000000002000000
-  spawnLimit: 0
+  validTargets: 02000000
+  spawnLimit: 1
   despawnTime: 10
-  duration: 5.5
-  playerSizeDecrease: 0.14
-  ballSizeDecrease: 0.002
-  sizeChangeDuration: 0.5
+  duration: 0
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -113,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9d9adb3debb76fa46b034e6f296324fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b057b710fea250f46a630da8b33741c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

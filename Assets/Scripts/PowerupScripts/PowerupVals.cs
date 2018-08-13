@@ -10,7 +10,10 @@ public enum Powerups
     Psychadelic,
     Speed,
     SizeIncrease,
-    SizeDecrease
+    SizeDecrease,
+    Split,
+    Invisibility,
+    Swallow
 }
 
 public class PowerupVals : MonoBehaviour

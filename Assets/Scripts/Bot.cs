@@ -7,7 +7,7 @@ public class Bot : Player
     [SerializeField] private int difficulty;
 
     private readonly float[] difficultySpeedModifiers = { 0.5f, 0.7f, 0.9f }, circleDifficultyModifiers = { 1f, 1.4f, 1.7f };
-    [SerializeField] private float deadpointRange = 0.05f;
+    [SerializeField] private const float deadpointRange = 0.05f;
 
     private GameObject ball;
 

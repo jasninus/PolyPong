@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4661154386399414}
   - component: {fileID: 212052450499704378}
   - component: {fileID: 58992244768257606}
-  - component: {fileID: 114772373882359888}
+  - component: {fileID: 114546228526319704}
   m_Layer: 0
-  m_Name: SizeDecrease
+  m_Name: SwallowPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.985
---- !u!114 &114772373882359888
+--- !u!114 &114546228526319704
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,19 +65,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824805189220680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3384f53de7428db4188f37a6f3b7c4dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 022b426e1ccc697409fa19ebfe3dca5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: 0
-  powerupType: 5
-  spawnConditions: 0
-  validTargets: 0000000002000000
-  spawnLimit: 0
+  powerupType: 8
+  spawnConditions: 2
+  validTargets: 02000000
+  spawnLimit: 1
   despawnTime: 10
-  duration: 5.5
-  playerSizeDecrease: 0.14
-  ballSizeDecrease: 0.002
-  sizeChangeDuration: 0.5
+  duration: 0
 --- !u!212 &212052450499704378
 SpriteRenderer:
   m_ObjectHideFlags: 1

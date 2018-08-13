@@ -12,7 +12,8 @@ public enum PowerupTarget
 public enum SpawnConditions
 {
     None,
-    NotInCircle
+    NotInCircle,
+    NeedsMultipleBalls
 }
 
 public abstract class PowerupBase : MonoBehaviour

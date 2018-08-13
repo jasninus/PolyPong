@@ -686,6 +686,9 @@ MonoBehaviour:
   - {fileID: 1824805189220680, guid: 465972d371a636f4aae7a47fc0da07f9, type: 2}
   - {fileID: 1824805189220680, guid: 5323ca87c37ef844db40021a9e9305c8, type: 2}
   - {fileID: 1824805189220680, guid: c3ff1ab55ef607045bb011e9082a866a, type: 2}
+  - {fileID: 1824805189220680, guid: c5a4c1e1b8cda034e8d94b8ec53d3f11, type: 2}
+  - {fileID: 1824805189220680, guid: 97d19b84cbbac9e428f816d6a1302b8e, type: 2}
+  - {fileID: 1824805189220680, guid: 604ee08cf20f63d46b412c329861fc10, type: 2}
   spawnRadius: 3
   minimumSpawnCooldown: 0.5
   maximumSpawnCooldown: 0.5

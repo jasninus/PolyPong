@@ -70,17 +70,19 @@ public class LevelManager : MonoBehaviour
 
     public void StartLerpLevelSmaller(int playerOrder)
     {
+        DestroyConditionalPowerups(SpawnConditions.NeedsMultipleBalls);
+
         levelLerpManager.StartLerpSmaller(playerOrder);
 
         shouldLerpSmaller = true;
         shouldSetIndices = true;
     }
 
-    private void DestroyNonCirclePowerups()
+    private void DestroyConditionalPowerups(SpawnConditions condition)
     {
         PowerupBase[] powerups = GameObject.FindGameObjectsWithTag("Powerup").Select(o => o.GetComponent<PowerupBase>()).ToArray();
 
-        foreach (PowerupBase powerup in powerups.Where(p => p.spawnConditions == SpawnConditions.NotInCircle))
+        foreach (PowerupBase powerup in powerups.Where(p => p.spawnConditions == condition))
         {
             Destroy(powerup.gameObject);
         }
@@ -88,7 +90,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartLerpCircleSmaller(int playerOrder)
     {
-        DestroyNonCirclePowerups();
+        DestroyConditionalPowerups(SpawnConditions.NotInCircle);
 
         circleLerpManager.StartLerpToCircle(playerOrder);
 

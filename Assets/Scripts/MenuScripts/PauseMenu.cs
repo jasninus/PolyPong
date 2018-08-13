@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,18 +8,19 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-    private GameObject ball;
+    private GameObject[] balls;
 
     private GameStart countdownManager;
 
     private LevelManager levelManager;
 
-    private Vector2 ballStart, ballDirection;
+    private Vector2[] ballStarts, ballDirections;
 
     private void Awake()
     {
         levelManager = GetComponent<LevelManager>();
         countdownManager = GetComponent<GameStart>();
+        GameStart.BallSpawn += SpawnExtraBalls;
     }
 
     private void Update()
@@ -39,27 +41,45 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
 
-        ball = GameObject.FindWithTag("Ball");
+        balls = GameObject.FindGameObjectsWithTag("Ball");
 
-        if (!ball)
+        if (!balls[0])
         {
-            ballDirection = Vector2.zero;
+            ballDirections[0] = Vector2.zero;
             return;
         }
 
-        ballStart = ball.transform.position;
-        ballDirection = ball.GetComponent<Rigidbody2D>().velocity;
+        ballStarts = balls.Select(b => (Vector2)b.transform.position).ToArray();
+        ballDirections = balls.Select(b => b.GetComponent<Rigidbody2D>().velocity).ToArray();
     }
 
     public void ClosePauseMenu()
     {
-        Destroy(ball);
+        foreach (GameObject ball in GameObject.FindGameObjectsWithTag("Ball"))
+        {
+            Destroy(ball);
+        }
+
         pauseMenu.SetActive(false);
         countdownManager.ResetCountdown();
 
-        StartCoroutine(ballDirection != Vector2.zero
-            ? countdownManager.CountDown(ballStart, ballDirection)
-            : countdownManager.CountDown(levelManager.levelCenter));
+        StartCoroutine(ballDirections[0] != Vector2.zero
+            ? countdownManager.CountDown(ballStarts[0], ballDirections[0])
+            : countdownManager.CountDown(levelManager.levelCenter)); // Game not started before pause
+    }
+
+    private void SpawnExtraBalls(GameObject spawnedBall)
+    {
+        if (balls?.Length > 1)
+        {
+            for (int i = 1; i < balls.Length; i++)
+            {
+                GameObject ball = Instantiate(spawnedBall, ballStarts[i], Quaternion.identity);
+                ball.GetComponent<Rigidbody2D>().velocity = ballDirections[i];
+            }
+
+            balls = null;
+        }
     }
 
     public void GoToMenu()
