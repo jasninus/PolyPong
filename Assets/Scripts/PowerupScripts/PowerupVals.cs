@@ -9,7 +9,8 @@ public enum Powerups
     Shield,
     Psychadelic,
     Speed,
-    SizeIncrease
+    SizeIncrease,
+    SizeDecrease
 }
 
 public class PowerupVals : MonoBehaviour
