@@ -50,6 +50,7 @@ public class RoundOver : MonoBehaviour
         panel.GetComponent<Image>().enabled = true;
         panel.GetComponent<Image>().color = MeshManager.materials[Points.GetWinner()].color;
         GameObject.FindWithTag("WinText").GetComponent<Text>().text = Points.GetWinner() + " player has won!";
+        // TODO display final scores
     }
 
     public static void ClearAllStaticVariables()

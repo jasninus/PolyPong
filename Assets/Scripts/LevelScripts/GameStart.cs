@@ -9,15 +9,15 @@ public class GameStart : MonoBehaviour
 
     public static event Spawn BallSpawn;
 
-    [SerializeField] public GameObject ball, directionArrow;
-    private GameObject _ball, spawnedDirArrow;
+    public GameObject ball, directionArrow;
+    private readonly List<GameObject> spawnedDirArrows = new List<GameObject>();
+    private GameObject _ball;
 
-    private Vector2 normalizedBallDirection;
+    private readonly List<Vector2> normalizedBallDirections = new List<Vector2>();
 
     [SerializeField] private Text countdownText;
 
     [SerializeField] private float countDownTime, dirArrowDisFromCenter;
-    private float ballDirection;
 
     [SerializeField] private int countDownAmount;
     private int currentCountDown;
@@ -42,18 +42,26 @@ public class GameStart : MonoBehaviour
     {
         currentCountDown = 0;
         StopAllCoroutines();
-        Destroy(spawnedDirArrow);
+
+        foreach (GameObject arrow in spawnedDirArrows)
+        {
+            Destroy(arrow);
+        }
+
+        spawnedDirArrows.Clear();
+        normalizedBallDirections.Clear();
+
         countdownText.text = "";
         Time.timeScale = 1;
     }
 
-    public IEnumerator CountDown(Vector2 levelCenter)
+    public IEnumerator CountDown(Vector2 ballPositions)
     {
         if (currentCountDown == 0)
         {
-            ballDirection = Random.Range(0, 2 * Mathf.PI);
-            normalizedBallDirection = new Vector2(Mathf.Cos(ballDirection), Mathf.Sin(ballDirection));
-            spawnedDirArrow = SpawnDirectionArrow(normalizedBallDirection, ballDirection * Mathf.Rad2Deg);
+            float ballDirection = Random.Range(0, 2 * Mathf.PI);
+            normalizedBallDirections.Add(new Vector2(Mathf.Cos(ballDirection), Mathf.Sin(ballDirection)));
+            spawnedDirArrows.Add(SpawnDirectionArrow(normalizedBallDirections[0], ballDirection * Mathf.Rad2Deg));
         }
 
         countdownText.text = (countDownAmount - currentCountDown).ToString();
@@ -63,22 +71,25 @@ public class GameStart : MonoBehaviour
 
         if (countDownAmount > currentCountDown)
         {
-            StartCoroutine(CountDown(levelCenter));
+            StartCoroutine(CountDown(ballPositions));
         }
         else
         {
-            StartRound(levelCenter);
+            StartRound(ballPositions);
         }
     }
 
-    public IEnumerator CountDown(Vector2 levelCenter, Vector2 direction)
+    public IEnumerator CountDown(Vector2[] ballPositions, Vector2[] directions)
     {
         if (currentCountDown == 0)
         {
-            ballDirection = direction.y >= 0 ? Mathf.Acos(direction.normalized.x) : 2 * Mathf.PI - Mathf.Acos(direction.normalized.x);
-            normalizedBallDirection = direction.normalized;
-            spawnedDirArrow = SpawnDirectionArrow(normalizedBallDirection, ballDirection * Mathf.Rad2Deg);
-            spawnedDirArrow.transform.position = levelCenter;
+            for (int i = 0; i < ballPositions.Length; i++)
+            {
+                float ballDirection = directions[i].y >= 0 ? Mathf.Acos(directions[i].normalized.x) : 2 * Mathf.PI - Mathf.Acos(directions[i].normalized.x);
+                normalizedBallDirections.Add(directions[i].normalized);
+                spawnedDirArrows.Add(SpawnDirectionArrow(normalizedBallDirections[i], ballDirection * Mathf.Rad2Deg));
+                spawnedDirArrows[i].transform.position = ballPositions[i];
+            }
         }
 
         countdownText.text = (countDownAmount - currentCountDown).ToString();
@@ -88,21 +99,40 @@ public class GameStart : MonoBehaviour
 
         if (countDownAmount > currentCountDown)
         {
-            StartCoroutine(CountDown(levelCenter, direction));
+            StartCoroutine(CountDown(ballPositions, directions));
         }
         else
         {
             Time.timeScale = 1;
-            StartRound(levelCenter);
+            StartRound(ballPositions);
         }
     }
 
-    private void StartRound(Vector2 levelCenter)
+    private void StartRound(Vector2 ballStartPosition)
     {
         currentCountDown = 0;
-        SpawnBall(levelCenter);
-        Destroy(spawnedDirArrow);
         countdownText.text = "";
+
+        SpawnBall(ballStartPosition, normalizedBallDirections[0]);
+        Destroy(spawnedDirArrows[0]);
+
+        spawnedDirArrows.Clear();
+        normalizedBallDirections.Clear();
+    }
+
+    private void StartRound(Vector2[] ballStartPositions)
+    {
+        currentCountDown = 0;
+        countdownText.text = "";
+
+        for (int i = 0; i < ballStartPositions.Length; i++)
+        {
+            SpawnBall(ballStartPositions[i], normalizedBallDirections[i]);
+            Destroy(spawnedDirArrows[i]);
+        }
+
+        spawnedDirArrows.Clear();
+        normalizedBallDirections.Clear();
     }
 
     private GameObject SpawnDirectionArrow(Vector2 normSpawnPos, float startAngle)
@@ -111,10 +141,10 @@ public class GameStart : MonoBehaviour
         return Instantiate(directionArrow, normSpawnPos * dirArrowDisFromCenter, rotation);
     }
 
-    private void SpawnBall(Vector2 levelCenter)
+    private void SpawnBall(Vector2 levelCenter, Vector2 normalizedDirection)
     {
         _ball = Instantiate(ball, levelCenter, Quaternion.identity);
-        _ball.GetComponent<Rigidbody2D>().velocity = normalizedBallDirection * ball.GetComponent<Ball>().ballSpeed;
+        _ball.GetComponent<Rigidbody2D>().velocity = normalizedDirection * ball.GetComponent<Ball>().ballSpeed;
 
         BallSpawn?.Invoke(_ball);
     }

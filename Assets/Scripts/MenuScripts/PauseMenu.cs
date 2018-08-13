@@ -14,13 +14,12 @@ public class PauseMenu : MonoBehaviour
 
     private LevelManager levelManager;
 
-    private Vector2[] ballStarts, ballDirections;
+    private Vector2[] ballStarts = new Vector2[0], ballDirections = new Vector2[0];
 
     private void Awake()
     {
         levelManager = GetComponent<LevelManager>();
         countdownManager = GetComponent<GameStart>();
-        GameStart.BallSpawn += SpawnExtraBalls;
     }
 
     private void Update()
@@ -43,12 +42,6 @@ public class PauseMenu : MonoBehaviour
 
         balls = GameObject.FindGameObjectsWithTag("Ball");
 
-        if (!balls[0])
-        {
-            ballDirections[0] = Vector2.zero;
-            return;
-        }
-
         ballStarts = balls.Select(b => (Vector2)b.transform.position).ToArray();
         ballDirections = balls.Select(b => b.GetComponent<Rigidbody2D>().velocity).ToArray();
     }
@@ -63,23 +56,9 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         countdownManager.ResetCountdown();
 
-        StartCoroutine(ballDirections[0] != Vector2.zero
-            ? countdownManager.CountDown(ballStarts[0], ballDirections[0])
+        StartCoroutine(ballDirections.Length > 0
+            ? countdownManager.CountDown(ballStarts, ballDirections)
             : countdownManager.CountDown(levelManager.levelCenter)); // Game not started before pause
-    }
-
-    private void SpawnExtraBalls(GameObject spawnedBall)
-    {
-        if (balls?.Length > 1)
-        {
-            for (int i = 1; i < balls.Length; i++)
-            {
-                GameObject ball = Instantiate(spawnedBall, ballStarts[i], Quaternion.identity);
-                ball.GetComponent<Rigidbody2D>().velocity = ballDirections[i];
-            }
-
-            balls = null;
-        }
     }
 
     public void GoToMenu()
