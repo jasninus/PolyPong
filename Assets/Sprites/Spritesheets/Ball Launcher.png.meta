@@ -1,0 +1,2442 @@
+fileFormatVersion: 2
+guid: d2285de6576b3a749814fd334fdc8389
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Ball Launcher_0
+    21300002: Ball Launcher_1
+    21300004: Ball Launcher_2
+    21300006: Ball Launcher_3
+    21300008: Ball Launcher_4
+    21300010: Ball Launcher_5
+    21300012: Ball Launcher_6
+    21300014: Ball Launcher_7
+    21300016: Ball Launcher_8
+    21300018: Ball Launcher_9
+    21300020: Ball Launcher_10
+    21300022: Ball Launcher_11
+    21300024: Ball Launcher_12
+    21300026: Ball Launcher_13
+    21300028: Ball Launcher_14
+    21300030: Ball Launcher_15
+    21300032: Ball Launcher_16
+    21300034: Ball Launcher_17
+    21300036: Ball Launcher_18
+    21300038: Ball Launcher_19
+    21300040: Ball Launcher_20
+    21300042: Ball Launcher_21
+    21300044: Ball Launcher_22
+    21300046: Ball Launcher_23
+    21300048: Ball Launcher_24
+    21300050: Ball Launcher_25
+    21300052: Ball Launcher_26
+    21300054: Ball Launcher_27
+    21300056: Ball Launcher_28
+    21300058: Ball Launcher_29
+    21300060: Ball Launcher_30
+    21300062: Ball Launcher_31
+    21300064: Ball Launcher_32
+    21300066: Ball Launcher_33
+    21300068: Ball Launcher_34
+    21300070: Ball Launcher_35
+    21300072: Ball Launcher_36
+    21300074: Ball Launcher_37
+    21300076: Ball Launcher_38
+    21300078: Ball Launcher_39
+    21300080: Ball Launcher_40
+    21300082: Ball Launcher_41
+    21300084: Ball Launcher_42
+    21300086: Ball Launcher_43
+    21300088: Ball Launcher_44
+    21300090: Ball Launcher_45
+    21300092: Ball Launcher_46
+    21300094: Ball Launcher_47
+    21300096: Ball Launcher_48
+    21300098: Ball Launcher_49
+    21300100: Ball Launcher_50
+    21300102: Ball Launcher_51
+    21300104: Ball Launcher_52
+    21300106: Ball Launcher_53
+    21300108: Ball Launcher_54
+    21300110: Ball Launcher_55
+    21300112: Ball Launcher_56
+    21300114: Ball Launcher_57
+    21300116: Ball Launcher_58
+    21300118: Ball Launcher_59
+    21300120: Ball Launcher_60
+    21300122: Ball Launcher_61
+    21300124: Ball Launcher_62
+    21300126: Ball Launcher_63
+    21300128: Ball Launcher_64
+    21300130: Ball Launcher_65
+    21300132: Ball Launcher_66
+    21300134: Ball Launcher_67
+    21300136: Ball Launcher_68
+    21300138: Ball Launcher_69
+    21300140: Ball Launcher_70
+    21300142: Ball Launcher_71
+    21300144: Ball Launcher_72
+    21300146: Ball Launcher_73
+    21300148: Ball Launcher_74
+    21300150: Ball Launcher_75
+    21300152: Ball Launcher_76
+    21300154: Ball Launcher_77
+    21300156: Ball Launcher_78
+    21300158: Ball Launcher_79
+    21300160: Ball Launcher_80
+    21300162: Ball Launcher_81
+    21300164: Ball Launcher_82
+    21300166: Ball Launcher_83
+    21300168: Ball Launcher_84
+    21300170: Ball Launcher_85
+    21300172: Ball Launcher_86
+    21300174: Ball Launcher_87
+    21300176: Ball Launcher_88
+    21300178: Ball Launcher_89
+    21300180: Ball Launcher_90
+    21300182: Ball Launcher_91
+    21300184: Ball Launcher_92
+    21300186: Ball Launcher_93
+    21300188: Ball Launcher_94
+    21300190: Ball Launcher_95
+    21300192: Ball Launcher_96
+    21300194: Ball Launcher_97
+    21300196: Ball Launcher_98
+    21300198: Ball Launcher_99
+    21300200: Ball Launcher_100
+    21300202: Ball Launcher_101
+    21300204: Ball Launcher_102
+    21300206: Ball Launcher_103
+    21300208: Ball Launcher_104
+    21300210: Ball Launcher_105
+    21300212: Ball Launcher_106
+    21300214: Ball Launcher_107
+    21300216: Ball Launcher_108
+    21300218: Ball Launcher_109
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ball Launcher_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59408d509e23e76479a27a47775a61f3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_1
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 595f733c0f9b3cf4292aac524d232e0c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_2
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0cddbfa6aff30340a73de10a6627540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_3
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e46686dad57124e839bc65273ac963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_4
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d28f871124066cc429dc762dbf91b920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_5
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6aab9037478a6f48b44f9b498ad1b75
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_6
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40c30407377d025428ebfeaf664a4a6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_7
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b28e933895a430c4ba564deadbf7ab62
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_8
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cad1cbca0b0805f4faead3f49d864201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_9
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 8800
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fad88939d72cda468281cf485aaa640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17754555134c6247858831be44a0aff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_11
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58fb1672e9efaba49ac7cf01628b3c5e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_12
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bb687ef97a97fa46a39a469aa0bb240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_13
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90456ffd02538c94885f10f7eface177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_14
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac68a57418deb54181eaa4ecdb35db1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_15
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b18faf9bf856de49b56e5aa84f85782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_16
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04a9e54019ed92b4898bafbe185319d8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_17
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b4761d65665366489ff8a56f3e66b10
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_18
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf61ee68492557d44826707160af0f9e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_19
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 7920
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09767dc37abb7fb42bf8bd60df7783a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3705b684140f9438c8eda20936835a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_21
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 513cc50e63336724583d12773a8fa7bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_22
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff2d3fc31f62d0d4a8d75dea9dfc4469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_23
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ebd33642ecbce4295a77149880f2f9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_24
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c549f799735f244b1dd386a39be94b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_25
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e9dd7a8774b3834586581c7282036d3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_26
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 714088005640e9e45abc1dbe759f2abe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_27
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c15d75ab861db743b5d6c606c1e4348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_28
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69b33b369356c50439c2ff3d03fe1452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_29
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 7040
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d7b889700df8c4ab4b68c66f8d8471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26766c1fdaf20d04db877736e5722942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_31
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0af8775f1bc3c9498db3236570bd582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_32
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 249270e30847f27439769626c6cc0a87
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_33
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4ad75c14ae5e794db61e347aa2d14ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_34
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 214ef2adfccdef5469edcee7b170d638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_35
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89060ff3dae858f4583363b2582d15ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_36
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3261df8d0f3c2a4198b7420cfc6e5a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_37
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48725b998eebdb5418de4b854de2e46d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_38
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d3baff5f7200e644b959cdfcdff04d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_39
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 6160
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b33dd30eb91de145a5f1e01d10a94d2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe2c6fc5851f7cb48b007f35a3624714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_41
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa39603907cb202498b3a7dbb4aa51b4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_42
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 731e2aef8fffaa1498ff62c84807c6a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_43
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 467ca0bef22fae847b816c479bf0fd35
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_44
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7926ac1b7da1d9e4ba0641f70ec5026a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_45
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79fd0e8839092e049aa8e8b49a0fee17
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_46
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a572af68d532c5b4e989fb16e794820b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_47
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cfffc0aff64074aa67cf0549d4799b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_48
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f2fca5f980764c4c96ea052c6f7b991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_49
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 5280
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d057eacf3106d4ab1c681a54e06a59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8247e204c984364b95cd5f050585353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_51
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 809ec12513e766747b675314267fe23a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_52
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f3607f3869b22044afef47f5d27c68a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_53
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327bba85cb3aa95469d4bfc9a8dcdf92
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_54
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb31741aa9f43fc44a66a5385c16c099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_55
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8cf52098e98b2d439a4d202fc7f9401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_56
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82a9cd1b45c5ad34982a894203a3a83b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_57
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399eefca095f44645bc2ec04257ce6d3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_58
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe0fb5e544ae1e47ad7f4a37c1de29b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_59
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 4400
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54c8632269db19743a560975f8b5a9d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c15fc10f1ddc9848afec02fe93eaad2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_61
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5f71eb9b4de72d4e8250db9d9ea80cb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_62
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a95766c40c8944c941c8b263771850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_63
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ce06a5ebfb285543b4077b2a8ec82dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_64
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d05dadecb966a34db83ac2a019e1c84
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_65
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d6d8668501f3ad4b85c05134476117d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_66
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 257f9a9717b35964a818c2ffa475a71e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_67
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c7af3e3e4db1041ba26f42bd4c9009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_68
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a9afdcc630ba3468cd685085dc3d35
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_69
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 3520
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc7a12e6ee62b54eb8ed1df9eb44cd1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb545ee893e6a7a4c844eb5621aff17a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_71
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 986c0f27c993932489aa68c50bf4b8bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_72
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170968f7fee8f9e44b9f073e339be41e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_73
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 733aa39dd15698a4cb80b40d3eaa04d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_74
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ac5f5ecc2854a4d82265a8c17d02a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_75
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4af144238e52c7e4399591fbd31fde3c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_76
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caff7aca5b571054cb4a4ccaf0d84382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_77
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e358e2500901c6a44a2dca20ba2a9571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_78
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ce47f8bc21491441bca2a0b9267ed6f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_79
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89768f121a4056742b510293876f9ca0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f9ffa13221dba040a1fc9639349834f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_81
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0996d574915a0c547befe931f84e437b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_82
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e75c64f7be9aa99478ee9a1fdb762f5b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_83
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba781441ef08cac4fb10b1e80d84c13e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_84
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e16c126d18d2a140bdba2e19bb9c692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_85
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b48977dd4a112a94b8a230b529580881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_86
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efdf1acb79ae02e45b19c41a98bb3f65
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_87
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b66f34124986154db239c97a8cc45fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_88
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06f3e22ae7dbedc46a9d10ef8ab3056a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_89
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37dccfb724162124c9179fb434a80a37
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a36f85e7308d981448e209ef1050c2fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_91
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bcba874ae6351e498f084fd6903e7c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_92
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40baf6ec904b2754c9f0a828079533fe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_93
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc85a0ffaebfd24baf36cb67f0a28fe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_94
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db4414f2cea02a944968640396e85607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_95
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944a2aaefbf5641488e428b699af0737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_96
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3505f517d0084b48a4058ae2c8e4bcf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_97
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dca62b32d1e8de64085e400f2faa461f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_98
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21be95c64f157504aaa0642b9a539793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_99
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af8f6854b3f412b4a94d99860efe73b7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_100
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d04c7b38801a8294eb329191d7b10387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_101
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c88d4f10ae797d345b945c4a812567b8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_102
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae45255270c919a4d8f960a72ce875b5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_103
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b8a2f7821a984b44ba3bd36bbb890e5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_104
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e39c69f1985c23e40a9baefd3461d390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_105
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6486c8dd2cd450242ad9d810ad235717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_106
+      rect:
+        serializedVersion: 2
+        x: 5280
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9db3e431323dd094ca9851b38dea9eca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_107
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 443f98d94706a554d8eedab93504e632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_108
+      rect:
+        serializedVersion: 2
+        x: 7040
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 970f6f3455223bf41805b82241927977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ball Launcher_109
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7dc1c43d259364ea58f274412b573d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 282d1660470679c4d8ec2b93b1c067a9
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
