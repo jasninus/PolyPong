@@ -13,7 +13,15 @@ public class MenuLevelManager : LevelManager
 
     private PlayerColors previouslySelectedPlayer;
 
-    private readonly int[][] addPlayerRotationConstants = { new[] { 0 }, new[] { 0 }, new[] { 0 }, new[] { -45, -15, 15, 45 }, new[] { -36, -18, 0, 18, 36 }, new[] { -30, -18, -6, 6, 18, 30 } };
+    private readonly int[][] addPlayerRotationConstants =
+    {
+        new[] { 0 },
+        new[] { 0 },
+        new[] { 0 },
+        new[] { -45, -15, 15, 45 },
+        new[] { -36, -18, 0, 18, 36 },
+        new[] { -30, -18, -6, 6, 18, 30 }
+    };
 
     [SerializeField] private float disBeforePlayerSpawn;
 
@@ -21,7 +29,7 @@ public class MenuLevelManager : LevelManager
 
     private struct QueueItem
     {
-        // 0 for smaller, 1 for bigger
+        // False for smaller, true for bigger
         public bool lerpType;
 
         public PlayerColors color;

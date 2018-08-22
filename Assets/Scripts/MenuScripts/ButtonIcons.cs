@@ -7,7 +7,7 @@ public class ButtonIcons : MonoBehaviour
 {
     [SerializeField] private Sprite[] replacementSprites;
 
-    public void SetButtonIcon(KeyCode key, Text text, SpriteRenderer rend)
+    public void SetButtonIcon(KeyCode key, Text text, Image image)
     {
         string rString = null;
         Sprite rSprite = null;
@@ -26,17 +26,17 @@ public class ButtonIcons : MonoBehaviour
         if (rString != null)
         {
             text.text = rString;
-            rend.gameObject.SetActive(false);
+            image.gameObject.SetActive(false);
             return;
         }
 
         if (rSprite != null)
         {
-            rend.sprite = rSprite;
+            image.sprite = rSprite;
             return;
         }
 
         text.text = key.ToString();
-        rend.gameObject.SetActive(false);
+        image.gameObject.SetActive(false);
     }
 }

@@ -25,6 +25,7 @@ public class BotSelection : MonoBehaviour
         }
     }
 
+    /// <param name="difficulty">0 = disabled, 1 = easy, 2 = medium, 3 = hard</param>
     public void SetBotDifficulty(int difficulty)
     {
         chooseControls.ClearControls(botColor);

@@ -56,6 +56,8 @@ public class ChooseControls : MonoBehaviour
 
     private DirectionArrows arrowManager;
 
+    [SerializeField] private ControlsMenuSwitcher menuSwitcher;
+
     public class PlayerControls
     {
         public KeyCode leftKey;
@@ -106,6 +108,9 @@ public class ChooseControls : MonoBehaviour
 
     private void Update()
     {
+        // Don't do anything if this is not the currently active menu
+        if (!menuSwitcher.IsCurrentMenu) { return; }
+
         // Should inputs change selected player or be used as controls
         if (!selectingControls && GetDigitInput(out numberInput))
         {
@@ -160,7 +165,7 @@ public class ChooseControls : MonoBehaviour
     private void SetButton(PlayerColors playerToSet, Direction direction, KeyCode input)
     {
         buttonIcons.SetButtonIcon(input, controlTexts[playerToSet][(int)direction],
-            squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.GetComponent<SpriteRenderer>());
+            squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.GetComponent<Image>());
 
         if (direction == Direction.left)
         {
@@ -201,8 +206,8 @@ public class ChooseControls : MonoBehaviour
         squares[(int)playerToWipe * 2].GetChild(0).gameObject.SetActive(true);
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.SetActive(true);
 
-        squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
-        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = arrow;
+        squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
+        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
 
         PlayerAmountDecreased?.Invoke(playerToWipe);
 
