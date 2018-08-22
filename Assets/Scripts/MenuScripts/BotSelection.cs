@@ -16,6 +16,9 @@ public class BotSelection : MonoBehaviour
     {
         chooseControls = GameObject.FindWithTag("LevelHandler").GetComponent<ChooseControls>();
 
+        // REASON gameObject needs to be active for Awake() to run. BotButtons should not be visible at start
+        gameObject.SetActive(false);
+
         if (botDifficulties.Count > 0) // REASON this method gets called on multiple instances, but it should only add values once
             return;
 
@@ -26,9 +29,9 @@ public class BotSelection : MonoBehaviour
     }
 
     /// <param name="difficulty">0 = disabled, 1 = easy, 2 = medium, 3 = hard</param>
-    public void SetBotDifficulty(int difficulty)
+    public void SetBotDifficulty(int difficulty) // TODO selecting bots makes menu level crash. It also doesn't work properly with the selection ball
     {
-        chooseControls.ClearControls(botColor);
+        chooseControls.ClearControls(botColor, true);
         ChooseControls.activatedPlayers[botColor] = true;
         botDifficulties[botColor] = difficulty;
         chooseControls.GoToNextPlayer();

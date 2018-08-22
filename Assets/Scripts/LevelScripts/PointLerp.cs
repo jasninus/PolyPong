@@ -55,13 +55,5 @@ public class PointLerp : MonoBehaviour
     public List<Vector2> LerpToNormal(List<Vector2> from, List<Vector2> to, float lerpAmount)
     {
         return from.Select((t, i) => Vector2.Lerp(t, to[i], lerpAmount)).ToList();
-
-        //try
-        //{
-        //    return from.Select((t, i) => Vector2.Lerp(t, to[i], lerpAmount)).ToList();
-        //}
-        //catch { }
-
-        return null;
     }
 }

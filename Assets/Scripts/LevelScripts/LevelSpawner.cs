@@ -50,7 +50,20 @@ public class LevelSpawner
         LevelManager.innerPoints = pointManager.SpawnInnerPoints(corners, levelManager.levelCenter);
         LevelManager.outerPoints = pointManager.SpawnOuterPoints(LevelManager.innerPoints);
 
+        //if (PlayerManager.backupPlayers.Count > 0)
+        //{
+        //    foreach (Player backupPlayer in PlayerManager.backupPlayers)
+        //    {
+        //        ChooseControls.activatedPlayers[backupPlayer.color] = true;
+        //    }
+
+        //    playerManager.SpawnPlayers(pointManager.radius, PlayerManager.backupPlayers.Select(p => p.color).ToArray());
+        //}
+        //else
+        //{
         playerManager.SpawnPlayers(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray());
+        //}
+
         playerManager.PlayersLookAtPoint(levelManager.levelCenter);
         meshManager.SetMaterials();
         arqdutManager.SpawnArqduts(LevelManager.innerPoints, levelManager.levelCenter);

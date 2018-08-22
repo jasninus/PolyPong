@@ -42,6 +42,11 @@ public class RoundOver : MonoBehaviour
         panel.GetComponent<Image>().enabled = true;
         panel.GetComponent<Image>().color = Color.gray;
         GameObject.FindWithTag("WinText").GetComponent<Text>().text = "Press space to continue";
+
+        foreach (Player backupPlayer in PlayerManager.backupPlayers)
+        {
+            ChooseControls.activatedPlayers[backupPlayer.color] = true;
+        }
     }
 
     private void CreateVictoryScreen()

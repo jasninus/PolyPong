@@ -121,7 +121,13 @@ public class PlayerManager : MonoBehaviour
     public void CircleSetPlayerPoints(List<Vector2> toPoints, int destroyedPlayer)
     {
         leftIndex = destroyedPlayer + 1 > 2 ? 0 : destroyedPlayer + 1; // Left player
-        players[leftIndex].points.left = toPoints[toPoints.Count / 4];
+        try
+        {
+            players[leftIndex].points.left = toPoints[toPoints.Count / 4]; // TODO one of the players gets destroyed prematurely
+        }
+        catch
+        {
+        }
         players[leftIndex].points.right = new Vector2(0, 0);
         circleStartLeft = players[leftIndex].transform.position;
         players[leftIndex].SetChildLerpFrom();

@@ -2741,7 +2741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &365362902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3241,6 +3241,8 @@ MonoBehaviour:
   botButtonsParent: {fileID: 1992737605}
   playerSquaresParent: {fileID: 936154763}
   color: 3
+  botSprite: {fileID: 21300000, guid: cee0c176501ad904287f1cc247d32a06, type: 3}
+  playerSprite: {fileID: 21300000, guid: 035e0ca0b509d4e4fa42f557f7a60420, type: 3}
 --- !u!114 &392412743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4506,6 +4508,8 @@ MonoBehaviour:
   botButtonsParent: {fileID: 2073362845}
   playerSquaresParent: {fileID: 531008359}
   color: 0
+  botSprite: {fileID: 21300000, guid: cee0c176501ad904287f1cc247d32a06, type: 3}
+  playerSprite: {fileID: 21300000, guid: 035e0ca0b509d4e4fa42f557f7a60420, type: 3}
 --- !u!114 &631995420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4799,6 +4803,8 @@ MonoBehaviour:
   botButtonsParent: {fileID: 2066412489}
   playerSquaresParent: {fileID: 45572530}
   color: 5
+  botSprite: {fileID: 21300000, guid: cee0c176501ad904287f1cc247d32a06, type: 3}
+  playerSprite: {fileID: 21300000, guid: 035e0ca0b509d4e4fa42f557f7a60420, type: 3}
 --- !u!114 &659924925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5704,7 +5710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &854265869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7943,7 +7949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1217479801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11707,6 +11713,8 @@ MonoBehaviour:
   botButtonsParent: {fileID: 854265868}
   playerSquaresParent: {fileID: 1372227154}
   color: 1
+  botSprite: {fileID: 21300000, guid: cee0c176501ad904287f1cc247d32a06, type: 3}
+  playerSprite: {fileID: 21300000, guid: 035e0ca0b509d4e4fa42f557f7a60420, type: 3}
 --- !u!114 &1643761718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12589,6 +12597,8 @@ MonoBehaviour:
   botButtonsParent: {fileID: 1217479800}
   playerSquaresParent: {fileID: 1758056456}
   color: 2
+  botSprite: {fileID: 21300000, guid: cee0c176501ad904287f1cc247d32a06, type: 3}
+  playerSprite: {fileID: 21300000, guid: 035e0ca0b509d4e4fa42f557f7a60420, type: 3}
 --- !u!114 &1773962064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12759,7 +12769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 791.2, y: 211.22739}
+  m_AnchoredPosition: {x: 621, y: 211.22739}
   m_SizeDelta: {x: 41.670002, y: 41.670002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1788421413
@@ -13583,6 +13593,8 @@ MonoBehaviour:
   botButtonsParent: {fileID: 365362901}
   playerSquaresParent: {fileID: 835710377}
   color: 4
+  botSprite: {fileID: 21300000, guid: cee0c176501ad904287f1cc247d32a06, type: 3}
+  playerSprite: {fileID: 21300000, guid: 035e0ca0b509d4e4fa42f557f7a60420, type: 3}
 --- !u!114 &1972393573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13650,7 +13662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1992737606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14203,7 +14215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2066412490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14252,7 +14264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2073362846
 RectTransform:
   m_ObjectHideFlags: 0

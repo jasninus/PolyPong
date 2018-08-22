@@ -209,9 +209,25 @@ public class ChooseControls : MonoBehaviour
         squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
 
+        // If this was called from adding a bot, it should not run event
         PlayerAmountDecreased?.Invoke(playerToWipe);
 
         previouslyClearedPlayer = playerToWipe;
+    }
+
+    public void ClearControls(PlayerColors playerToWipe, bool wasRunFromBotAdd)
+    {
+        SetButton(playerToWipe, Direction.left, KeyCode.None);
+        SetButton(playerToWipe, Direction.right, KeyCode.None);
+
+        controlTexts[playerToWipe][0].text = "";
+        controlTexts[playerToWipe][1].text = "";
+
+        squares[(int)playerToWipe * 2].GetChild(0).gameObject.SetActive(true);
+        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.SetActive(true);
+
+        squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
+        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
     }
 
     private void ClearPlayer(PlayerColors playerToWipe)
@@ -234,12 +250,14 @@ public class ChooseControls : MonoBehaviour
 
     public void GoToNextPlayer()
     {
-        try
+        for (int i = 0; i < 6 /* Amount of PlayerColors*/; i++)
         {
-            PlayerColors pc = activatedPlayers.First(item => !item.Value).Key;
-            SetSelectedPlayer(pc);
+            if (!activatedPlayers[(PlayerColors)i] && BotSelection.botDifficulties[(PlayerColors)i] == 0)
+            {
+                SetSelectedPlayer((PlayerColors)i);
+                return;
+            }
         }
-        catch { }
     }
 
     /// <summary>
@@ -285,7 +303,7 @@ public class ChooseControls : MonoBehaviour
 
         PlayerColors[] players = activatedPlayers.Where(p => p.Value).Select(p => p.Key).ToArray();
 
-        foreach (PlayerColors player in players)
+        foreach (PlayerColors player in players) // TODO there are some issues with bots not being in the game even though they have been selected
         {
             if (controls[player].rightKey == KeyCode.None && BotSelection.botDifficulties[player] == 0)
             {

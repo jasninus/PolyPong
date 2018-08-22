@@ -62,7 +62,7 @@ public class MenuLevelManager : LevelManager
 
     private void Update()
     {
-        if (ChooseControls.activatedPlayers.Count(p => p.Value) == 2 && !levelIsSpawned) // The first
+        if (ChooseControls.activatedPlayers.Count(p => p.Value) == 2 && !levelIsSpawned)
         {
             SpawnLevel();
         }
@@ -92,8 +92,6 @@ public class MenuLevelManager : LevelManager
         };
 
         circleSpawningPlayer.transform.position = (circleSpawningPlayer.points.left + circleSpawningPlayer.points.right) * 0.5f;
-
-        // TODO there are errors when it is not the last player that is the third player. One player does also not get it's position updated
     }
 
     private void QueueAddPlayer(PlayerColors color)
@@ -108,7 +106,7 @@ public class MenuLevelManager : LevelManager
 
     private void UpdateActivatedPlayers(PlayerColors selectedColor)
     {
-        if (ChooseControls.controls[previouslySelectedPlayer].leftKey == KeyCode.None)
+        if (ChooseControls.controls[previouslySelectedPlayer].leftKey == KeyCode.None && BotSelection.botDifficulties[previouslySelectedPlayer] == 0)
         {
             ChooseControls.activatedPlayers[previouslySelectedPlayer] = false;
             RemovePlayer(previouslySelectedPlayer);
@@ -167,7 +165,9 @@ public class MenuLevelManager : LevelManager
         shouldLerpFromCircle = true;
         lerpedAmount = 1;
 
-        Player p = playerManager.SpawnPlayer(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray(), 0);
+        PlayerColors[] colors = ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray();
+        BotSelection.botDifficulties[colors[0]] = 0;
+        Player p = playerManager.SpawnPlayer(pointManager.radius, colors, 0);
 
         p.playerOrder = index;
         p.color = activatedColors[index];
@@ -192,8 +192,8 @@ public class MenuLevelManager : LevelManager
     private void UpdateArqduts()
     {
         arqdutManager.DestroyAllArqduts();
-        List<Vector2> arqdutSpawnPosition = new List<Vector2>(3) { innerPoints[0], innerPoints[innerPoints.Count - 2], innerPoints.Last() };
-        arqdutManager.SpawnArqduts(arqdutSpawnPosition, levelCenter);
+        List<Vector2> arqdutSpawnPositions = new List<Vector2>(3) { innerPoints[0], innerPoints[innerPoints.Count - 2], innerPoints.Last() };
+        arqdutManager.SpawnArqduts(arqdutSpawnPositions, levelCenter);
     }
 
     private void UpdateLerpLists(int index, List<PlayerColors> activatedColors)
@@ -228,7 +228,7 @@ public class MenuLevelManager : LevelManager
     {
         queueIsRunning = true;
 
-        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpToNormal && !executeLevelLerpRunning && !shouldLerpFromCircle); // Wait until level is done lerping
+        yield return new WaitUntil(() => !shouldLerpSmaller && !shouldLerpToNormal && !executeLevelLerpRunning && !shouldLerpFromCircle && !shouldLerpToCircle); // Wait until level is done lerping
 
         if (queue[0].lerpType) // Read next item in queue
         {
