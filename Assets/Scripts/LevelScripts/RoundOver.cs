@@ -24,7 +24,7 @@ public class RoundOver : MonoBehaviour
 
     public void EndRound()
     {
-        if (roundsPlayed >= RoundSlider.selectedRoundAmount - 1)
+        if (roundsPlayed >= RoundAmountRenumeration.selectedRoundAmount - 1)
         {
             CreateVictoryScreen();
         }
@@ -86,7 +86,7 @@ public class RoundOver : MonoBehaviour
             Points.previousPlayerDeaths = 0;
             roundsPlayed++;
 
-            if (roundsPlayed < RoundSlider.selectedRoundAmount) // More rounds remaining
+            if (roundsPlayed < RoundAmountRenumeration.selectedRoundAmount) // More rounds remaining
             {
                 ResetStaticVariables();
                 SceneManager.LoadScene(2);
@@ -97,7 +97,7 @@ public class RoundOver : MonoBehaviour
                 ClearAllStaticVariables();
                 roundsPlayed = 0;
                 SceneManager.LoadScene(1);
-                RoundSlider.selectedRoundAmount = 1;
+                RoundAmountRenumeration.selectedRoundAmount = 1;
             }
         }
     }
