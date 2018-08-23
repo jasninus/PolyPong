@@ -29,7 +29,7 @@ public class BotSelection : MonoBehaviour
     }
 
     /// <param name="difficulty">0 = disabled, 1 = easy, 2 = medium, 3 = hard</param>
-    public void SetBotDifficulty(int difficulty) // TODO selecting bots makes menu level crash. It also doesn't work properly with the selection ball
+    public void SetBotDifficulty(int difficulty)
     {
         chooseControls.ClearControls(botColor, true);
         ChooseControls.activatedPlayers[botColor] = true;

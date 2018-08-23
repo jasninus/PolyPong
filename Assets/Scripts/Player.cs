@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
         levelManager.StartLerpCircleSmaller(playerOrder);
         DeactivePlayer();
+        this.enabled = false;
 
         UpdateScoreboard?.Invoke();
     }

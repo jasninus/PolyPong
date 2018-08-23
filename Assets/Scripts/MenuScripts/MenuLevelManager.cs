@@ -166,7 +166,7 @@ public class MenuLevelManager : LevelManager
         lerpedAmount = 1;
 
         PlayerColors[] colors = ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray();
-        BotSelection.botDifficulties[colors[0]] = 0;
+        BotSelection.botDifficulties[colors.Last()] = 0;
         Player p = playerManager.SpawnPlayer(pointManager.radius, colors, 0);
 
         p.playerOrder = index;

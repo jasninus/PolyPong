@@ -20,8 +20,8 @@ public class Bot : Player
     {
         difficulty = BotSelection.botDifficulties[color];
 
-        playerSpeed *= difficultySpeedModifiers[difficulty - 1];
-        circleSpeed *= circleDifficultyModifiers[difficulty - 1];
+        playerSpeed *= difficultySpeedModifiers[difficulty > 0 ? difficulty - 1 : 0];
+        circleSpeed *= circleDifficultyModifiers[difficulty > 0 ? difficulty - 1 : 0];
     }
 
     private void GetNewBall(GameObject newBall)
@@ -64,12 +64,6 @@ public class Bot : Player
         }
 
         ClampMovement(minDis);
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawLine(LevelManager.innerLerpTo[0], LevelManager.innerLerpTo[LevelManager.innerLerpTo.Count / 2]);
-        //Gizmos.DrawLine(Vector2.zero, ForTest());
     }
 
     private void CircleMovement()
