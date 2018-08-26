@@ -18,7 +18,7 @@ public enum SpawnConditions
 
 public abstract class PowerupBase : MonoBehaviour
 {
-    [HideInInspector] public PowerupTarget target;
+    public PowerupTarget target;
 
     public Powerups powerupType;
 

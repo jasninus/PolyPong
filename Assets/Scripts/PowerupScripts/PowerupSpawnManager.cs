@@ -121,7 +121,7 @@ public class PowerupSpawnManager : MonoBehaviour
     private PowerupTarget ChooseRandomPowerupTarget(PowerupBase chosenPowerup)
     {
         // TODO there should be added a reference to ball, so that when lastPlayerHit is null, the player target cannot be used
-        PowerupTarget[] validTargets = chosenPowerup.validTargets;
-        return validTargets[Random.Range(0, validTargets.Length)];
+        List<PowerupTarget> validTargets = PowerupVals.powerupTargets[chosenPowerup.powerupType];
+        return validTargets[Random.Range(0, validTargets.Count)];
     }
 }

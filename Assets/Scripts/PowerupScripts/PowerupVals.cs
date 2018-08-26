@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-// TODO Add all powerups here
 public enum Powerups
 {
     Reverse,
@@ -22,10 +22,22 @@ public class PowerupVals : MonoBehaviour
 
     public static Dictionary<Powerups, bool> powerupsActivatedState = new Dictionary<Powerups, bool>();
 
+    public static Dictionary<Powerups, List<PowerupTarget>> powerupTargets = new Dictionary<Powerups, List<PowerupTarget>>();
+
+    [SerializeField] private GameObject[] powerups;
+
     private void Awake()
     {
         if (powerupsActivatedState.Count > 0)
             return;
+
+        // Add all targets to PowerupVals
+        foreach (GameObject powerupObj in powerups)
+        {
+            PowerupBase powerup = powerupObj.GetComponent<PowerupBase>();
+
+            powerupTargets.Add(powerup.powerupType, powerup.validTargets.ToList());
+        }
 
         foreach (Powerups item in Enum.GetValues(typeof(Powerups)))
         {
