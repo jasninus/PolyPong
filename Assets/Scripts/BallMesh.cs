@@ -33,7 +33,7 @@ public class BallMesh : MonoBehaviour
 
     private void Start()
     {
-        rend.materials = LevelManager.isCircle ? PlayerManager.players.Select(p => MeshManager.materials[p.color]).ToArray() : meshManager.rend.materials;
+        rend.materials = InGameManager.isCircle ? PlayerManager.players.Select(p => MeshManager.materials[p.color]).ToArray() : meshManager.rend.materials;
 
         currentPlayers = rend.materials.Length;
 

@@ -42,8 +42,6 @@ public class LevelPoints : MonoBehaviour
 
         const float radians = 2 * Mathf.PI;
 
-        //float[] weights = GetWeightedRadians(cornerAmount);
-
         float prevWeights = 0;
 
         for (int i = 0; i < cornerAmount; i++)
@@ -52,8 +50,6 @@ public class LevelPoints : MonoBehaviour
 
             prevWeights += weights[i];
         }
-
-        //MovePoints(spawnedPoints, center);
 
         return spawnedPoints;
     }
@@ -171,7 +167,7 @@ public class LevelPoints : MonoBehaviour
             points.Add(firstPoint + betweenPointsL * i);
             points.Add(firstPoint + betweenPointsR * i);
         }
-        // Two for-loops for reducing complexity in sorting points
+        //R Two for-loops for reducing complexity in sorting points
         points.Add(outerFrom);
         for (int i = 1; i <= numberOfPoints; i++)
         {
@@ -179,7 +175,6 @@ public class LevelPoints : MonoBehaviour
             points.Add(outerFrom + outerBetweenR * i);
         }
 
-        //Debug.Log(points.Count);
         return points;
     }
 }

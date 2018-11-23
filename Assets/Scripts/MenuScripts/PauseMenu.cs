@@ -12,13 +12,13 @@ public class PauseMenu : MonoBehaviour
 
     private GameStart countdownManager;
 
-    private LevelManager levelManager;
+    private InGameManager _inGameManager;
 
     private Vector2[] ballStarts = new Vector2[0], ballDirections = new Vector2[0];
 
     private void Awake()
     {
-        levelManager = GetComponent<LevelManager>();
+        _inGameManager = GetComponent<InGameManager>();
         countdownManager = GetComponent<GameStart>();
     }
 
@@ -58,7 +58,7 @@ public class PauseMenu : MonoBehaviour
 
         StartCoroutine(ballDirections.Length > 0
             ? countdownManager.CountDown(ballStarts, ballDirections)
-            : countdownManager.CountDown(levelManager.levelCenter)); // Game not started before pause
+            : countdownManager.CountDown(_inGameManager.levelCenter)); // Game not started before pause
     }
 
     public void GoToMenu()

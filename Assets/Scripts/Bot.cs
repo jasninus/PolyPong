@@ -34,7 +34,7 @@ public class Bot : Player
         if (!ball)
             return;
 
-        if (LevelManager.isCircle)
+        if (InGameManager.isCircle)
         {
             CircleMovement();
         }
@@ -86,7 +86,7 @@ public class Bot : Player
 
     private float CalculateCircleXDiff()
     {
-        Vector2 circleAxis = (LevelManager.innerLerpTo[0] - LevelManager.innerLerpTo[LevelManager.innerLerpTo.Count / 2]).normalized;
+        Vector2 circleAxis = (InGameManager.innerLerpTo[0] - InGameManager.innerLerpTo[InGameManager.innerLerpTo.Count / 2]).normalized;
         float axisRotation = Mathf.Atan(circleAxis.y / circleAxis.x) * Mathf.Rad2Deg;
 
         Vector2 fromVector = ball.transform.position - transform.position;

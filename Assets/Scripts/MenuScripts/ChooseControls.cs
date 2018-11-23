@@ -136,7 +136,7 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared && MenuLevelManager.levelIsSpawned)
+            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared && MenuInGameManager.levelIsSpawned)
             {
                 ForceAddPlayer?.Invoke(selectedPlayer);
             }
@@ -298,8 +298,8 @@ public class ChooseControls : MonoBehaviour
 
     private void StartGame()
     {
-        LevelManager.isCircle = false;
-        LevelManager.shouldLerpToCircle = false;
+        InGameManager.isCircle = false;
+        InGameManager.shouldLerpToCircle = false;
 
         PlayerColors[] players = activatedPlayers.Where(p => p.Value).Select(p => p.Key).ToArray();
 

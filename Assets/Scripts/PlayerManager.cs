@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private LevelManager levelManager;
+    private InGameManager _inGameManager;
 
     public static List<Player> players = new List<Player>(), backupPlayers = new List<Player>();
 
@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        levelManager = GetComponent<LevelManager>();
+        _inGameManager = GetComponent<InGameManager>();
     }
 
     public void SpawnPlayers(float radius, PlayerColors[] activatedColors)
@@ -44,10 +44,10 @@ public class PlayerManager : MonoBehaviour
     public Player SpawnPlayer(float radius, PlayerColors[] activatedColors, int i)
     {
         var p = BotSelection.botDifficulties[activatedColors[i]] == 0 ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
-            : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
+            Instantiate(player, (InGameManager.innerPoints[i] + InGameManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
+            : Instantiate(player, (InGameManager.innerPoints[i] + InGameManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
 
-        p.Initialize(activatedColors[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, levelManager, playerSpeed, circleSpeed, radius);
+        p.Initialize(activatedColors[i], InGameManager.innerPoints[i], InGameManager.innerPoints[i + 1], i, _inGameManager, playerSpeed, circleSpeed, radius);
         players.Add(p);
 
         p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors[i]].color;
@@ -58,10 +58,10 @@ public class PlayerManager : MonoBehaviour
     private void SpawnLastPlayer(float radius, PlayerColors[] activatedColors)
     {
         var lP = BotSelection.botDifficulties[activatedColors.Last()] == 0 ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>()
-            : Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
+            Instantiate(player, (InGameManager.innerPoints.Last() + InGameManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>()
+            : Instantiate(player, (InGameManager.innerPoints.Last() + InGameManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
 
-        lP.Initialize(activatedColors.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(), activatedColors.Length - 1, levelManager, playerSpeed, circleSpeed, radius);
+        lP.Initialize(activatedColors.Last(), InGameManager.innerPoints.Last(), InGameManager.innerPoints.First(), activatedColors.Length - 1, _inGameManager, playerSpeed, circleSpeed, radius);
         players.Add(lP);
 
         lP.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColors.Last()].color;
@@ -105,14 +105,14 @@ public class PlayerManager : MonoBehaviour
         {
             if (item != players.Last())
             {
-                item.points.left = LevelManager.innerPoints[item.playerOrder];
-                item.points.right = LevelManager.innerPoints[item.playerOrder + 1];
+                item.points.left = InGameManager.innerPoints[item.playerOrder];
+                item.points.right = InGameManager.innerPoints[item.playerOrder + 1];
                 item.transform.position = (item.points.left + item.points.right) / 2;
             }
             else
             {
-                players.Last().points.left = LevelManager.innerPoints.Last();
-                players.Last().points.right = LevelManager.innerPoints.First();
+                players.Last().points.left = InGameManager.innerPoints.Last();
+                players.Last().points.right = InGameManager.innerPoints.First();
                 players.Last().transform.position = (players.Last().points.left + players.Last().points.right) / 2;
             }
         }

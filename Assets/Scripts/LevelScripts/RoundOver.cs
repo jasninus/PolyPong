@@ -65,18 +65,18 @@ public class RoundOver : MonoBehaviour
         PlayerManager.players.Clear();
         MeshManager.materials.Clear();
         PlayerManager.backupPlayers.Clear();
-        LevelManager.isCircle = false;
-        LevelManager.shouldLerpToCircle = false;
+        InGameManager.isCircle = false;
+        InGameManager.shouldLerpToCircle = false;
         ChooseControls.gameStarted = false;
-        MenuLevelManager.levelIsSpawned = false;
+        MenuInGameManager.levelIsSpawned = false;
     }
 
     public static void ResetStaticVariables()
     {
         MeshManager.materials.Clear();
         PlayerManager.players.Clear();
-        LevelManager.isCircle = false;
-        LevelManager.shouldLerpToCircle = false;
+        InGameManager.isCircle = false;
+        InGameManager.shouldLerpToCircle = false;
     }
 
     private void Update()

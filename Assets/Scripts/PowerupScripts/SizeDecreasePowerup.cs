@@ -76,7 +76,11 @@ public class SizeDecreasePowerup : PowerupBase
             }
             else if (reducedBall) // Ball
             {
-                reducedBall.localScale = new Vector3(originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), reducedBall.localScale.z);
+                reducedBall.localScale = new Vector3(
+                    originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
+                    originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
+                    reducedBall.localScale.z
+                    );
             }
 
             if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)

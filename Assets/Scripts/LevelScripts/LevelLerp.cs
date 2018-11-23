@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelLerp : MonoBehaviour
 {
-    private readonly LevelManager levelManager;
+    private readonly InGameManager _inGameManager;
     private readonly LevelPoints pointManager;
     private readonly PointLerp lerpManager;
     private readonly MeshManager meshManager;
@@ -15,9 +15,9 @@ public class LevelLerp : MonoBehaviour
     private int lerpPlayerNumber;
     public readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 } /* constants used in rotation calculations */, joiningPoints = new int[2];
 
-    public LevelLerp(LevelManager levelManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, GameStart gameManager)
+    public LevelLerp(InGameManager inGameManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, GameStart gameManager)
     {
-        this.levelManager = levelManager;
+        this._inGameManager = inGameManager;
         this.lerpManager = lerpManager;
         this.pointManager = pointManager;
         this.meshManager = meshManager;
@@ -30,42 +30,42 @@ public class LevelLerp : MonoBehaviour
     {
         lerpPlayerNumber = playerOrder;
 
-        LevelManager.innerLerpFrom = LevelManager.innerPoints;
-        LevelManager.outerLerpFrom = LevelManager.outerPoints;
+        InGameManager.innerLerpFrom = InGameManager.innerPoints;
+        InGameManager.outerLerpFrom = InGameManager.outerPoints;
 
         // TODO there was error about index being out of bounds of array after ending game in circle. This method shouldn't even be called after player dies in circle
-        float rotateAmount = 360 / (LevelManager.innerPoints.Count * 2) - rotationConstants[LevelManager.innerPoints.Count - 1] * playerOrder + levelManager.previousRotation; // Calculate rotation
-        levelManager.previousRotation = rotateAmount;
+        float rotateAmount = 360 / (InGameManager.innerPoints.Count * 2) - rotationConstants[InGameManager.innerPoints.Count - 1] * playerOrder + _inGameManager.previousRotation; // Calculate rotation
+        _inGameManager.previousRotation = rotateAmount;
 
-        LevelManager.innerLerpTo = pointManager.SpawnInnerPoints(LevelManager.innerPoints.Count - 1, levelManager.levelCenter);
-        pointManager.RotatePoints(LevelManager.innerLerpTo, rotateAmount); // Rotate inner points
-        LevelManager.outerLerpTo = pointManager.SpawnOuterPoints(LevelManager.innerLerpTo);
+        InGameManager.innerLerpTo = pointManager.SpawnInnerPoints(InGameManager.innerPoints.Count - 1, _inGameManager.levelCenter);
+        pointManager.RotatePoints(InGameManager.innerLerpTo, rotateAmount); // Rotate inner points
+        InGameManager.outerLerpTo = pointManager.SpawnOuterPoints(InGameManager.innerLerpTo);
 
         joiningPoints[0] = playerOrder;
         joiningPoints[1] = playerOrder + 1;
 
-        _gameManager.StartCountdown(levelManager.levelCenter);
+        _gameManager.StartCountdown(_inGameManager.levelCenter);
     }
 
     private void LerpPointsSmaller(int playerOrder, PointLerp lerpManager)
     {
-        LevelManager.innerPoints = lerpManager.LerpLevelSmaller(LevelManager.innerLerpFrom, LevelManager.innerLerpTo, levelManager.lerpAmount + levelManager.lerpedAmount, joiningPoints, playerOrder);
-        LevelManager.outerPoints = lerpManager.LerpLevelSmaller(LevelManager.outerLerpFrom, LevelManager.outerLerpTo, levelManager.lerpAmount + levelManager.lerpedAmount, joiningPoints, playerOrder);
+        InGameManager.innerPoints = lerpManager.LerpLevelSmaller(InGameManager.innerLerpFrom, InGameManager.innerLerpTo, _inGameManager.lerpAmount + _inGameManager.lerpedAmount, joiningPoints, playerOrder);
+        InGameManager.outerPoints = lerpManager.LerpLevelSmaller(InGameManager.outerLerpFrom, InGameManager.outerLerpTo, _inGameManager.lerpAmount + _inGameManager.lerpedAmount, joiningPoints, playerOrder);
 
-        levelManager.lerpedAmount += levelManager.lerpAmount;
+        _inGameManager.lerpedAmount += _inGameManager.lerpAmount;
     }
 
     private void FinishLerping()
     {
-        levelManager.DestroyPlayer(LevelManager.playerToDestroy);
+        _inGameManager.DestroyPlayer(InGameManager.playerToDestroy);
 
-        LevelManager.innerPoints = LevelManager.innerLerpTo;
-        LevelManager.outerPoints = LevelManager.outerLerpTo;
+        InGameManager.innerPoints = InGameManager.innerLerpTo;
+        InGameManager.outerPoints = InGameManager.outerLerpTo;
 
-        LevelManager.shouldLerpSmaller = false;
+        InGameManager.shouldLerpSmaller = false;
 
         meshManager.SetMaterials();
-        levelManager.lerpedAmount = 0;
+        _inGameManager.lerpedAmount = 0;
         playerManager.UpdatePlayerPositions();
     }
 
@@ -73,16 +73,16 @@ public class LevelLerp : MonoBehaviour
     {
         LerpPointsSmaller(lerpPlayerNumber, lerpManager);
 
-        if (levelManager.lerpedAmount >= 1) // Finished lerping
+        if (_inGameManager.lerpedAmount >= 1) // Finished lerping
         {
             FinishLerping();
         }
 
-        playerManager.PlayersLookAtPoint(levelManager.levelCenter);
+        playerManager.PlayersLookAtPoint(_inGameManager.levelCenter);
         playerManager.UpdatePlayerPositions();
-        arqdutManager.UpdateArqdutPositions(LevelManager.innerPoints, levelManager.levelCenter);
-        levelManager.DrawMesh(ChooseControls.activatedPlayers.Count(i => i.Value) + Convert.ToByte(LevelManager.shouldLerpSmaller));
+        arqdutManager.UpdateArqdutPositions(InGameManager.innerPoints, _inGameManager.levelCenter);
+        _inGameManager.DrawMesh(ChooseControls.activatedPlayers.Count(i => i.Value) + Convert.ToByte(InGameManager.shouldLerpSmaller));
 
-        LevelManager.shouldSetIndices = false;
+        InGameManager.shouldSetIndices = false;
     }
 }

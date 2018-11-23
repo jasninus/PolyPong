@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(LevelManager))]
+[RequireComponent(typeof(InGameManager))]
 public class PowerupSpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnablePowerups;
@@ -21,7 +21,7 @@ public class PowerupSpawnManager : MonoBehaviour
     {
         enabledPowerups = PowerupVals.powerupsActivatedState.Where(p => p.Value).Select(p => p.Key).ToArray();
 
-        levelCenter = GetComponent<LevelManager>().levelCenter;
+        levelCenter = GetComponent<InGameManager>().levelCenter;
 
         StartCoroutine(SpawnTimer());
     }
@@ -53,7 +53,7 @@ public class PowerupSpawnManager : MonoBehaviour
             switch (powerupToSpawn.spawnConditions)
             {
                 case SpawnConditions.NotInCircle:
-                    if (LevelManager.isCircle || LevelManager.shouldLerpToCircle)
+                    if (InGameManager.isCircle || InGameManager.shouldLerpToCircle)
                     {
                         unavailablePowerups.Add(powerupToSpawn.powerupType);
                         continue;

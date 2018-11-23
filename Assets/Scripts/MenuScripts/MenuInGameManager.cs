@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 // TODO This whole system should probably be hooked up to the psychadelic size system instead. When a player is added, it's weight should start lerping from 0 to 1. When a player is removed, it's weight should lerp from 1 to 0. All players should be able to lerp at the same time. All players' weight will be normalized to calculate their actual weight
-public class MenuLevelManager : LevelManager
+public class MenuInGameManager : InGameManager
 {
     public static bool levelIsSpawned;
     private bool queueIsRunning, executeLevelLerpRunning;

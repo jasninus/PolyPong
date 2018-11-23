@@ -58,11 +58,11 @@ public class Ball : MonoBehaviour
             }
         }
 
-        LevelManager.playerToDestroy = hitPlayer.playerOrder;
+        InGameManager.playerToDestroy = hitPlayer.playerOrder;
 
-        if (LevelManager.innerPoints.Count < 4)
+        if (InGameManager.innerPoints.Count < 4)
         {
-            if (LevelManager.innerPoints.Count == 3)
+            if (InGameManager.innerPoints.Count == 3)
             {
                 Points.AddPoints(hitPlayer.color);
             }

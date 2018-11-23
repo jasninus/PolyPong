@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     private Vector3 childStartPos, childLerpFrom;
 
-    private LevelManager levelManager;
+    private InGameManager _inGameManager;
 
     public PlayerColors color;
 
@@ -28,13 +28,13 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Call this function on creation of player instead of a constructor
     /// </summary>
-    public void Initialize(PlayerColors color, Vector2 leftPoint, Vector2 rightPoint, int playerOrder, LevelManager levelManager, float playerSpeed, float circleSpeed, float radius)
+    public void Initialize(PlayerColors color, Vector2 leftPoint, Vector2 rightPoint, int playerOrder, InGameManager inGameManager, float playerSpeed, float circleSpeed, float radius)
     {
-        LevelManager.OnPlayerDestroy += CheckPlayerOrderDecrease;
+        InGameManager.OnPlayerDestroy += CheckPlayerOrderDecrease;
         this.color = color;
         points = new LeftRightPoints { left = leftPoint, right = rightPoint };
         this.playerOrder = playerOrder;
-        this.levelManager = levelManager;
+        this._inGameManager = inGameManager;
         this.playerSpeed = playerSpeed;
         this.circleSpeed = circleSpeed;
 
@@ -70,8 +70,8 @@ public class Player : MonoBehaviour
             Points.AddPoints(color);
 
         ChooseControls.activatedPlayers[color] = false;
-        levelManager.StartLerpLevelSmaller(playerOrder);
-        LevelManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
+        _inGameManager.StartLerpLevelSmaller(playerOrder);
+        InGameManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
         DeactivePlayer();
 
         UpdateScoreboard?.Invoke();
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         }
 
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-        levelManager.StartLerpCircleSmaller(playerOrder);
+        _inGameManager.StartLerpCircleSmaller(playerOrder);
         DeactivePlayer();
         this.enabled = false;
 
@@ -106,11 +106,11 @@ public class Player : MonoBehaviour
         if (!ChooseControls.gameStarted)
             return;
 
-        if (!LevelManager.isCircle && !LevelManager.shouldLerpToCircle)
+        if (!InGameManager.isCircle && !InGameManager.shouldLerpToCircle)
         {
             LevelMovement();
         }
-        else if (LevelManager.isCircle && transform.parent != null)
+        else if (InGameManager.isCircle && transform.parent != null)
         {
             CircleMovement();
         }
@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
 
     public float CalculateMinDis()
     {
-        return 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad);
+        return 0.38f / Mathf.Tan(((((InGameManager.innerPoints.Count - 2) * 180f) / InGameManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad);
     }
 
     protected bool CanMoveLeft(float minDis)
