@@ -71,9 +71,9 @@ public class CircleCollider : MonoBehaviour
         }
 
         Destroy(other.gameObject);
-        Points.AddPoints(owner.color);
+        Points.AddPoints(owner.Color);
         PlayerManager.players.Remove(owner);
-        Points.AddPoints(PlayerManager.players.First().color);
+        Points.AddPoints(PlayerManager.players.First().Color);
         RoundWin?.Invoke();
     }
 }

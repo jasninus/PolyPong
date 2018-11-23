@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class FlipControls : MonoBehaviour
 {
-    [SerializeField] private PlayerColors player;
+    [SerializeField] private PlayerColor player;
 
     private Button button;
 

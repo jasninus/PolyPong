@@ -65,49 +65,68 @@ public class SizeDecreasePowerup : PowerupBase
     {
         if (lerpSmaller)
         {
-            if (target == PowerupTarget.Enemies && reducedEnemyTransforms[0])
-            {
-                for (int i = 0; i < reducedEnemyTransforms.Length; i++)
-                {
-                    reducedEnemyTransforms[i].localScale = new Vector3(originalSizes[i] - Mathf.Lerp(0, playerSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), reducedEnemyTransforms[i].localScale.y, reducedEnemyTransforms[i].localScale.z);
-
-                    reducedEnemies[i].ClampMovement(reducedEnemies[i].CalculateMinDis());
-                }
-            }
-            else if (reducedBall) // Ball
-            {
-                reducedBall.localScale = new Vector3(
-                    originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
-                    originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
-                    reducedBall.localScale.z
-                    );
-            }
-
-            if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)
-            {
-                lerpSmaller = false;
-            }
+            LerpSmaller();
         }
         else if (lerpBigger)
         {
-            if (target == PowerupTarget.Enemies && reducedEnemyTransforms[0])
-            {
-                for (int i = 0; i < reducedEnemyTransforms.Length; i++)
-                {
-                    reducedEnemyTransforms[i].localScale = new Vector3(originalSizes[i] + Mathf.Lerp(0, playerSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), reducedEnemyTransforms[i].localScale.y, reducedEnemyTransforms[i].localScale.z);
+            LerpBigger();
+        }
+    }
 
-                    reducedEnemies[i].ClampMovement(reducedEnemies[i].CalculateMinDis());
-                }
-            }
-            else if (reducedBall) // Ball
+    private void LerpBigger()
+    {
+        if (target == PowerupTarget.Enemies && reducedEnemyTransforms[0])
+        {
+            for (int i = 0; i < reducedEnemyTransforms.Length; i++)
             {
-                reducedBall.localScale = new Vector3(originalBallSize + Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), originalBallSize + Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), reducedBall.localScale.z);
-            }
+                reducedEnemyTransforms[i].localScale = new Vector3(
+                    originalSizes[i] + Mathf.Lerp(0, playerSizeDecrease,
+                        (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), reducedEnemyTransforms[i].localScale.y,
+                    reducedEnemyTransforms[i].localScale.z);
 
-            if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)
-            {
-                lerpSmaller = false;
+                reducedEnemies[i].ClampMovement(reducedEnemies[i].CalculateMinDis());
             }
+        }
+        else if (reducedBall) // Ball
+        {
+            reducedBall.localScale = new Vector3(
+                originalBallSize + Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
+                originalBallSize + Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
+                reducedBall.localScale.z);
+        }
+
+        if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)
+        {
+            lerpSmaller = false;
+        }
+    }
+
+    private void LerpSmaller()
+    {
+        if (target == PowerupTarget.Enemies && reducedEnemyTransforms[0])
+        {
+            for (int i = 0; i < reducedEnemyTransforms.Length; i++)
+            {
+                reducedEnemyTransforms[i].localScale = new Vector3(
+                    originalSizes[i] - Mathf.Lerp(0, playerSizeDecrease,
+                        (Time.time - lerpStartTime) * (1 / sizeChangeDuration)), reducedEnemyTransforms[i].localScale.y,
+                    reducedEnemyTransforms[i].localScale.z);
+
+                reducedEnemies[i].ClampMovement(reducedEnemies[i].CalculateMinDis());
+            }
+        }
+        else if (reducedBall) // Ball
+        {
+            reducedBall.localScale = new Vector3(
+                originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
+                originalBallSize - Mathf.Lerp(0, ballSizeDecrease, (Time.time - lerpStartTime) * (1 / sizeChangeDuration)),
+                reducedBall.localScale.z
+            );
+        }
+
+        if ((Time.time - lerpStartTime) * (1 / sizeChangeDuration) > 1)
+        {
+            lerpSmaller = false;
         }
     }
 }

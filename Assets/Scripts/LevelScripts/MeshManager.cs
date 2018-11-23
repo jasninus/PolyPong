@@ -13,7 +13,7 @@ public class MeshManager : MonoBehaviour
 
     [SerializeField] private Material[] matArray;
 
-    public static readonly Dictionary<PlayerColors, Material> materials = new Dictionary<PlayerColors, Material>();
+    public static readonly Dictionary<PlayerColor, Material> materials = new Dictionary<PlayerColor, Material>();
 
     public MeshManager()
     {
@@ -27,7 +27,7 @@ public class MeshManager : MonoBehaviour
         if (materials.Count > 0)
             materials.Clear();
 
-        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColor item in Enum.GetValues(typeof(PlayerColor)))
         {
             // Add materials
             materials.Add(item, matArray[(int)item]);
@@ -53,7 +53,7 @@ public class MeshManager : MonoBehaviour
 
     public Material[] SetMaterials()
     {
-        rend.materials = ChooseControls.activatedPlayers.Where(i => i.Value).Select(item => materials[item.Key]).ToArray();
+        rend.materials = ChooseControls.playerStates.Where(i => i.Value != PlayerState.Deactivated).Select(item => materials[item.Key]).ToArray();
         return rend.materials;
     }
 

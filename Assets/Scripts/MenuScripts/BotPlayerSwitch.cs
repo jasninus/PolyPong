@@ -8,11 +8,9 @@ public class BotPlayerSwitch : MonoBehaviour
 {
     [SerializeField] private GameObject botButtonsParent, playerSquaresParent;
 
-    [SerializeField] private PlayerColors color;
+    [SerializeField] private PlayerColor color;
 
     [SerializeField] private Sprite botSprite, playerSprite;
-
-    private BotSelection botSelection;
 
     private Image image;
 
@@ -21,7 +19,6 @@ public class BotPlayerSwitch : MonoBehaviour
     private void Awake()
     {
         image = GetComponent<Image>();
-        botSelection = botButtonsParent.GetComponent<BotSelection>();
         chooseControls = GameObject.FindWithTag("LevelHandler").GetComponent<ChooseControls>();
     }
 
@@ -42,7 +39,7 @@ public class BotPlayerSwitch : MonoBehaviour
         botButtonsParent.SetActive(true);
         playerSquaresParent.SetActive(false);
 
-        botSelection.SetBotDifficulty(2);
+        ChooseControls.playerStates[color] = PlayerState.BotMedium;
 
         image.sprite = botSprite;
     }

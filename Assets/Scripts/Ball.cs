@@ -64,7 +64,7 @@ public class Ball : MonoBehaviour
         {
             if (InGameManager.innerPoints.Count == 3)
             {
-                Points.AddPoints(hitPlayer.color);
+                Points.AddPoints(hitPlayer.Color);
             }
 
             hitPlayer.CircleDestroyPlayer();

@@ -6,48 +6,37 @@ using UnityEngine;
 
 [RequireComponent(typeof(LevelPoints), typeof(MeshManager), typeof(PlayerManager))]
 [RequireComponent(typeof(PointLerp), typeof(ArqdutManager))]
-public class InGameManager : MonoBehaviour
+public class InGameManager : LevelManager
 {
     public delegate void PlayerDestroy(int destroyedPlayerOrder);
 
     public static event PlayerDestroy OnPlayerDestroy;
 
-    public static List<Vector2> innerPoints = new List<Vector2>(), outerPoints = new List<Vector2>();
-    public static List<Vector2> innerLerpFrom = new List<Vector2>(), innerLerpTo = new List<Vector2>(), outerLerpFrom = new List<Vector2>(), outerLerpTo = new List<Vector2>();
-    public Vector2 levelCenter;
-
     public static int playerToDestroy;
 
-    [HideInInspector] public float lerpedAmount, previousRotation, lerpAmount;
+    [HideInInspector] public float lerpedAmount, lerpAmount;
 
-    [SerializeField] protected float lerpSmallerModifier, lerpLargerModifier;
+    [SerializeField] private float lerpSmallerModifier, lerpLargerModifier;
     public float baseLerpAmount;
 
-    protected LevelPoints pointManager;
-    protected MeshManager meshManager;
-    protected PointLerp lerpManager;
-    protected PlayerManager playerManager;
-    protected ArqdutManager arqdutManager;
-    protected GameStart _gameManager;
-    protected DirectionArrows arrowManager;
-
-    protected LevelLerpCircle circleLerpManager;
-    protected LevelLerp levelLerpManager;
+    private PointLerp lerpManager;
+    private GameStart _gameManager;
+    private DirectionArrows arrowManager;
+    private LevelLerpCircle circleLerpManager;
+    private LevelLerp levelLerpManager;
     protected LevelSpawner levelSpawner;
 
     public Player circleSpawningPlayer;
 
-    protected bool shouldLerpToNormal;
+    private bool shouldLerpToNormal;
     public bool shouldLerpFromCircle;
     public static bool shouldLerpToCircle, isCircle, shouldLerpSmaller, shouldSetIndices;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         lerpManager = GetComponent<PointLerp>();
-        pointManager = GetComponent<LevelPoints>();
-        meshManager = GetComponent<MeshManager>();
-        playerManager = GetComponent<PlayerManager>();
-        arqdutManager = GetComponent<ArqdutManager>();
         _gameManager = GetComponent<GameStart>();
         arrowManager = GetComponent<DirectionArrows>();
 
@@ -57,15 +46,15 @@ public class InGameManager : MonoBehaviour
         levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, _gameManager);
     }
 
-    protected virtual void Start()
+    private void Start()
     {
-        if (ChooseControls.activatedPlayers.Count(i => i.Value) < 3) // Start as circle
+        if (ChooseControls.playerStates.Count(i => i.Value != PlayerState.Deactivated) < 3) // Start as circle
         {
             levelSpawner.SpawnCircle();
             return;
         }
 
-        levelSpawner.SpawnLevel(ChooseControls.activatedPlayers.Count(i => i.Value)); // Start normal
+        levelSpawner.SpawnLevel(ChooseControls.playerStates.Count(i => i.Value != PlayerState.Deactivated)); // Start normal
     }
 
     public void StartLerpLevelSmaller(int playerOrder)
@@ -100,19 +89,6 @@ public class InGameManager : MonoBehaviour
         shouldSetIndices = true;
     }
 
-    public void UpdatePsychadelicLevel(float sinRotMagnitude, float[] weightedRadians, float magnitude, float angle)
-    {
-        innerPoints = pointManager.SpawnInnerPoints(innerPoints.Count, levelCenter, weightedRadians);
-        pointManager.RotatePoints(innerPoints, -Mathf.Sin(angle) * magnitude * sinRotMagnitude + previousRotation);
-        outerPoints = pointManager.SpawnOuterPoints(innerPoints);
-
-        playerManager.UpdatePlayerPositions();
-        playerManager.PlayersLookAtPoint(levelCenter);
-        arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
-
-        DrawMesh(innerPoints.Count);
-    }
-
     public void ReturnToNormalLevel()
     {
         innerLerpFrom = innerPoints;
@@ -133,17 +109,7 @@ public class InGameManager : MonoBehaviour
         arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
     }
 
-    public void DrawMesh(int playerAmount)
-    {
-        if (meshManager.mesh.vertexCount > 0)
-        {
-            meshManager.AddIndicesAndDrawMesh(playerAmount);
-        }
-
-        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(innerPoints, outerPoints));
-    }
-
-    protected virtual void FixedUpdate()
+    private void FixedUpdate()
     {
         if (shouldLerpToNormal)
         {
@@ -178,7 +144,7 @@ public class InGameManager : MonoBehaviour
 
     public void DestroyPlayer(int playerToDestroy)
     {
-        arqdutManager.DestroyArqdut(innerPoints.Count > ChooseControls.activatedPlayers.Count(p => p.Value) ? playerToDestroy == 0 ? 2 : playerToDestroy : playerToDestroy);
+        arqdutManager.DestroyArqdut(innerPoints.Count > ChooseControls.playerStates.Count(p => p.Value != PlayerState.Deactivated) ? playerToDestroy == 0 ? 2 : playerToDestroy : playerToDestroy);
         OnPlayerDestroy(playerToDestroy);
         PlayerManager.players.RemoveAt(playerToDestroy);
     }

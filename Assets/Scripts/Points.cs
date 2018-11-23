@@ -7,7 +7,7 @@ using UnityEngineInternal.Input;
 
 public static class Points
 {
-    public static readonly Dictionary<PlayerColors, int> points = new Dictionary<PlayerColors, int>();
+    public static readonly Dictionary<PlayerColor, int> points = new Dictionary<PlayerColor, int>();
 
     public static int previousPlayerDeaths;
 
@@ -16,13 +16,13 @@ public static class Points
         if (points.Count > 0)
             return;
 
-        foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColor color in Enum.GetValues(typeof(PlayerColor)))
         {
             points.Add(color, 0);
         }
     }
 
-    public static void AddPoints(PlayerColors color)
+    public static void AddPoints(PlayerColor color)
     {
         points[color] += previousPlayerDeaths;
         previousPlayerDeaths++;
@@ -30,17 +30,17 @@ public static class Points
 
     public static void ResetPoints()
     {
-        foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColor color in Enum.GetValues(typeof(PlayerColor)))
         {
             points[color] = 0;
         }
     }
 
-    public static PlayerColors GetWinner() // TODO tie functionality must be implemented
+    public static PlayerColor GetWinner() // TODO tie functionality must be implemented
     {
-        PlayerColors winner = PlayerColors.Yellow;
+        PlayerColor winner = PlayerColor.Yellow;
 
-        foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColor color in Enum.GetValues(typeof(PlayerColor)))
         {
             if (points[color] > points[winner])
             {
@@ -51,7 +51,7 @@ public static class Points
         return winner;
     }
 
-    public static List<PlayerColors> GetSortedPlayers()
+    public static List<PlayerColor> GetSortedPlayers()
     {
         return points.OrderByDescending(i => i.Value).Select(i => i.Key).ToList();
     }

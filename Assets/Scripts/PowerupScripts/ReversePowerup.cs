@@ -17,7 +17,7 @@ public class ReversePowerup : PowerupBase
 
         foreach (Player enemy in enemies)
         {
-            ChooseControls.PlayerControls controls = ChooseControls.controls[enemy.color];
+            ChooseControls.PlayerControls controls = ChooseControls.controls[enemy.Color];
             KeyCode leftKey = controls.leftKey;
             controls.leftKey = controls.rightKey;
             controls.rightKey = leftKey;
@@ -28,7 +28,7 @@ public class ReversePowerup : PowerupBase
     {
         foreach (Player enemy in enemies)
         {
-            ChooseControls.PlayerControls controls = ChooseControls.controls[enemy.color];
+            ChooseControls.PlayerControls controls = ChooseControls.controls[enemy.Color];
             KeyCode leftKey = controls.leftKey;
             controls.leftKey = controls.rightKey;
             controls.rightKey = leftKey;

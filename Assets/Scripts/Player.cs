@@ -21,17 +21,17 @@ public class Player : MonoBehaviour
 
     private InGameManager _inGameManager;
 
-    public PlayerColors color;
+    public PlayerColor Color;
 
     public int playerOrder;
 
     /// <summary>
     /// Call this function on creation of player instead of a constructor
     /// </summary>
-    public void Initialize(PlayerColors color, Vector2 leftPoint, Vector2 rightPoint, int playerOrder, InGameManager inGameManager, float playerSpeed, float circleSpeed, float radius)
+    public void Initialize(PlayerColor color, Vector2 leftPoint, Vector2 rightPoint, int playerOrder, InGameManager inGameManager, float playerSpeed, float circleSpeed, float radius)
     {
         InGameManager.OnPlayerDestroy += CheckPlayerOrderDecrease;
-        this.color = color;
+        this.Color = color;
         points = new LeftRightPoints { left = leftPoint, right = rightPoint };
         this.playerOrder = playerOrder;
         this._inGameManager = inGameManager;
@@ -67,9 +67,9 @@ public class Player : MonoBehaviour
         }
 
         if (ChooseControls.gameStarted)
-            Points.AddPoints(color);
+            Points.AddPoints(Color);
 
-        ChooseControls.activatedPlayers[color] = false;
+        ChooseControls.playerStates[Color] = PlayerState.Deactivated;
         _inGameManager.StartLerpLevelSmaller(playerOrder);
         InGameManager.OnPlayerDestroy -= CheckPlayerOrderDecrease;
         DeactivePlayer();
@@ -133,12 +133,12 @@ public class Player : MonoBehaviour
         minDis = CalculateMinDis();
 
         // Left key control
-        if (Input.GetKey(ChooseControls.controls[color].leftKey) && CanMoveLeft(minDis))
+        if (Input.GetKey(ChooseControls.controls[Color].leftKey) && CanMoveLeft(minDis))
         {
             MoveLeft();
         }
         // Right key control
-        else if (Input.GetKey(ChooseControls.controls[color].rightKey) && CanMoveRight(minDis))
+        else if (Input.GetKey(ChooseControls.controls[Color].rightKey) && CanMoveRight(minDis))
         {
             MoveRight();
         }
@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
 
     public float CalculateMinDis()
     {
-        return 0.38f / Mathf.Tan(((((InGameManager.innerPoints.Count - 2) * 180f) / InGameManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad);
+        return 0.38f / Mathf.Tan(((((LevelManager.innerPoints.Count - 2) * 180f) / LevelManager.innerPoints.Count) / 2f) * Mathf.Deg2Rad);
     }
 
     protected bool CanMoveLeft(float minDis)
@@ -199,12 +199,12 @@ public class Player : MonoBehaviour
     {
         // TODO convert to protected functions, so they can be called from Bot. Hey, good-lookin' ;)
 
-        if (Input.GetKey(ChooseControls.controls[color].leftKey) && transform.parent.rotation.eulerAngles.z > 90 + minRot)
+        if (Input.GetKey(ChooseControls.controls[Color].leftKey) && transform.parent.rotation.eulerAngles.z > 90 + minRot)
         {
             CircleMoveLeft();
         }
 
-        if (Input.GetKey(ChooseControls.controls[color].rightKey) && transform.parent.rotation.eulerAngles.z < 270 - minRot)
+        if (Input.GetKey(ChooseControls.controls[Color].rightKey) && transform.parent.rotation.eulerAngles.z < 270 - minRot)
         {
             CircleMoveRight();
         }

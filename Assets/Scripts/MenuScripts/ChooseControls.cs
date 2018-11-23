@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum PlayerColors
+public enum PlayerColor
 {
     Yellow,
     Orange,
@@ -14,6 +14,15 @@ public enum PlayerColors
     Purple,
     Blue,
     Green
+}
+
+public enum PlayerState
+{
+    Activated,
+    BotEasy,
+    BotMedium,
+    BotHard,
+    Deactivated,
 }
 
 public enum Direction
@@ -33,7 +42,7 @@ public class ChooseControls : MonoBehaviour
 
     [SerializeField] private Sprite arrow;
 
-    public delegate void PlayerChange(PlayerColors selectedPlayer);
+    public delegate void PlayerChange(PlayerColor selectedPlayer);
 
     public static event PlayerChange PlayerAmountIncreased, PlayerAmountDecreased, ForceAddPlayer;
 
@@ -44,15 +53,15 @@ public class ChooseControls : MonoBehaviour
 
     private int numberInput;
 
-    public static PlayerColors previouslyClearedPlayer;
-    private PlayerColors selectedPlayer;
+    public static PlayerColor previouslyClearedPlayer;
+    private PlayerColor selectedPlayer;
 
     private KeyCode pressedKey;
 
-    private static readonly Dictionary<PlayerColors, Text[]> controlTexts = new Dictionary<PlayerColors, Text[]>();
-    private readonly Dictionary<PlayerColors, float> selectionYVals = new Dictionary<PlayerColors, float>();
-    public static readonly Dictionary<PlayerColors, bool> activatedPlayers = new Dictionary<PlayerColors, bool>();
-    public static readonly Dictionary<PlayerColors, PlayerControls> controls = new Dictionary<PlayerColors, PlayerControls>();
+    private static readonly Dictionary<PlayerColor, Text[]> controlTexts = new Dictionary<PlayerColor, Text[]>();
+    private readonly Dictionary<PlayerColor, float> selectionYVals = new Dictionary<PlayerColor, float>();
+    public static readonly Dictionary<PlayerColor, PlayerState> playerStates = new Dictionary<PlayerColor, PlayerState>();
+    public static readonly Dictionary<PlayerColor, PlayerControls> controls = new Dictionary<PlayerColor, PlayerControls>();
 
     private DirectionArrows arrowManager;
 
@@ -77,7 +86,7 @@ public class ChooseControls : MonoBehaviour
 
     private void TryAddDictionaryValues()
     {
-        foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColor item in Enum.GetValues(typeof(PlayerColor)))
         {
             if (controlTexts.ContainsKey(item) && controlTexts[item][0] == null)
             {
@@ -94,7 +103,7 @@ public class ChooseControls : MonoBehaviour
             selectionYVals.Add(item, squares[(int)item * 2].position.y);
 
             // Add all player colors
-            activatedPlayers.Add(item, false);
+            playerStates.Add(item, PlayerState.Deactivated);
 
             // Add new PlayerControls for all colors
             controls.Add(item, new PlayerControls());
@@ -103,7 +112,7 @@ public class ChooseControls : MonoBehaviour
 
     private void Start()
     {
-        SetSelectedPlayer(PlayerColors.Yellow);
+        SetSelectedPlayer(PlayerColor.Yellow);
     }
 
     private void Update()
@@ -120,7 +129,8 @@ public class ChooseControls : MonoBehaviour
         {
             ClearPlayer(selectedPlayer);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && choosingLeftControl && activatedPlayers.Count(p => p.Value) > 1) // Left key can't be space and there must be two or more players
+        // Left key can't be space and there must be two or more players to start the game
+        else if (Input.GetKeyDown(KeyCode.Space) && choosingLeftControl && playerStates.Count(p => p.Value != PlayerState.Deactivated) > 1)
         {
             StartGame();
         }
@@ -136,7 +146,7 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared && MenuInGameManager.levelIsSpawned)
+            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared)
             {
                 ForceAddPlayer?.Invoke(selectedPlayer);
             }
@@ -147,8 +157,7 @@ public class ChooseControls : MonoBehaviour
 
             SetButton(selectedPlayer, Direction.left, key);
 
-            activatedPlayers[selectedPlayer] = true;
-            BotSelection.botDifficulties[selectedPlayer] = 0;
+            playerStates[selectedPlayer] = PlayerState.Activated;
         }
         else // Set rightKey control
         {
@@ -162,7 +171,7 @@ public class ChooseControls : MonoBehaviour
     /// <summary>
     /// Set text and control for selectedPlayer and direction to input
     /// </summary>
-    private void SetButton(PlayerColors playerToSet, Direction direction, KeyCode input)
+    private void SetButton(PlayerColor playerToSet, Direction direction, KeyCode input)
     {
         buttonIcons.SetButtonIcon(input, controlTexts[playerToSet][(int)direction],
             squares[(int)playerToSet * 2 + (int)direction].GetChild(0).gameObject.GetComponent<Image>());
@@ -189,13 +198,13 @@ public class ChooseControls : MonoBehaviour
         arrowManager.SwitchArrowDirection();
     }
 
-    public static void UpdatePlayerControlText(PlayerColors player)
+    public static void UpdatePlayerControlText(PlayerColor player)
     {
         controlTexts[player][0].text = controls[player].leftKey.ToString();
         controlTexts[player][1].text = controls[player].rightKey.ToString();
     }
 
-    public void ClearControls(PlayerColors playerToWipe)
+    public void ClearControls(PlayerColor playerToWipe)
     {
         SetButton(playerToWipe, Direction.left, KeyCode.None);
         SetButton(playerToWipe, Direction.right, KeyCode.None);
@@ -215,7 +224,7 @@ public class ChooseControls : MonoBehaviour
         previouslyClearedPlayer = playerToWipe;
     }
 
-    public void ClearControls(PlayerColors playerToWipe, bool wasRunFromBotAdd)
+    public void ClearControls(PlayerColor playerToWipe, bool wasRunFromBotAdd)
     {
         SetButton(playerToWipe, Direction.left, KeyCode.None);
         SetButton(playerToWipe, Direction.right, KeyCode.None);
@@ -230,12 +239,11 @@ public class ChooseControls : MonoBehaviour
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
     }
 
-    private void ClearPlayer(PlayerColors playerToWipe)
+    private void ClearPlayer(PlayerColor playerToWipe)
     {
         ClearControls(playerToWipe);
 
-        activatedPlayers[playerToWipe] = false;
-        BotSelection.botDifficulties[playerToWipe] = 0;
+        playerStates[playerToWipe] = PlayerState.Deactivated;
         selectingControls = false;
         playerCleared = true;
     }
@@ -250,11 +258,11 @@ public class ChooseControls : MonoBehaviour
 
     public void GoToNextPlayer()
     {
-        for (int i = 0; i < 6 /* Amount of PlayerColors*/; i++)
+        for (int i = 0; i < 6 /* Amount of PlayerColor*/; i++)
         {
-            if (!activatedPlayers[(PlayerColors)i] && BotSelection.botDifficulties[(PlayerColors)i] == 0)
+            if (playerStates[(PlayerColor)i] == PlayerState.Deactivated)
             {
-                SetSelectedPlayer((PlayerColors)i);
+                SetSelectedPlayer((PlayerColor)i);
                 return;
             }
         }
@@ -275,10 +283,10 @@ public class ChooseControls : MonoBehaviour
     /// </summary>
     private void SetPlayerWithDigit(int playerNumber)
     {
-        SetSelectedPlayer((PlayerColors)playerNumber - 1);
+        SetSelectedPlayer((PlayerColor)playerNumber - 1);
     }
 
-    private void SetSelectedPlayer(PlayerColors selectingPlayer)
+    private void SetSelectedPlayer(PlayerColor selectingPlayer)
     {
         selectionBall.StartPosLerpToPoint(new Vector3(selectionBall.transform.position.x, selectionYVals[selectingPlayer], selectionBall.transform.position.z));
         selectedPlayer = selectingPlayer;
@@ -293,24 +301,13 @@ public class ChooseControls : MonoBehaviour
     /// <remarks>May need to be updated in case of different player orders</remarks>
     public void ButtonSetPlayer(int selectingPlayer)
     {
-        SetSelectedPlayer((PlayerColors)selectingPlayer);
+        SetSelectedPlayer((PlayerColor)selectingPlayer);
     }
 
     private void StartGame()
     {
         InGameManager.isCircle = false;
         InGameManager.shouldLerpToCircle = false;
-
-        PlayerColors[] players = activatedPlayers.Where(p => p.Value).Select(p => p.Key).ToArray();
-
-        foreach (PlayerColors player in players) // TODO there are some issues with bots not being in the game even though they have been selected
-        {
-            if (controls[player].rightKey == KeyCode.None && BotSelection.botDifficulties[player] == 0)
-            {
-                activatedPlayers[player] = false;
-            }
-        }
-
         gameStarted = true;
         SceneManager.LoadScene("Main");
     }

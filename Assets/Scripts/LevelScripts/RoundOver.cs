@@ -45,7 +45,7 @@ public class RoundOver : MonoBehaviour
 
         foreach (Player backupPlayer in PlayerManager.backupPlayers)
         {
-            ChooseControls.activatedPlayers[backupPlayer.color] = true;
+            ChooseControls.playerStates[backupPlayer.Color] = PlayerState.Activated;
         }
     }
 
@@ -60,7 +60,7 @@ public class RoundOver : MonoBehaviour
 
     public static void ClearAllStaticVariables()
     {
-        ChooseControls.activatedPlayers.Clear();
+        ChooseControls.playerStates.Clear();
         ChooseControls.controls.Clear();
         PlayerManager.players.Clear();
         MeshManager.materials.Clear();
@@ -68,7 +68,6 @@ public class RoundOver : MonoBehaviour
         InGameManager.isCircle = false;
         InGameManager.shouldLerpToCircle = false;
         ChooseControls.gameStarted = false;
-        MenuInGameManager.levelIsSpawned = false;
     }
 
     public static void ResetStaticVariables()

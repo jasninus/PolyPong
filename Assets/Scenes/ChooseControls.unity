@@ -860,7 +860,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066412491}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1217479802}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -1885,7 +1885,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 365362903}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 854265870}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -2618,14 +2618,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 365362902}
-  - component: {fileID: 365362903}
   m_Layer: 5
   m_Name: BlueButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &365362902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2647,18 +2646,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: -292}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &365362903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 365362901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botColor: 4
 --- !u!1 &369384052
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,7 +3391,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066412491}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -3595,7 +3582,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1992737607}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -5988,7 +5975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -104.6, y: -0.5}
+  m_AnchoredPosition: {x: -104.600006, y: -0.5}
   m_SizeDelta: {x: -28, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &801906618
@@ -6213,14 +6200,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 854265869}
-  - component: {fileID: 854265870}
   m_Layer: 5
   m_Name: OrangeButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &854265869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6242,18 +6228,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: 92}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &854265870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 854265868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botColor: 1
 --- !u!1 &860402802
 GameObject:
   m_ObjectHideFlags: 0
@@ -6753,7 +6727,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 365362903}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -6909,7 +6883,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2073362847}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -8578,20 +8552,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1212984656}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86bf2d037b360a54e9459b0c3a306a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCenter: {x: 10.5, y: 0}
-  lerpedAmount: 0
   previousRotation: 0
-  lerpAmount: 0
-  lerpSmallerModifier: 0.1
-  lerpLargerModifier: 0.1
-  baseLerpAmount: 0.3
-  circleSpawningPlayer: {fileID: 0}
-  shouldLerpFromCircle: 0
+  levelCenter: {x: 10.5, y: 0}
   disBeforePlayerSpawn: 1
 --- !u!114 &1212984658
 MonoBehaviour:
@@ -8846,14 +8813,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1217479801}
-  - component: {fileID: 1217479802}
   m_Layer: 5
   m_Name: RedButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1217479801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8875,18 +8841,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: -36}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1217479802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1217479800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botColor: 2
 --- !u!1 &1219661184
 GameObject:
   m_ObjectHideFlags: 0
@@ -9813,7 +9767,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1992737607}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -10537,7 +10491,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1992737607}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -10734,7 +10688,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066412491}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -11048,7 +11002,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 365362903}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -12339,7 +12293,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2073362847}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -12998,7 +12952,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1217479802}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -14106,7 +14060,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 854265870}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -14461,14 +14415,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1992737606}
-  - component: {fileID: 1992737607}
   m_Layer: 5
   m_Name: PurpleButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1992737606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14490,18 +14443,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: -164}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1992737607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1992737605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botColor: 3
 --- !u!1 &2009635861
 GameObject:
   m_ObjectHideFlags: 0
@@ -14646,7 +14587,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1217479802}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -15035,7 +14976,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2073362847}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:
@@ -15159,14 +15100,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066412490}
-  - component: {fileID: 2066412491}
   m_Layer: 5
   m_Name: GreenButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2066412490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15188,18 +15128,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114.000015, y: -420}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2066412491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066412489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botColor: 5
 --- !u!1 &2073362845
 GameObject:
   m_ObjectHideFlags: 0
@@ -15208,14 +15136,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2073362846}
-  - component: {fileID: 2073362847}
   m_Layer: 5
   m_Name: YellowButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2073362846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15237,18 +15164,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114, y: 220}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2073362847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2073362845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b7169e6f2bb5a43bd117b94ef4b4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botColor: 0
 --- !u!1 &2099281649
 GameObject:
   m_ObjectHideFlags: 0
@@ -15614,7 +15529,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 854265870}
+      - m_Target: {fileID: 0}
         m_MethodName: SetBotDifficulty
         m_Mode: 3
         m_Arguments:

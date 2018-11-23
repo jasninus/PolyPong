@@ -123,7 +123,7 @@
     //}
  */
 
-//public static Dictionary<PlayerColors, Bot> bots;
+//public static Dictionary<PlayerColor, Bot> bots;
 
 //public class Bot
 //{
@@ -131,11 +131,11 @@
 //    public int difficulty;
 //}
 
-//[SerializeField] private PlayerColors color;
+//[SerializeField] private PlayerColor color;
 
 //private void AddDictionaryValues()
 //{
-//foreach (PlayerColors item in Enum.GetValues(typeof(PlayerColors)))
+//foreach (PlayerColor item in Enum.GetValues(typeof(PlayerColor)))
 //{
 //// Add all text vars to controlTexts
 //bots.Add(item, new Bot());
@@ -160,10 +160,10 @@
 //selectionYVals.Add(item, squares[(int)item * 2].position.y);
 //}
 
-//if (!activatedPlayers.ContainsKey(item))
+//if (!playerStates.ContainsKey(item))
 //{
 //// Add all player colors
-//activatedPlayers.Add(item, false);
+//playerStates.Add(item, false);
 //}
 
 //if (!controls.ContainsKey(item))
@@ -194,4 +194,35 @@
 //private void ResetResolution()
 //{
 //Screen.SetResolution(2560, 1440, true);
+//}
+
+////public static Dictionary<PlayerColor, int> botDifficulties = new Dictionary<PlayerColor, int>();
+
+//[SerializeField] private PlayerColor botColor;
+
+//private ChooseControls chooseControls;
+
+//private void Awake()
+//{
+//    chooseControls = GameObject.FindWithTag("LevelHandler").GetComponent<ChooseControls>();
+
+//    // REASON gameObject needs to be active for Awake() to run. BotButtons should not be visible at start
+//    gameObject.SetActive(false);
+
+//    if (botDifficulties.Count > 0) // REASON this method gets called on multiple instances, but it should only add values once
+//        return;
+
+//    foreach (PlayerColor color in Enum.GetValues(typeof(PlayerColor)))
+//    {
+//        botDifficulties.Add(color, 0);
+//    }
+//}
+
+///// <param name="difficulty">0 = disabled, 1 = easy, 2 = medium, 3 = hard</param>
+//public void SetBotDifficulty(int difficulty)
+//{
+//    chooseControls.ClearControls(botColor, true);
+//    ChooseControls.playerStates[botColor] = true;
+//    botDifficulties[botColor] = difficulty;
+//    chooseControls.GoToNextPlayer();
 //}

@@ -18,7 +18,7 @@ public class LevelLerpCircle : MonoBehaviour
     private readonly int[] rotationConstants = { 0, 0, 0, 30, 18, 12 }, joiningPoints = new int[2];
     private readonly int circleEdges = 20;
 
-    private PlayerColors circleSpawnedPlayerColor;
+    private PlayerColor _circleSpawnedPlayerColor;
 
     public LevelLerpCircle(InGameManager inGameManager, PointLerp lerpManager, LevelPoints pointManager, MeshManager meshManager, PlayerManager playerManager, ArqdutManager arqdutManager, GameStart gameManager, DirectionArrows arrowManager)
     {
@@ -35,34 +35,34 @@ public class LevelLerpCircle : MonoBehaviour
     public void StartLerpToCircle(int playerOrder)
     {
         // Assign from lists
-        InGameManager.innerLerpFrom = pointManager.SpawnCircleLerpPoints(PlayerManager.players[playerOrder].points, InGameManager.innerPoints, _inGameManager.levelCenter, circleEdges);
-        InGameManager.outerLerpFrom = InGameManager.innerLerpFrom.GetRange(InGameManager.innerLerpFrom.Count / 2, InGameManager.innerLerpFrom.Count / 2);
-        InGameManager.innerLerpFrom.RemoveRange(InGameManager.innerLerpFrom.Count / 2, InGameManager.innerLerpFrom.Count / 2);
+        LevelManager.innerLerpFrom = pointManager.SpawnCircleLerpPoints(PlayerManager.players[playerOrder].points, LevelManager.innerPoints, _inGameManager.levelCenter, circleEdges);
+        LevelManager.outerLerpFrom = LevelManager.innerLerpFrom.GetRange(LevelManager.innerLerpFrom.Count / 2, LevelManager.innerLerpFrom.Count / 2);
+        LevelManager.innerLerpFrom.RemoveRange(LevelManager.innerLerpFrom.Count / 2, LevelManager.innerLerpFrom.Count / 2);
 
         Vector2 avgVector = ((PlayerManager.players[playerOrder].points.left - _inGameManager.levelCenter) + (PlayerManager.players[playerOrder].points.right - _inGameManager.levelCenter)) / 2;
         float rotateAmount = avgVector.y < 0 ? 360 - Mathf.Acos(avgVector.normalized.x) * Mathf.Rad2Deg : Mathf.Acos(avgVector.normalized.x) * Mathf.Rad2Deg;
 
         // Assign to lists
-        InGameManager.innerLerpTo = pointManager.SpawnInnerPoints(circleEdges * 2, _inGameManager.levelCenter);
-        pointManager.RotatePoints(InGameManager.innerLerpTo, rotateAmount);
-        InGameManager.outerLerpTo = pointManager.SpawnOuterPoints(InGameManager.innerLerpTo);
+        LevelManager.innerLerpTo = pointManager.SpawnInnerPoints(circleEdges * 2, _inGameManager.levelCenter);
+        pointManager.RotatePoints(LevelManager.innerLerpTo, rotateAmount);
+        LevelManager.outerLerpTo = pointManager.SpawnOuterPoints(LevelManager.innerLerpTo);
 
         //meshManager.SetMaterials();
 
-        playerManager.CircleSetPlayerPoints(InGameManager.innerLerpTo, playerOrder);
+        playerManager.CircleSetPlayerPoints(LevelManager.innerLerpTo, playerOrder);
         _gameManager.StartCountdown(_inGameManager.levelCenter);
     }
 
     public void LerpToCircle()
     {
-        InGameManager.innerPoints = lerpManager.LerpToCircle(InGameManager.innerLerpFrom, InGameManager.innerLerpTo, _inGameManager.lerpedAmount);
-        InGameManager.outerPoints = lerpManager.LerpToCircle(InGameManager.outerLerpFrom, InGameManager.outerLerpTo, _inGameManager.lerpedAmount);
+        LevelManager.innerPoints = lerpManager.LerpToCircle(LevelManager.innerLerpFrom, LevelManager.innerLerpTo, _inGameManager.lerpedAmount);
+        LevelManager.outerPoints = lerpManager.LerpToCircle(LevelManager.outerLerpFrom, LevelManager.outerLerpTo, _inGameManager.lerpedAmount);
 
         playerManager.CircleUpdatePlayerPosition(_inGameManager.lerpedAmount);
         playerManager.PlayersLookAtPoint(_inGameManager.levelCenter);
-        arqdutManager.CircleUpdateArqdutPosition(InGameManager.innerPoints, _inGameManager.levelCenter);
+        arqdutManager.CircleUpdateArqdutPosition(LevelManager.innerPoints, _inGameManager.levelCenter);
 
-        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(InGameManager.innerPoints, InGameManager.outerPoints));
+        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
 
         _inGameManager.lerpedAmount += _inGameManager.shouldLerpFromCircle ? -_inGameManager.lerpAmount : _inGameManager.lerpAmount;
     }
@@ -119,22 +119,22 @@ public class LevelLerpCircle : MonoBehaviour
         _inGameManager.shouldLerpFromCircle = false;
         _inGameManager.lerpedAmount = 0;
 
-        InGameManager.innerPoints = pointManager.SpawnInnerPoints(3, _inGameManager.levelCenter); // Problem with rotation
-        InGameManager.outerPoints = pointManager.SpawnOuterPoints(InGameManager.innerPoints);
+        LevelManager.innerPoints = pointManager.SpawnInnerPoints(3, _inGameManager.levelCenter); // Problem with rotation
+        LevelManager.outerPoints = pointManager.SpawnOuterPoints(LevelManager.innerPoints);
 
         meshManager.mesh.Clear();
-        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(InGameManager.innerPoints, InGameManager.outerPoints));
+        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
         meshManager.SetMaterials();
         meshManager.AddIndicesAndDrawMesh(3);
 
-        circleSpawnedPlayerColor = _inGameManager.circleSpawningPlayer.color;
+        _circleSpawnedPlayerColor = _inGameManager.circleSpawningPlayer.Color;
 
-        PlayerColors[] activatedColors = PlayerManager.players.Select(p => p.color).OrderBy(i => (int)i).ToArray();
+        PlayerColor[] activatedColor = PlayerManager.players.Select(p => p.Color).OrderBy(i => (int)i).ToArray();
 
         playerManager.DestroyAllPlayers();
-        playerManager.SpawnPlayers(pointManager.radius, activatedColors);
+        playerManager.SpawnPlayers(pointManager.radius, activatedColor);
         playerManager.PlayersLookAtPoint(_inGameManager.levelCenter);
 
-        arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.color == circleSpawnedPlayerColor));
+        arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.Color == _circleSpawnedPlayerColor));
     }
 }

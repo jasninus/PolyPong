@@ -18,7 +18,7 @@ public class Bot : Player
 
     private void Start()
     {
-        difficulty = BotSelection.botDifficulties[color];
+        difficulty = (int)ChooseControls.playerStates[Color];
 
         playerSpeed *= difficultySpeedModifiers[difficulty > 0 ? difficulty - 1 : 0];
         circleSpeed *= circleDifficultyModifiers[difficulty > 0 ? difficulty - 1 : 0];

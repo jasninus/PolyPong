@@ -9,16 +9,16 @@ public class Scoreboard : MonoBehaviour
 {
     [SerializeField] private float startYPos, yDiff;
 
-    private readonly Dictionary<PlayerColors, Text> pointTexts = new Dictionary<PlayerColors, Text>();
+    private readonly Dictionary<PlayerColor, Text> pointTexts = new Dictionary<PlayerColor, Text>();
 
     private void Start()
     {
         if (pointTexts.Count > 0)
             pointTexts.Clear();
 
-        foreach (PlayerColors color in Enum.GetValues(typeof(PlayerColors)))
+        foreach (PlayerColor color in Enum.GetValues(typeof(PlayerColor)))
         {
-            if (ChooseControls.activatedPlayers[color])
+            if (ChooseControls.playerStates[color] != PlayerState.Deactivated)
             {
                 transform.GetChild((int)color).gameObject.SetActive(true);
                 pointTexts.Add(color, transform.GetChild((int)color).GetComponent<Text>());
@@ -38,7 +38,7 @@ public class Scoreboard : MonoBehaviour
 
     private void UpdatePositions()
     {
-        List<PlayerColors> colorOrder = Points.GetSortedPlayers();
+        List<PlayerColor> colorOrder = Points.GetSortedPlayers();
 
         foreach (var pointText in pointTexts)
         {

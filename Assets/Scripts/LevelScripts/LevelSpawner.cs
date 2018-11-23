@@ -28,18 +28,18 @@ public class LevelSpawner
     /// <remarks>Actually spawns an extra player and lerps immediately to a circle</remarks>
     public void SpawnCircle()
     {
-        PlayerColors extraPlayerColor = ChooseControls.activatedPlayers.First(i => !i.Value).Key;
-        ChooseControls.activatedPlayers[extraPlayerColor] = true;
+        PlayerColor extraPlayerColor = ChooseControls.playerStates.First(i => i.Value == PlayerState.Deactivated).Key;
+        ChooseControls.playerStates[extraPlayerColor] = PlayerState.Activated;
 
         SpawnLevel(3);
-        InGameManager.playerToDestroy = PlayerManager.players.First(p => p.color == extraPlayerColor).playerOrder;
+        InGameManager.playerToDestroy = PlayerManager.players.First(p => p.Color == extraPlayerColor).playerOrder;
         _inGameManager.StartDestroyPlayer();
         _inGameManager.lerpedAmount = 1 - 2 * _inGameManager.lerpAmount;
         circleLerpManager.LerpToCircle();
 
         Object.Destroy(GameObject.FindWithTag("Ball")); // Destroy extra ball
 
-        ChooseControls.activatedPlayers[extraPlayerColor] = false;
+        ChooseControls.playerStates[extraPlayerColor] = PlayerState.Deactivated;
     }
 
     /// <summary>
@@ -47,28 +47,16 @@ public class LevelSpawner
     /// </summary>
     public void SpawnLevel(int corners)
     {
-        InGameManager.innerPoints = pointManager.SpawnInnerPoints(corners, _inGameManager.levelCenter);
-        InGameManager.outerPoints = pointManager.SpawnOuterPoints(InGameManager.innerPoints);
+        LevelManager.innerPoints = pointManager.SpawnInnerPoints(corners, _inGameManager.levelCenter);
+        LevelManager.outerPoints = pointManager.SpawnOuterPoints(LevelManager.innerPoints);
 
-        //if (PlayerManager.backupPlayers.Count > 0)
-        //{
-        //    foreach (Player backupPlayer in PlayerManager.backupPlayers)
-        //    {
-        //        ChooseControls.activatedPlayers[backupPlayer.color] = true;
-        //    }
-
-        //    playerManager.SpawnPlayers(pointManager.radius, PlayerManager.backupPlayers.Select(p => p.color).ToArray());
-        //}
-        //else
-        //{
-        playerManager.SpawnPlayers(pointManager.radius, ChooseControls.activatedPlayers.Where(o => o.Value).Select(i => i.Key).ToArray());
-        //}
+        playerManager.SpawnPlayers(pointManager.radius, ChooseControls.playerStates.Where(o => o.Value != PlayerState.Deactivated).Select(i => i.Key).ToArray());
 
         playerManager.PlayersLookAtPoint(_inGameManager.levelCenter);
         meshManager.SetMaterials();
-        arqdutManager.SpawnArqduts(InGameManager.innerPoints, _inGameManager.levelCenter);
+        arqdutManager.SpawnArqduts(LevelManager.innerPoints, _inGameManager.levelCenter);
 
-        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(InGameManager.innerPoints, InGameManager.outerPoints));
+        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
         _inGameManager.DrawMesh(corners);
 
         if (ChooseControls.gameStarted)
