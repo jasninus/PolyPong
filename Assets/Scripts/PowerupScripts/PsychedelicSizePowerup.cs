@@ -1,34 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using UnityEngine;
-using UnityEngine.Assertions.Comparers;
+﻿using UnityEngine;
 
-public class PsychadelicSizePowerup : PowerupBase
+public class PsychedelicSizePowerup : PowerupBase
 {
     [SerializeField] private float targetMagnitude, angleSpeed, sinRotMagnitude;
     private float angle, currentMagnitude;
 
-    private LevelPoints lerpManager;
+    private InGameManager inGameManager;
 
-    private InGameManager _inGameManager;
+    [SerializeField] /*TODO delete serialization*/private bool isActivated, endedEarly;
 
-    private float startTime;
-
-    private bool isActivated, endedEarly;
+    [SerializeField] private float w1, w2, w3, w4, w5, w6;
 
     private void Awake()
     {
-        _inGameManager = GameObject.FindWithTag("LevelHandler").GetComponent<InGameManager>();
-        lerpManager = _inGameManager.GetComponent<LevelPoints>();
+        inGameManager = GameObject.FindWithTag("LevelHandler").GetComponent<InGameManager>();
     }
 
     protected override void SpecialActivate()
     {
-        startTime = Time.time;
         isActivated = true;
-        InGameManager.innerLerpTo = InGameManager.innerPoints;
-        InGameManager.outerLerpTo = InGameManager.outerPoints;
+        LevelManager.innerLerpTo = LevelManager.innerPoints;
+        LevelManager.outerLerpTo = LevelManager.outerPoints;
     }
 
     protected override void Revert()
@@ -36,17 +28,21 @@ public class PsychadelicSizePowerup : PowerupBase
         isActivated = false;
 
         if (!endedEarly)
-            _inGameManager.ReturnToNormalLevel();
+        {
+            inGameManager.ReturnToNormalLevel();
+        }
     }
 
     private void Update()
     {
         if (!isActivated)
+        {
             return;
+        }
 
         if (!InGameManager.shouldLerpSmaller && !InGameManager.shouldLerpToCircle)
         {
-            _inGameManager.UpdatePsychadelicLevel(sinRotMagnitude, GetWeightedRadians(InGameManager.innerPoints.Count), currentMagnitude, angle);
+            inGameManager.UpdatePsychedelicLevel(sinRotMagnitude, GetWeightedRadians(LevelManager.innerPoints.Count), currentMagnitude, angle);
         }
         else
         {
@@ -60,7 +56,9 @@ public class PsychadelicSizePowerup : PowerupBase
     public float[] GetWeightedRadians(int cornerAmount)
     {
         if (currentMagnitude < targetMagnitude)
+        {
             currentMagnitude += targetMagnitude * Time.deltaTime;
+        }
 
         const float radians = 2 * Mathf.PI;
 

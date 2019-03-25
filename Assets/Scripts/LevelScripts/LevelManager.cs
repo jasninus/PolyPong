@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshManager))]
@@ -16,6 +15,10 @@ public class LevelManager : MonoBehaviour
     protected ArqdutManager arqdutManager;
     protected LevelPoints pointManager;
     protected MeshManager meshManager;
+    protected LevelSpawner levelSpawner;
+    protected LevelLerpCircle circleLerpManager;
+
+    public static bool shouldLerpToCircle, shouldSetIndices;
 
     protected virtual void Awake()
     {
@@ -23,13 +26,17 @@ public class LevelManager : MonoBehaviour
         pointManager = GetComponent<LevelPoints>();
         meshManager = GetComponent<MeshManager>();
         arqdutManager = GetComponent<ArqdutManager>();
+
+        levelSpawner = new LevelSpawner(this, pointManager, playerManager, meshManager, arqdutManager);
     }
 
-    public void UpdatePsychadelicLevel(float sinRotMagnitude, float[] weightedRadians, float magnitude, float angle)
+    // Used for psychedelic powerup
+    public void UpdatePsychedelicLevel(float sinRotMagnitude, float[] weightedRadians, float magnitude, float angle)
     {
         innerPoints = pointManager.SpawnInnerPoints(innerPoints.Count, levelCenter, weightedRadians);
+        LevelPoints.MovePoints(innerPoints, LevelPoints.GetCenter(innerPoints), levelCenter);
         pointManager.RotatePoints(innerPoints, -Mathf.Sin(angle) * magnitude * sinRotMagnitude + previousRotation);
-        outerPoints = pointManager.SpawnOuterPoints(innerPoints);
+        outerPoints = pointManager.GetOuterPoints(innerPoints);
 
         playerManager.UpdatePlayerPositions();
         playerManager.PlayersLookAtPoint(levelCenter);
@@ -42,9 +49,17 @@ public class LevelManager : MonoBehaviour
     {
         if (meshManager.mesh.vertexCount > 0)
         {
-            meshManager.AddIndicesAndDrawMesh(playerAmount);
+            meshManager.AddIndicesAndDrawMesh(ChooseControls.gameStarted ? playerAmount : 6);
         }
 
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(innerPoints, outerPoints));
+    }
+
+    protected virtual void StartLerpCircleSmaller(int playerOrder)
+    {
+        circleLerpManager.StartLerpToCircle(playerOrder);
+
+        shouldLerpToCircle = true;
+        shouldSetIndices = true;
     }
 }

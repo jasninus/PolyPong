@@ -10,7 +10,7 @@
             }
 
             innerPoints = levelPointsSpawner.SpawnInnerPoints(cornerAmount, levelCenter).ToList();
-            outerPoints = levelPointsSpawner.SpawnOuterPoints(innerPoints).ToList();
+            outerPoints = levelPointsSpawner.GetOuterPoints(innerPoints).ToList();
             shouldDrawMesh = true;
         }
 

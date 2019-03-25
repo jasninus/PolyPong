@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RoundAmountRenumeration : ValueRenumeration
+﻿public class RoundAmountRenumeration : ValueRenumeration
 {
     public static int selectedRoundAmount;
 

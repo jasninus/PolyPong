@@ -1,112 +1,192 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 
-// TODO This whole system should probably be hooked up to the psychadelic size system instead. When a player is added, it's weight should start lerping from 0 to 1. When a player is removed, it's weight should lerp from 1 to 0. All players should be able to lerp at the same time. All players' weight will be normalized to calculate their actual weight
 public class MenuLevel : LevelManager
 {
-    private bool shouldLerpFromCircle;
+    [SerializeField] private float playerMinVisibleDis, lerpSpeed;
 
-    private PlayerColor previouslySelectedPlayer;
+    private readonly bool shouldLerpFromCircle;
 
-    private readonly int[][] addPlayerRotationConstants =
+    private const int MAX_PLAYERS = 6;
+    private int activatedPlayerCount;
+
+    private readonly PlayerColor previouslySelectedPlayer;
+
+    private readonly DirectionArrows arrowManager;
+
+    private readonly LevelSpawner spawner;
+
+    [SerializeProperty("PlayerLerpStates"), SerializeField] private bool[] playerLerpStates = new bool[6];
+
+    private bool[] PlayerLerpStates
     {
-        new[] { 0 },
-        new[] { 0 },
-        new[] { 0 },
-        new[] { -45, -15, 15, 45 },
-        new[] { -36, -18, 0, 18, 36 },
-        new[] { -30, -18, -6, 6, 18, 30 }
-    };
+        get { return playerLerpStates; }
+        set
+        {
+            Debug.Log("SETTING!");
 
-    [SerializeField] private float disBeforePlayerSpawn;
+            activatedPlayerCount = value.Count(s => s);
 
-    private DirectionArrows arrowManager;
+            if (activatedPlayerCount == 2)
+            {
+                StartLerpCircleSmaller(1); // TODO input correct thing. Maybe use value
+            }
 
-    private readonly List<QueueItem> queue = new List<QueueItem>();
-
-    private struct QueueItem
-    {
-        // False for smaller, true for bigger
-        public bool lerpType;
-
-        public PlayerColor Color;
+            playerLerpStates = value;
+        }
     }
 
-    private void SpawnLevel()
+    private const float ONE_THIRD_PI = 1.0471975511965977461542144610932f;
+    private readonly float[] playerWeights = new float[6];
+    private float bottomClamp;
+
+    protected override void Awake()
     {
-        arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.Color == ChooseControls.controls.First(c => c.Value.rightKey == KeyCode.None).Key));
-        arrowManager.SwitchArrowDirection();
-        arrowManager.FlipArrow();
-        StopAllCoroutines();
-        shouldLerpFromCircle = false;
+        base.Awake();
+
+        // Selection will always start on yellow and should therefore be true
+        playerLerpStates[0] = true;
+    }
+
+    private void Start()
+    {
+        levelSpawner.SpawnLevel(6);
+        meshManager.SetMaterials((PlayerColor[])Enum.GetValues(typeof(PlayerColor)));
+    }
+
+    public void LerpPlayerIn(PlayerColor color)
+    {
+        playerLerpStates[(int)color] = true;
+    }
+
+    public void LerpPlayerOut(PlayerColor color)
+    {
+        playerLerpStates[(int)color] = true;
+    }
+
+    protected void UpdateMenuLevel(float[] weightedRadians, Vector2 center)
+    {
+        innerPoints = pointManager.SpawnInnerPoints(innerPoints.Count, levelCenter, weightedRadians);
+        LevelPoints.MovePoints(innerPoints, LevelPoints.GetWeightedCenter(innerPoints, bottomClamp, playerWeights), levelCenter);
+        outerPoints = pointManager.GetOuterPoints(innerPoints, center);
+
+        playerManager.UpdatePlayerPositions();
+        playerManager.PlayersLookAtPoint(center);
+        arqdutManager.UpdateArqdutPositions(innerPoints, levelCenter);
+
+        DrawMesh(innerPoints.Count);
     }
 
     private void Update()
     {
-        if (ChooseControls.playerStates.Count(p => p.Value != PlayerState.Deactivated) == 3)
+        // Should not update if level should be circle
+        if (activatedPlayerCount > 2)
         {
-            SpawnLevel();
+            UpdateMenuLevel(GetUpdatedWeights(), LevelPoints.GetWeightedCenter(innerPoints, bottomClamp, playerWeights));
+            CheckPlayerVisibility();
+        }
+        else if (activatedPlayerCount == 2)
+        {
+            // TODO Lerp into circle
+        }
+        else
+        {
+            // TODO Player count must be one so level should be hidden
         }
     }
 
-    private void UpdateArqduts()
+    private float[] GetUpdatedWeights()
     {
-        arqdutManager.DestroyAllArqduts();
-        List<Vector2> arqdutSpawnPositions = new List<Vector2>(3) { innerPoints[0], innerPoints[innerPoints.Count - 2], innerPoints.Last() };
-        arqdutManager.SpawnArqduts(arqdutSpawnPositions, levelCenter);
+        bottomClamp = playerWeights.Aggregate((total, weight) => total + weight) / 6 - ONE_THIRD_PI;
+
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            playerWeights[i] = Mathf.Clamp(playerWeights[i] + (playerLerpStates[i] ? 1 : -1) * lerpSpeed * Time.deltaTime, bottomClamp, 0);
+        }
+
+        return playerWeights;
     }
 
-    private void UpdateLerpLists(int index, List<PlayerColor> activatedColors)
+    private void CheckPlayerVisibility()
     {
-        innerPoints.Insert(index, index == innerPoints.Count ? innerPoints[0] : innerPoints[index]);
-        outerPoints = pointManager.SpawnOuterPoints(innerPoints);
-
-        innerLerpTo = pointManager.SpawnInnerPoints(activatedColors.Count, levelCenter);
-        float rotateAmount = previousRotation + addPlayerRotationConstants[activatedColors.Count - 1][index];
-        previousRotation = rotateAmount;
-        pointManager.RotatePoints(innerLerpTo, rotateAmount);
-        outerLerpTo = pointManager.SpawnOuterPoints(innerLerpTo);
-    }
-
-    private void UpdateManagers(int index, PlayerColor color)
-    {
-        arqdutManager.DestroyAllArqduts();
-        arqdutManager.SpawnArqduts(innerPoints, levelCenter);
-        meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(innerPoints, outerPoints));
-        meshManager.SetMaterials();
-        playerManager.DestroyAllPlayers();
-        playerManager.SpawnPlayers(pointManager.radius, ChooseControls.playerStates.Where(o => o.Value != PlayerState.Deactivated).Select(i => i.Key).ToArray());
-        arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.Color == color));
-        HidePlayer(color);
-        StartCoroutine(RevealPlayer(PlayerManager.players.First(p => p.Color == color)));
-
-        playerManager.PlayersLookAtPoint(levelCenter);
-        meshManager.AddIndicesAndDrawMesh(innerPoints.Count);
-    }
-
-    private void HidePlayer(PlayerColor color)
-    {
-        Player player = PlayerManager.players.First(p => p.Color == color);
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-
-        if (player.transform.GetChild(0).childCount > 0)
-            player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-    }
-
-    private IEnumerator RevealPlayer(Player player)
-    {
-        yield return new WaitUntil(() => Vector2.Distance(player.points.left, player.points.right) > disBeforePlayerSpawn);
-
-        player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-        player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        foreach (Player player in PlayerManager.players)
+        {
+            player.Visible = Vector2.Distance(player.points.left, player.points.right) > playerMinVisibleDis;
+        }
     }
 }
 
-#region MightBeUsefulForCircle
+#region MaybeUsefulStuff
+
+//private void SpawnLevel()
+//{
+//    arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.Color == ChooseControls.controls.First(c => c.Value.rightKey == KeyCode.None).Key));
+//    arrowManager.SwitchArrowDirection();
+//    arrowManager.FlipArrow();
+//    StopAllCoroutines();
+//    shouldLerpFromCircle = false;
+//}
+
+//private void Update()
+//{
+//    if (ChooseControls.playerStates.Count(p => p.Value != PlayerState.Deactivated) == 3)
+//    {
+//        SpawnLevel();
+//    }
+//}
+
+//private void UpdateArqduts()
+//{
+//    arqdutManager.DestroyAllArqduts();
+//    List<Vector2> arqdutSpawnPositions = new List<Vector2>(3) { innerPoints[0], innerPoints[innerPoints.Count - 2], innerPoints.Last() };
+//    arqdutManager.SpawnArqduts(arqdutSpawnPositions, levelCenter);
+//}
+
+//private void UpdateLerpLists(int index, List<PlayerColor> activatedColors)
+//{
+//    innerPoints.Insert(index, index == innerPoints.Count ? innerPoints[0] : innerPoints[index]);
+//    outerPoints = pointManager.GetOuterPoints(innerPoints);
+
+//    innerLerpTo = pointManager.SpawnInnerPoints(activatedColors.Count, levelCenter);
+//    float rotateAmount = previousRotation + addPlayerRotationConstants[activatedColors.Count - 1][index];
+//    previousRotation = rotateAmount;
+//    pointManager.RotatePoints(innerLerpTo, rotateAmount);
+//    outerLerpTo = pointManager.GetOuterPoints(innerLerpTo);
+//}
+
+//private void UpdateManagers(int index, PlayerColor color)
+//{
+//    arqdutManager.DestroyAllArqduts();
+//    arqdutManager.SpawnArqduts(innerPoints, levelCenter);
+//    meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(innerPoints, outerPoints));
+//    meshManager.SetMaterials();
+//    playerManager.DestroyAllPlayers();
+//    playerManager.SpawnPlayers(pointManager.radius, ChooseControls.playerStates.Where(o => o.Value != PlayerState.Deactivated).Select(i => i.Key).ToArray());
+//    arrowManager.AttachLeftArrow(PlayerManager.players.First(p => p.Color == color));
+//    HidePlayer(color);
+//    StartCoroutine(RevealPlayer(PlayerManager.players.First(p => p.Color == color)));
+
+//    playerManager.PlayersLookAtPoint(levelCenter);
+//    meshManager.AddIndicesAndDrawMesh(innerPoints.Count);
+//}
+
+//private void HidePlayer(PlayerColor color)
+//{
+//    Player player = PlayerManager.players.First(p => p.Color == color);
+//    player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+
+//    if (player.transform.GetChild(0).childCount > 0)
+//        player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+//}
+
+//private IEnumerator RevealPlayer(Player player)
+//{
+//    yield return new WaitUntil(() => Vector2.Distance(player.points.left, player.points.right) > disBeforePlayerSpawn);
+
+//    player.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+//    player.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+//}
 
 //private void UpdateCircleSpawningPlayerPosition()
 //{
@@ -149,4 +229,4 @@ public class MenuLevel : LevelManager
 //    meshManager.SetMaterials();
 //}
 
-#endregion MightBeUsefulForCircle
+#endregion MaybeUsefulStuff

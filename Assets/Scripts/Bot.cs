@@ -68,7 +68,7 @@ public class Bot : Player
 
     private void CircleMovement()
     {
-        // TODO consider changing logic to be based on if left or right movement will bring bot closer to ball. This will probably make bots more difficult
+        // TODO consider changing logic to be based on if left or right movement will bring bot closer to ball. This will probably make bots more intelligent
         if (CalculateCircleXDiff() > 0 && transform.parent.rotation.eulerAngles.z < 270 - minRot)
         {
             CircleMoveRight();
@@ -86,7 +86,7 @@ public class Bot : Player
 
     private float CalculateCircleXDiff()
     {
-        Vector2 circleAxis = (InGameManager.innerLerpTo[0] - InGameManager.innerLerpTo[InGameManager.innerLerpTo.Count / 2]).normalized;
+        Vector2 circleAxis = (LevelManager.innerLerpTo[0] - LevelManager.innerLerpTo[LevelManager.innerLerpTo.Count / 2]).normalized;
         float axisRotation = Mathf.Atan(circleAxis.y / circleAxis.x) * Mathf.Rad2Deg;
 
         Vector2 fromVector = ball.transform.position - transform.position;

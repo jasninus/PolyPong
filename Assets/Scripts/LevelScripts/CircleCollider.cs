@@ -23,24 +23,24 @@ public class CircleCollider : MonoBehaviour
     {
         this.owner = owner;
 
-        List<Vector2> vertices = new List<Vector2> { InGameManager.innerPoints[0] };
+        List<Vector2> vertices = new List<Vector2> { LevelManager.innerPoints[0] };
 
-        for (int i = 1; i < InGameManager.innerPoints.Count; i++)
+        for (int i = 1; i < LevelManager.innerPoints.Count; i++)
         {
             if (i % 2 == 1)
             {
-                vertices.Add(InGameManager.innerPoints[i]);
+                vertices.Add(LevelManager.innerPoints[i]);
             }
         }
 
-        for (int i = 1; i < InGameManager.outerPoints.Count; i++)
+        for (int i = 1; i < LevelManager.outerPoints.Count; i++)
         {
             if (i % 2 == 1)
             {
-                vertices.Add(InGameManager.outerPoints[InGameManager.outerPoints.Count - (1 + i)]);
+                vertices.Add(LevelManager.outerPoints[LevelManager.outerPoints.Count - (1 + i)]);
             }
         }
-        vertices.Add(InGameManager.outerPoints[0]);
+        vertices.Add(LevelManager.outerPoints[0]);
 
         coll.points = vertices.ToArray();
     }
@@ -49,13 +49,13 @@ public class CircleCollider : MonoBehaviour
     {
         this.owner = owner;
 
-        List<Vector2> vertices = InGameManager.innerPoints.Where((t, i) => i % 2 == 0).ToList();
+        List<Vector2> vertices = LevelManager.innerPoints.Where((t, i) => i % 2 == 0).ToList();
 
-        for (int i = 0; i < InGameManager.outerPoints.Count; i++)
+        for (int i = 0; i < LevelManager.outerPoints.Count; i++)
         {
             if (i % 2 == 0)
             {
-                vertices.Add(InGameManager.outerPoints[InGameManager.outerPoints.Count - (1 + i)]);
+                vertices.Add(LevelManager.outerPoints[LevelManager.outerPoints.Count - (1 + i)]);
             }
         }
 

@@ -29,7 +29,9 @@ public class GameStart : MonoBehaviour
     public void StartCountdown(Vector2 levelCenter)
     {
         if (!ChooseControls.gameStarted)
+        {
             return;
+        }
 
         // There cannot be two simultaneous countdowns
         if (currentCountDown == 0)
@@ -55,13 +57,13 @@ public class GameStart : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public IEnumerator CountDown(Vector2 ballPositions)
+    public IEnumerator CountDown(Vector2 ballPosition)
     {
         if (currentCountDown == 0)
         {
             float ballDirection = Random.Range(0, 2 * Mathf.PI);
             normalizedBallDirections.Add(new Vector2(Mathf.Cos(ballDirection), Mathf.Sin(ballDirection)));
-            spawnedDirArrows.Add(SpawnDirectionArrow(normalizedBallDirections[0], ballDirection * Mathf.Rad2Deg));
+            spawnedDirArrows.Add(SpawnDirectionArrow(ballPosition, ballDirection * Mathf.Rad2Deg));
         }
 
         countdownText.text = (countDownAmount - currentCountDown).ToString();
@@ -69,6 +71,11 @@ public class GameStart : MonoBehaviour
 
         yield return new WaitForSeconds(countDownTime);
 
+        CheckCountAgain(ballPosition);
+    }
+
+    private void CheckCountAgain(Vector2 ballPositions)
+    {
         if (countDownAmount > currentCountDown)
         {
             StartCoroutine(CountDown(ballPositions));
@@ -135,10 +142,11 @@ public class GameStart : MonoBehaviour
         normalizedBallDirections.Clear();
     }
 
-    private GameObject SpawnDirectionArrow(Vector2 normSpawnPos, float startAngle)
+    private GameObject SpawnDirectionArrow(Vector2 ballSpawnPos, float startAngle)
     {
         Quaternion rotation = Quaternion.Euler(0, 0, startAngle + 180);
-        return Instantiate(directionArrow, normSpawnPos * dirArrowDisFromCenter, rotation);
+        Vector2 dirVector = new Vector2(Mathf.Cos(startAngle * Mathf.Deg2Rad), Mathf.Sin(startAngle * Mathf.Deg2Rad));
+        return Instantiate(directionArrow, ballSpawnPos + dirArrowDisFromCenter * dirVector, rotation);
     }
 
     private void SpawnBall(Vector2 levelCenter, Vector2 normalizedDirection)

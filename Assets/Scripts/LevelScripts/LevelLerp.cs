@@ -39,7 +39,7 @@ public class LevelLerp : MonoBehaviour
 
         LevelManager.innerLerpTo = pointManager.SpawnInnerPoints(LevelManager.innerPoints.Count - 1, _inGameManager.levelCenter);
         pointManager.RotatePoints(LevelManager.innerLerpTo, rotateAmount); // Rotate inner points
-        LevelManager.outerLerpTo = pointManager.SpawnOuterPoints(LevelManager.innerLerpTo);
+        LevelManager.outerLerpTo = pointManager.GetOuterPoints(LevelManager.innerLerpTo);
 
         joiningPoints[0] = playerOrder;
         joiningPoints[1] = playerOrder + 1;
@@ -64,7 +64,7 @@ public class LevelLerp : MonoBehaviour
 
         InGameManager.shouldLerpSmaller = false;
 
-        meshManager.SetMaterials();
+        meshManager.SetMaterials(ChooseControls.playerStates.Where(i => i.Value != PlayerState.Deactivated).Select(item => item.Key).ToArray());
         _inGameManager.lerpedAmount = 0;
         playerManager.UpdatePlayerPositions();
     }

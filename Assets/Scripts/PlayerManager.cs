@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private InGameManager _LevelManager;
+    private InGameManager levelManager;
 
     public static List<Player> players = new List<Player>(), backupPlayers = new List<Player>();
 
@@ -21,47 +21,57 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        _LevelManager = GetComponent<InGameManager>();
+        levelManager = GetComponent<InGameManager>();
     }
 
-    public void SpawnPlayers(float radius, PlayerColor[] activatedColor)
+    public void SpawnPlayers(float radius, PlayerColor[] activatedColors)
     {
         if (players.Count > 0)
             players.Clear();
 
-        for (int i = 0; i < activatedColor.Length - 1; i++)
+        for (int i = 0; i < activatedColors.Length - 1; i++)
         {
-            SpawnPlayer(radius, activatedColor, i);
+            if (ChooseControls.playerStates[activatedColors[i]] == PlayerState.Activated)
+            {
+                SpawnPlayer<Player>(radius, activatedColors, i);
+            }
+            else
+            {
+                SpawnPlayer<Bot>(radius, activatedColors, i);
+            }
         }
 
-        SpawnLastPlayer(radius, activatedColor);
+        if (ChooseControls.playerStates[activatedColors.Last()] == PlayerState.Activated)
+        {
+            SpawnLastPlayer<Player>(radius, activatedColors);
+        }
+        else
+        {
+            SpawnLastPlayer<Bot>(radius, activatedColors);
+        }
 
         Player[] playerArr = new Player[players.Count];
         players.CopyTo(playerArr);
         backupPlayers = playerArr.ToList();
     }
 
-    public Player SpawnPlayer(float radius, PlayerColor[] activatedColor, int i)
+    private void SpawnPlayer<T>(float radius, PlayerColor[] activatedColor, int i) where T : Player
     {
-        var p = ChooseControls.playerStates[activatedColor[i]] == PlayerState.Activated ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Player>()
-            : Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<Bot>();
+        var p = Instantiate(player, (LevelManager.innerPoints[i] + LevelManager.innerPoints[i + 1]) / 2, Quaternion.identity).AddComponent<T>();
 
-        p.Initialize(activatedColor[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1], i, _LevelManager, playerSpeed, circleSpeed, radius);
+        p.Initialize(activatedColor[i], LevelManager.innerPoints[i], LevelManager.innerPoints[i + 1],
+                     i, levelManager, playerSpeed, circleSpeed, radius);
         players.Add(p);
 
         p.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColor[i]].color;
-
-        return p;
     }
 
-    private void SpawnLastPlayer(float radius, PlayerColor[] activatedColor)
+    private void SpawnLastPlayer<T>(float radius, PlayerColor[] activatedColor) where T : Player
     {
-        var lP = ChooseControls.playerStates[activatedColor.Last()] == PlayerState.Activated ? // Should added var be a bot or player
-            Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Player>()
-            : Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<Bot>();
+        var lP = Instantiate(player, (LevelManager.innerPoints.Last() + LevelManager.innerPoints.First()) / 2, Quaternion.identity).AddComponent<T>();
 
-        lP.Initialize(activatedColor.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(), activatedColor.Length - 1, _LevelManager, playerSpeed, circleSpeed, radius);
+        lP.Initialize(activatedColor.Last(), LevelManager.innerPoints.Last(), LevelManager.innerPoints.First(),
+                      activatedColor.Length - 1, levelManager, playerSpeed, circleSpeed, radius);
         players.Add(lP);
 
         lP.transform.GetComponentInChildren<SpriteRenderer>().color = MeshManager.materials[activatedColor.Last()].color;
@@ -69,14 +79,14 @@ public class PlayerManager : MonoBehaviour
 
     public void DestroyAllPlayers()
     {
-        foreach (Player player in players)
+        foreach (Player p in players)
         {
-            Destroy(player.gameObject);
+            Destroy(p.gameObject);
         }
 
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Goal"))
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Goal"))
         {
-            Destroy(player); // Destroy all remaining players
+            Destroy(p); // Destroy all remaining players
         }
 
         players.Clear();

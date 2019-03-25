@@ -1,25 +1,32 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class LevelSpawner
 {
-    private readonly InGameManager _inGameManager;
+    private readonly LevelManager levelManager;
     private readonly LevelLerpCircle circleLerpManager;
     private readonly LevelPoints pointManager;
     private readonly PlayerManager playerManager;
     private readonly MeshManager meshManager;
     private readonly ArqdutManager arqdutManager;
-    private readonly GameStart _gameManager;
+    private readonly GameStart gameManager;
 
-    public LevelSpawner(InGameManager inGameManager, LevelLerpCircle circleLerpManager, LevelPoints pointManager, PlayerManager playerManager, MeshManager meshManager, ArqdutManager arqdutManager, GameStart gameManager)
+    // Calls a base constructor (the one beneath this one)
+    public LevelSpawner(LevelManager levelManager, LevelLerpCircle circleLerpManager, LevelPoints pointManager, PlayerManager playerManager, MeshManager meshManager, ArqdutManager arqdutManager, GameStart gameManager) : this(levelManager, pointManager, playerManager, meshManager, arqdutManager)
     {
-        this._inGameManager = inGameManager;
         this.circleLerpManager = circleLerpManager;
+        this.gameManager = gameManager;
+    }
+
+    public LevelSpawner(LevelManager levelManager, LevelPoints pointManager, PlayerManager playerManager, MeshManager meshManager, ArqdutManager arqdutManager)
+    {
+        this.levelManager = levelManager;
         this.pointManager = pointManager;
         this.playerManager = playerManager;
         this.meshManager = meshManager;
         this.arqdutManager = arqdutManager;
-        this._gameManager = gameManager;
     }
 
     /// <summary>
@@ -28,13 +35,15 @@ public class LevelSpawner
     /// <remarks>Actually spawns an extra player and lerps immediately to a circle</remarks>
     public void SpawnCircle()
     {
+        InGameManager inGameManager = (InGameManager)levelManager;
+
         PlayerColor extraPlayerColor = ChooseControls.playerStates.First(i => i.Value == PlayerState.Deactivated).Key;
         ChooseControls.playerStates[extraPlayerColor] = PlayerState.Activated;
 
         SpawnLevel(3);
         InGameManager.playerToDestroy = PlayerManager.players.First(p => p.Color == extraPlayerColor).playerOrder;
-        _inGameManager.StartDestroyPlayer();
-        _inGameManager.lerpedAmount = 1 - 2 * _inGameManager.lerpAmount;
+        inGameManager.StartDestroyPlayer();
+        inGameManager.lerpedAmount = 1 - 2 * inGameManager.lerpAmount;
         circleLerpManager.LerpToCircle();
 
         Object.Destroy(GameObject.FindWithTag("Ball")); // Destroy extra ball
@@ -47,19 +56,29 @@ public class LevelSpawner
     /// </summary>
     public void SpawnLevel(int corners)
     {
-        LevelManager.innerPoints = pointManager.SpawnInnerPoints(corners, _inGameManager.levelCenter);
-        LevelManager.outerPoints = pointManager.SpawnOuterPoints(LevelManager.innerPoints);
+        LevelManager.innerPoints = pointManager.SpawnInnerPoints(corners, levelManager.levelCenter);
+        LevelManager.outerPoints = pointManager.GetOuterPoints(LevelManager.innerPoints);
 
-        playerManager.SpawnPlayers(pointManager.radius, ChooseControls.playerStates.Where(o => o.Value != PlayerState.Deactivated).Select(i => i.Key).ToArray());
+        // If level is not spawned when game is started, it should spawn all players for the menu
+        if (ChooseControls.gameStarted)
+        {
+            playerManager.SpawnPlayers(pointManager.radius, ChooseControls.playerStates.Where(o => o.Value != PlayerState.Deactivated).Select(i => i.Key).ToArray());
+        }
+        else
+        {
+            playerManager.SpawnPlayers(pointManager.radius, (PlayerColor[])Enum.GetValues(typeof(PlayerColor)));
+        }
 
-        playerManager.PlayersLookAtPoint(_inGameManager.levelCenter);
-        meshManager.SetMaterials();
-        arqdutManager.SpawnArqduts(LevelManager.innerPoints, _inGameManager.levelCenter);
+        playerManager.PlayersLookAtPoint(levelManager.levelCenter);
+        meshManager.SetMaterials(ChooseControls.playerStates.Where(i => i.Value != PlayerState.Deactivated).Select(item => item.Key).ToArray());
+        arqdutManager.SpawnArqduts(LevelManager.innerPoints, levelManager.levelCenter);
 
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
-        _inGameManager.DrawMesh(corners);
+        levelManager.DrawMesh(corners);
 
         if (ChooseControls.gameStarted)
-            _gameManager.StartCountdown(_inGameManager.levelCenter);
+        {
+            gameManager.StartCountdown(levelManager.levelCenter);
+        }
     }
 }

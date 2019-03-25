@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class LevelLerpCircle : MonoBehaviour
@@ -45,7 +43,7 @@ public class LevelLerpCircle : MonoBehaviour
         // Assign to lists
         LevelManager.innerLerpTo = pointManager.SpawnInnerPoints(circleEdges * 2, _inGameManager.levelCenter);
         pointManager.RotatePoints(LevelManager.innerLerpTo, rotateAmount);
-        LevelManager.outerLerpTo = pointManager.SpawnOuterPoints(LevelManager.innerLerpTo);
+        LevelManager.outerLerpTo = pointManager.GetOuterPoints(LevelManager.innerLerpTo);
 
         //meshManager.SetMaterials();
 
@@ -120,11 +118,11 @@ public class LevelLerpCircle : MonoBehaviour
         _inGameManager.lerpedAmount = 0;
 
         LevelManager.innerPoints = pointManager.SpawnInnerPoints(3, _inGameManager.levelCenter); // Problem with rotation
-        LevelManager.outerPoints = pointManager.SpawnOuterPoints(LevelManager.innerPoints);
+        LevelManager.outerPoints = pointManager.GetOuterPoints(LevelManager.innerPoints);
 
         meshManager.mesh.Clear();
         meshManager.SetVertices(MeshManager.ConcatV2ListsToV3(LevelManager.innerPoints, LevelManager.outerPoints));
-        meshManager.SetMaterials();
+        meshManager.SetMaterials(ChooseControls.playerStates.Where(i => i.Value != PlayerState.Deactivated).Select(item => item.Key).ToArray());
         meshManager.AddIndicesAndDrawMesh(3);
 
         _circleSpawnedPlayerColor = _inGameManager.circleSpawningPlayer.Color;

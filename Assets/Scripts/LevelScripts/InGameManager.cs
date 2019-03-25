@@ -1,7 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(LevelPoints), typeof(MeshManager), typeof(PlayerManager))]
@@ -20,30 +17,29 @@ public class InGameManager : LevelManager
     public float baseLerpAmount;
 
     private PointLerp lerpManager;
-    private GameStart _gameManager;
+    private GameStart gameManager;
     private DirectionArrows arrowManager;
-    private LevelLerpCircle circleLerpManager;
     private LevelLerp levelLerpManager;
-    protected LevelSpawner levelSpawner;
+    private new LevelSpawner levelSpawner;
 
     public Player circleSpawningPlayer;
 
     private bool shouldLerpToNormal;
     public bool shouldLerpFromCircle;
-    public static bool shouldLerpToCircle, isCircle, shouldLerpSmaller, shouldSetIndices;
+    public static bool isCircle, shouldLerpSmaller;
 
     protected override void Awake()
     {
         base.Awake();
 
         lerpManager = GetComponent<PointLerp>();
-        _gameManager = GetComponent<GameStart>();
+        gameManager = GetComponent<GameStart>();
         arrowManager = GetComponent<DirectionArrows>();
 
         // Different classes containing functionality made for better overview
-        levelLerpManager = new LevelLerp(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager); // TODO warning about using new keyword. Seems like it thinks I'm trying to add classes as components
-        circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, _gameManager, arrowManager);
-        levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, _gameManager);
+        levelLerpManager = new LevelLerp(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, gameManager); // TODO warning about using new keyword. Seems like it thinks I'm trying to add classes as components
+        circleLerpManager = new LevelLerpCircle(this, lerpManager, pointManager, meshManager, playerManager, arqdutManager, gameManager, arrowManager);
+        levelSpawner = new LevelSpawner(this, circleLerpManager, pointManager, playerManager, meshManager, arqdutManager, gameManager);
     }
 
     private void Start()
@@ -79,14 +75,10 @@ public class InGameManager : LevelManager
         }
     }
 
-    public void StartLerpCircleSmaller(int playerOrder)
+    public new void StartLerpCircleSmaller(int playerOrder)
     {
         DestroyConditionalPowerups(SpawnConditions.NotInCircle);
-
-        circleLerpManager.StartLerpToCircle(playerOrder);
-
-        shouldLerpToCircle = true;
-        shouldSetIndices = true;
+        base.StartLerpCircleSmaller(playerOrder);
     }
 
     public void ReturnToNormalLevel()
@@ -139,7 +131,9 @@ public class InGameManager : LevelManager
         shouldLerpToNormal = lerpedAmount < 1 + lerpAmount;
 
         if (!shouldLerpToNormal)
+        {
             lerpedAmount = 0;
+        }
     }
 
     public void DestroyPlayer(int playerToDestroy)

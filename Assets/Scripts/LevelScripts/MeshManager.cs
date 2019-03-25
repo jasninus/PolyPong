@@ -51,9 +51,10 @@ public class MeshManager : MonoBehaviour
         return v3List;
     }
 
-    public Material[] SetMaterials()
+    public Material[] SetMaterials(PlayerColor[] colors)
     {
-        rend.materials = ChooseControls.playerStates.Where(i => i.Value != PlayerState.Deactivated).Select(item => materials[item.Key]).ToArray();
+        rend.materials = colors.Select(color => materials[color]).ToArray();
+        //ChooseControls.playerStates.Where(i => i.Value != PlayerState.Deactivated).Select(item => materials[item.Key]).ToArray();
         return rend.materials;
     }
 

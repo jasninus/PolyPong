@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-    private void FixedUpdate() // TODO stop rotation if curvingAmount is 0 and test if is problem in circle
+    private void FixedUpdate() // TODO stop rotation if curvingAmount is 0 and test if it is problem in circle
     {
         transform.Rotate(0, 0, curvingAmount * curveRotationSpeed);
 
@@ -60,9 +60,9 @@ public class Ball : MonoBehaviour
 
         InGameManager.playerToDestroy = hitPlayer.playerOrder;
 
-        if (InGameManager.innerPoints.Count < 4)
+        if (LevelManager.innerPoints.Count < 4)
         {
-            if (InGameManager.innerPoints.Count == 3)
+            if (LevelManager.innerPoints.Count == 3)
             {
                 Points.AddPoints(hitPlayer.Color);
             }

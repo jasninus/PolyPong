@@ -12,6 +12,8 @@ public class BotPlayerSwitch : MonoBehaviour
 
     [SerializeField] private Sprite botSprite, playerSprite;
 
+    [SerializeField] private MenuLevel menuLevel;
+
     private Image image;
 
     private ChooseControls chooseControls;
@@ -40,6 +42,9 @@ public class BotPlayerSwitch : MonoBehaviour
         playerSquaresParent.SetActive(false);
 
         ChooseControls.playerStates[color] = PlayerState.BotMedium;
+
+        Debug.Log("Adding " + color + " bot");
+        //menuLevel.AddQueueItem(new MenuLevel.QueueItem { color = color, lerpType = true });
 
         image.sprite = botSprite;
     }

@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 
     public static event PlayerDeath UpdateScoreboard;
 
+    private Renderer childRend;
+
     public float playerSpeed, circleSpeed, minDis, minRot;
 
     public bool hasShield, movingLeft, movingRight;
@@ -13,6 +15,20 @@ public class Player : MonoBehaviour
     public struct LeftRightPoints
     {
         public Vector2 left, right;
+    }
+
+    private bool visible = true;
+
+    public bool Visible
+    {
+        set
+        {
+            if (value != visible)
+            {
+                childRend.enabled = value;
+                visible = value;
+            }
+        }
     }
 
     public LeftRightPoints points;
@@ -37,6 +53,7 @@ public class Player : MonoBehaviour
         this._inGameManager = inGameManager;
         this.playerSpeed = playerSpeed;
         this.circleSpeed = circleSpeed;
+        childRend = transform.GetChild(0).GetComponent<Renderer>();
 
         childStartPos = transform.GetChild(0).localPosition;
         CalculateMinRot(radius);
@@ -67,7 +84,9 @@ public class Player : MonoBehaviour
         }
 
         if (ChooseControls.gameStarted)
+        {
             Points.AddPoints(Color);
+        }
 
         ChooseControls.playerStates[Color] = PlayerState.Deactivated;
         _inGameManager.StartLerpLevelSmaller(playerOrder);
@@ -104,7 +123,9 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if (!ChooseControls.gameStarted)
+        {
             return;
+        }
 
         if (!InGameManager.isCircle && !InGameManager.shouldLerpToCircle)
         {

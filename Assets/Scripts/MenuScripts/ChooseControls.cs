@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum PlayerColor
 {
@@ -16,13 +15,14 @@ public enum PlayerColor
     Green
 }
 
+// Don't change the order. Is used for casting to and from int
 public enum PlayerState
 {
-    Activated,
+    Deactivated,
     BotEasy,
     BotMedium,
     BotHard,
-    Deactivated,
+    Activated,
 }
 
 public enum Direction
@@ -42,13 +42,11 @@ public class ChooseControls : MonoBehaviour
 
     [SerializeField] private Sprite arrow;
 
-    public delegate void PlayerChange(PlayerColor selectedPlayer);
-
-    public static event PlayerChange PlayerAmountIncreased, PlayerAmountDecreased, ForceAddPlayer;
+    [SerializeField] private MenuLevel menuLevel;
 
     private ButtonIcons buttonIcons;
 
-    private bool choosingLeftControl = true, selectingControls, firstPlayerSelected, playerCleared;
+    private bool choosingLeftControl = true, selectingControls, firstPlayerSelected;
     public static bool gameStarted;
 
     private int numberInput;
@@ -63,8 +61,6 @@ public class ChooseControls : MonoBehaviour
     public static readonly Dictionary<PlayerColor, PlayerState> playerStates = new Dictionary<PlayerColor, PlayerState>();
     public static readonly Dictionary<PlayerColor, PlayerControls> controls = new Dictionary<PlayerColor, PlayerControls>();
 
-    private DirectionArrows arrowManager;
-
     [SerializeField] private ControlsMenuSwitcher menuSwitcher;
 
     public class PlayerControls
@@ -76,11 +72,7 @@ public class ChooseControls : MonoBehaviour
     private void Awake()
     {
         Points.Setup();
-
         buttonIcons = GetComponent<ButtonIcons>();
-
-        arrowManager = GetComponent<DirectionArrows>();
-
         TryAddDictionaryValues();
     }
 
@@ -146,17 +138,7 @@ public class ChooseControls : MonoBehaviour
 
         if (choosingLeftControl) // Set leftKey control
         {
-            if (previouslyClearedPlayer == selectedPlayer && firstPlayerSelected && playerCleared)
-            {
-                ForceAddPlayer?.Invoke(selectedPlayer);
-            }
-            else
-            {
-                firstPlayerSelected = true;
-            }
-
             SetButton(selectedPlayer, Direction.left, key);
-
             playerStates[selectedPlayer] = PlayerState.Activated;
         }
         else // Set rightKey control
@@ -179,23 +161,14 @@ public class ChooseControls : MonoBehaviour
         if (direction == Direction.left)
         {
             controls[playerToSet].leftKey = input;
-
-            StartCoroutine(SwitchArrowDirection());
         }
         else
         {
             controls[playerToSet].rightKey = input;
-            arrowManager.HideArrow();
         }
 
         // Set ChoosingLeftControl to true if right control was just set
         choosingLeftControl = direction == Direction.right;
-    }
-
-    private IEnumerator SwitchArrowDirection()
-    {
-        yield return new WaitForSeconds(0.01f);
-        arrowManager.SwitchArrowDirection();
     }
 
     public static void UpdatePlayerControlText(PlayerColor player)
@@ -218,34 +191,16 @@ public class ChooseControls : MonoBehaviour
         squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
         squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
 
-        // If this was called from adding a bot, it should not run event
-        PlayerAmountDecreased?.Invoke(playerToWipe);
-
         previouslyClearedPlayer = playerToWipe;
-    }
 
-    public void ClearControls(PlayerColor playerToWipe, bool wasRunFromBotAdd)
-    {
-        SetButton(playerToWipe, Direction.left, KeyCode.None);
-        SetButton(playerToWipe, Direction.right, KeyCode.None);
-
-        controlTexts[playerToWipe][0].text = "";
-        controlTexts[playerToWipe][1].text = "";
-
-        squares[(int)playerToWipe * 2].GetChild(0).gameObject.SetActive(true);
-        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.SetActive(true);
-
-        squares[(int)playerToWipe * 2].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
-        squares[(int)playerToWipe * 2 + 1].GetChild(0).gameObject.GetComponent<Image>().sprite = arrow;
+        Debug.Log("Clearing " + playerToWipe + " player");
     }
 
     private void ClearPlayer(PlayerColor playerToWipe)
     {
         ClearControls(playerToWipe);
-
         playerStates[playerToWipe] = PlayerState.Deactivated;
         selectingControls = false;
-        playerCleared = true;
     }
 
     /// <summary>
@@ -258,7 +213,7 @@ public class ChooseControls : MonoBehaviour
 
     public void GoToNextPlayer()
     {
-        for (int i = 0; i < 6 /* Amount of PlayerColor*/; i++)
+        for (int i = 0; i < 6 /*Amount of PlayerColor*/; i++)
         {
             if (playerStates[(PlayerColor)i] == PlayerState.Deactivated)
             {
@@ -288,10 +243,10 @@ public class ChooseControls : MonoBehaviour
 
     private void SetSelectedPlayer(PlayerColor selectingPlayer)
     {
+        //Debug.Log("Clearing " + selectedPlayer + " player");
+        //Debug.Log("Adding " + selectingPlayer + " player"); // TODO should probably also add player to playerStates here, so that it can be used by MenuLevel
         selectionBall.StartPosLerpToPoint(new Vector3(selectionBall.transform.position.x, selectionYVals[selectingPlayer], selectionBall.transform.position.z));
         selectedPlayer = selectingPlayer;
-
-        PlayerAmountIncreased?.Invoke(selectingPlayer);
     }
 
     /// <summary>
